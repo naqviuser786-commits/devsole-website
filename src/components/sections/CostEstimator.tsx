@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { siteSettings } from '@/data/siteData';
+import { supabase } from '@/lib/supabase';
 
 interface Option {
   id: string;
@@ -10,23 +11,20 @@ interface Option {
   pricePKR: number;
 }
 
-// 🏢 Step 1: Base Platform Services with Visual Icons
-const PROJECT_TYPES: Option[] = [
+const DEFAULT_PROJECT_TYPES: Option[] = [
   { id: 'fullstack', name: 'Custom Web Application', icon: '⚡', priceUSD: 450, pricePKR: 125000 },
   { id: 'proptech', name: 'PropTech / Real Estate Portal', icon: '🏢', priceUSD: 650, pricePKR: 180000 },
   { id: 'saas', name: 'SaaS Tool & Automation', icon: '🧮', priceUSD: 750, pricePKR: 210000 },
   { id: 'ecommerce', name: 'E-Commerce Marketplace', icon: '🛍️', priceUSD: 550, pricePKR: 150000 },
 ];
 
-// 📐 Step 2: Scope & Scale with Visual Icons
-const SCOPES: Option[] = [
+const DEFAULT_SCOPES: Option[] = [
   { id: 'mvp', name: 'Starter MVP (1–5 Screens)', icon: '📱', priceUSD: 0, pricePKR: 0 },
   { id: 'growth', name: 'Growth Platform (6–12 Screens)', icon: '💻', priceUSD: 150, pricePKR: 40000 },
   { id: 'enterprise', name: 'Enterprise Scale (13+ Screens)', icon: '🌐', priceUSD: 350, pricePKR: 100000 },
 ];
 
-// ⚙️ Step 3: Advanced Add-ons with Visual Icons
-const ADDONS: Option[] = [
+const DEFAULT_ADDONS: Option[] = [
   { id: 'admin', name: 'Admin Panel Dashboard', icon: '📊', priceUSD: 100, pricePKR: 30000 },
   { id: 'auth', name: 'Authentication & Roles', icon: '🔐', priceUSD: 75, pricePKR: 20000 },
   { id: 'payment', name: 'Payment Gateway (Stripe/Card)', icon: '💳', priceUSD: 75, pricePKR: 20000 },
@@ -35,18 +33,57 @@ const ADDONS: Option[] = [
   { id: '3d', name: 'Interactive 3D WebGL Element', icon: '🧊', priceUSD: 150, pricePKR: 40000 },
 ];
 
-// ⏱️ Step 4: Delivery Pace
-const TIMELINES: Option[] = [
+const DEFAULT_TIMELINES: Option[] = [
   { id: 'standard', name: 'Standard Delivery (3–4 Weeks)', icon: '🗓️', priceUSD: 0, pricePKR: 0 },
   { id: 'express', name: 'Priority Sprint (1–2 Weeks)', icon: '⚡', priceUSD: 100, pricePKR: 30000 },
 ];
 
 export function CostEstimator() {
   const [currency, setCurrency] = useState<'USD' | 'PKR'>('USD');
-  const [selectedType, setSelectedType] = useState<Option>(PROJECT_TYPES[0]);
-  const [selectedScope, setSelectedScope] = useState<Option>(SCOPES[0]);
+  const [projectTypes, setProjectTypes] = useState<Option[]>(DEFAULT_PROJECT_TYPES);
+  const [scopes, setScopes] = useState<Option[]>(DEFAULT_SCOPES);
+  const [addons, setAddons] = useState<Option[]>(DEFAULT_ADDONS);
+  const [timelines, setTimelines] = useState<Option[]>(DEFAULT_TIMELINES);
+
+  const [selectedType, setSelectedType] = useState<Option>(DEFAULT_PROJECT_TYPES[0]);
+  const [selectedScope, setSelectedScope] = useState<Option>(DEFAULT_SCOPES[0]);
   const [selectedAddons, setSelectedAddons] = useState<string[]>(['admin', 'auth']);
-  const [selectedTimeline, setSelectedTimeline] = useState<Option>(TIMELINES[0]);
+  const [selectedTimeline, setSelectedTimeline] = useState<Option>(DEFAULT_TIMELINES[0]);
+
+  // Fetch Live Pricing Catalog from Supabase
+  useEffect(() => {
+    async function fetchPricing() {
+      try {
+        const { data, error } = await supabase
+          .from('pricing_catalog')
+          .select('*')
+          .eq('id', 'default_pricing')
+          .maybeSingle();
+
+        if (!error && data) {
+          if (data.project_types?.length) {
+            setProjectTypes(data.project_types);
+            setSelectedType(data.project_types[0]);
+          }
+          if (data.scopes?.length) {
+            setScopes(data.scopes);
+            setSelectedScope(data.scopes[0]);
+          }
+          if (data.addons?.length) {
+            setAddons(data.addons);
+          }
+          if (data.timelines?.length) {
+            setTimelines(data.timelines);
+            setSelectedTimeline(data.timelines[0]);
+          }
+        }
+      } catch {
+        // Fallback to defaults
+      }
+    }
+
+    fetchPricing();
+  }, []);
 
   const toggleAddon = (id: string) => {
     setSelectedAddons((prev) =>
@@ -56,12 +93,12 @@ export function CostEstimator() {
 
   const totals = useMemo(() => {
     const addonsUSD = selectedAddons.reduce((sum, id) => {
-      const addon = ADDONS.find((a) => a.id === id);
+      const addon = addons.find((a) => a.id === id);
       return sum + (addon ? addon.priceUSD : 0);
     }, 0);
 
     const addonsPKR = selectedAddons.reduce((sum, id) => {
-      const addon = ADDONS.find((a) => a.id === id);
+      const addon = addons.find((a) => a.id === id);
       return sum + (addon ? addon.pricePKR : 0);
     }, 0);
 
@@ -71,12 +108,11 @@ export function CostEstimator() {
       selectedType.pricePKR + selectedScope.pricePKR + addonsPKR + selectedTimeline.pricePKR;
 
     return { totalUSD, totalPKR };
-  }, [selectedType, selectedScope, selectedAddons, selectedTimeline]);
+  }, [selectedType, selectedScope, selectedAddons, selectedTimeline, addons]);
 
-  // WhatsApp Message Generator
   const generateWhatsAppLink = () => {
     const addonNames = selectedAddons
-      .map((id) => ADDONS.find((a) => a.id === id)?.name)
+      .map((id) => addons.find((a) => a.id === id)?.name)
       .filter(Boolean)
       .join(', ');
 
@@ -109,7 +145,7 @@ I would like to discuss this roadmap with your engineering team.`;
         align="center"
       />
 
-      {/* 💱 Responsive Currency Switcher */}
+      {/* Currency Switcher */}
       <div className="mt-8 flex justify-center">
         <div className="inline-flex max-w-full items-center rounded-full border border-white/10 bg-navy-950/80 p-1 backdrop-blur-md shadow-inner">
           <button
@@ -150,7 +186,7 @@ I would like to discuss this roadmap with your engineering team.`;
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {PROJECT_TYPES.map((type) => {
+              {projectTypes.map((type) => {
                 const isSelected = selectedType.id === type.id;
                 return (
                   <button
@@ -195,7 +231,7 @@ I would like to discuss this roadmap with your engineering team.`;
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {SCOPES.map((scope) => {
+              {scopes.map((scope) => {
                 const isSelected = selectedScope.id === scope.id;
                 return (
                   <button
@@ -233,7 +269,7 @@ I would like to discuss this roadmap with your engineering team.`;
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {ADDONS.map((addon) => {
+              {addons.map((addon) => {
                 const isSelected = selectedAddons.includes(addon.id);
                 return (
                   <button
@@ -278,7 +314,7 @@ I would like to discuss this roadmap with your engineering team.`;
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {TIMELINES.map((t) => {
+              {timelines.map((t) => {
                 const isSelected = selectedTimeline.id === t.id;
                 return (
                   <button
@@ -315,7 +351,6 @@ I would like to discuss this roadmap with your engineering team.`;
               <span className="h-2 w-2 animate-pulse rounded-full bg-energy-bright shadow-[0_0_6px_#00f0ff]" />
             </div>
 
-            {/* Calculated Price Display */}
             <div className="mt-4 border-b border-white/10 pb-5">
               <p className="text-xs text-chrome-400">Estimated Project Cost</p>
               <div className="mt-1 flex items-baseline gap-2">
@@ -333,12 +368,8 @@ I would like to discuss this roadmap with your engineering team.`;
                   ? `≈ PKR ${totals.totalPKR.toLocaleString()}`
                   : `≈ $${totals.totalUSD.toLocaleString()} USD`}
               </p>
-              <p className="mt-2 text-[10px] text-chrome-500 leading-normal">
-                *Transparent upfront pricing based on selected architecture.
-              </p>
             </div>
 
-            {/* Breakdown Items */}
             <div className="mt-5 space-y-2.5 text-xs text-chrome-300">
               <div className="flex justify-between">
                 <span>Architecture:</span>
@@ -358,7 +389,6 @@ I would like to discuss this roadmap with your engineering team.`;
               </div>
             </div>
 
-            {/* Action CTA Button */}
             <div className="mt-8 space-y-3">
               <a
                 href={generateWhatsAppLink()}

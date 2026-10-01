@@ -8,7 +8,8 @@ const NAV_ITEMS = [
   { to: '/crm/customers', label: 'Customers', icon: '👥' },
   { to: '/crm/projects', label: 'Projects', icon: '🚀' },
   { to: '/crm/portfolio', label: 'Portfolio Showcase', icon: '🌐' },
-  { to: '/crm/reviews', label: 'Client Reviews', icon: '⭐' }, // 👈 Yeh nayi line add karein
+  { to: '/crm/pricing', label: 'Pricing & Rates', icon: '💱' }, // 👈 Naya Tab
+  { to: '/crm/reviews', label: 'Client Reviews', icon: '⭐' },
   { to: '/crm/tasks', label: 'Tasks', icon: '📋' },
   { to: '/crm/followups', label: 'Follow-ups', icon: '⏰' },
   { to: '/crm/team', label: 'Team & Roles', icon: '🛡️', adminOnly: true },
