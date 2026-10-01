@@ -7,7 +7,8 @@ import { CrmDashboard } from './pages/CrmDashboard';
 import { CrmLeads } from './pages/CrmLeads';
 import { CrmCustomers } from './pages/CrmCustomers';
 import { CrmProjects } from './pages/CrmProjects';
-import { CrmPortfolio } from './pages/CrmPortfolio'; // 👈 Import karein
+import { CrmPortfolio } from './pages/CrmPortfolio';
+import { CrmReviews } from './pages/CrmReviews'; // 👈 Import karein
 import { CrmTasks } from './pages/CrmTasks';
 import { CrmFollowups } from './pages/CrmFollowups';
 import { CrmTeam } from './pages/CrmTeam';
@@ -27,7 +28,8 @@ export function CrmApp() {
                   <Route path="leads" element={<CrmLeads />} />
                   <Route path="customers" element={<CrmCustomers />} />
                   <Route path="projects" element={<CrmProjects />} />
-                  <Route path="portfolio" element={<CrmPortfolio />} /> {/* 👈 Naya Route */}
+                  <Route path="portfolio" element={<CrmPortfolio />} />
+                  <Route path="reviews" element={<CrmReviews />} /> {/* 👈 Naya Route */}
                   <Route path="tasks" element={<CrmTasks />} />
                   <Route path="followups" element={<CrmFollowups />} />
                   <Route path="team" element={<CrmTeam />} />

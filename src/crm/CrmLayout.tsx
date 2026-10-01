@@ -7,7 +7,8 @@ const NAV_ITEMS = [
   { to: '/crm/leads', label: 'Leads Pipeline', icon: '🎯' },
   { to: '/crm/customers', label: 'Customers', icon: '👥' },
   { to: '/crm/projects', label: 'Projects', icon: '🚀' },
-  { to: '/crm/portfolio', label: 'Portfolio Showcase', icon: '🌐' }, // 👈 Yeh line add karein
+  { to: '/crm/portfolio', label: 'Portfolio Showcase', icon: '🌐' },
+  { to: '/crm/reviews', label: 'Client Reviews', icon: '⭐' }, // 👈 Yeh nayi line add karein
   { to: '/crm/tasks', label: 'Tasks', icon: '📋' },
   { to: '/crm/followups', label: 'Follow-ups', icon: '⏰' },
   { to: '/crm/team', label: 'Team & Roles', icon: '🛡️', adminOnly: true },
