@@ -11,19 +11,26 @@ export function CustomCursor() {
 
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
+  const visibleRef = useRef(false);
 
   useEffect(() => {
-    // Touch screens (mobile/tablet) par disable karein
+    // Touch screens (mobile/tablet) par disable taaki zero overhead ho
     if (window.matchMedia('(pointer: coarse)').matches) {
       setIsTouchDevice(true);
       return;
     }
 
+    let animationFrameId: number;
+
     const onMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
 
-      // Check karein kya mouse kisi clickable element par hai
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        setIsVisible(true);
+      }
+
+      // Check if hovering over clickable or interactive elements
       const target = e.target as HTMLElement | null;
       const isInteractive = Boolean(
         target?.closest('a, button, input, select, textarea, [role="button"], .cursor-pointer')
@@ -33,21 +40,26 @@ export function CustomCursor() {
 
     const onMouseDown = () => setIsClicked(true);
     const onMouseUp = () => setIsClicked(false);
-    const onMouseLeave = () => setIsVisible(false);
-    const onMouseEnter = () => setIsVisible(true);
+    const onMouseLeave = () => {
+      visibleRef.current = false;
+      setIsVisible(false);
+    };
+    const onMouseEnter = () => {
+      visibleRef.current = true;
+      setIsVisible(true);
+    };
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mousedown', onMouseDown, { passive: true });
+    window.addEventListener('mouseup', onMouseUp, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
-    // Smooth 60fps Trailing Physics Loop
-    let animationFrameId: number;
+    // Smooth 60fps / 120fps Trailing Physics Loop
     const render = () => {
       // Linear Interpolation (Lerp) for smooth trailing
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.18;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.18;
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.2;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.2;
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
@@ -58,6 +70,7 @@ export function CustomCursor() {
 
       animationFrameId = requestAnimationFrame(render);
     };
+
     render();
 
     return () => {
@@ -68,7 +81,7 @@ export function CustomCursor() {
       document.removeEventListener('mouseenter', onMouseEnter);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isVisible]);
+  }, []);
 
   if (isTouchDevice || !isVisible) return null;
 
@@ -77,7 +90,7 @@ export function CustomCursor() {
       {/* 1. Sharp Center Core Dot */}
       <div
         ref={dotRef}
-        className="fixed -left-1 -top-1 h-2 w-2 rounded-full bg-energy-bright shadow-[0_0_10px_#00f0ff] transition-opacity duration-150"
+        className="fixed -left-1 -top-1 h-2 w-2 rounded-full bg-energy-bright shadow-[0_0_10px_#00f0ff] transition-opacity duration-150 will-change-transform"
         style={{
           opacity: isHovered ? 0.4 : 1,
         }}
@@ -86,7 +99,7 @@ export function CustomCursor() {
       {/* 2. Fluid Trailing Neon Ring */}
       <div
         ref={ringRef}
-        className={`fixed -left-4 -top-4 rounded-full border transition-all duration-300 ease-out ${
+        className={`fixed -left-4 -top-4 rounded-full border transition-all duration-200 ease-out will-change-transform ${
           isHovered
             ? 'h-14 w-14 -left-7 -top-7 border-energy-bright bg-energy-bright/10 shadow-[0_0_25px_rgba(0,240,255,0.4)] backdrop-blur-[1px]'
             : isClicked

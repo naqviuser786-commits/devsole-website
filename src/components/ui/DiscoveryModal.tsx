@@ -18,7 +18,7 @@ export function DiscoveryModal({ isOpen, onClose }: DiscoveryModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg rounded-3xl border border-energy-bright/60 bg-navy-950 p-6 sm:p-8 shadow-[0_0_60px_rgba(0,240,255,0.25)] animate-modal"
+        className="relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-3xl border border-energy-bright/60 bg-navy-950 p-6 sm:p-8 shadow-[0_0_60px_rgba(0,240,255,0.25)] animate-modal"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -82,7 +82,7 @@ export function DiscoveryModal({ isOpen, onClose }: DiscoveryModalProps) {
                   Calculate Live Estimate
                 </h4>
                 <p className="text-[11px] text-chrome-400">
-                  Select features & calculate upfront budget
+                  Select features & calculate upfront investment
                 </p>
               </div>
             </div>

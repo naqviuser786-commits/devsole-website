@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Scene } from '@/components/3d/Scene';
 import { WebGLFallback } from '@/components/3d/WebGLFallback';
 import { Header } from '@/components/layout/Header';
@@ -15,6 +15,17 @@ import { initSmoothScroll } from '@/lib/lenis';
 import { useDevsoleScrollTimeline } from '@/hooks/useDevsoleScrollTimeline';
 import { isWebGLAvailable } from '@/lib/webgl';
 
+// Route change par scroll ko clean top par reset karne ke liye
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function PublicSite() {
   const [webglOk] = useState(isWebGLAvailable);
 
@@ -27,9 +38,10 @@ function PublicSite() {
 
   return (
     <div className="relative min-h-screen">
-      {/* 🎯 Custom Cyberpunk Trailing Neon Cursor */}
+      {/* 🎯 Hardware-Accelerated Custom Cursor */}
       <CustomCursor />
 
+      {/* 🧊 3D Scene / WebGL Fallback */}
       {webglOk ? <Scene /> : <WebGLFallback />}
 
       <div className="relative z-10">
@@ -43,7 +55,7 @@ function PublicSite() {
         <Footer />
       </div>
 
-      {/* 🟢 Live Floating Neon WhatsApp Widget */}
+      {/* 🟢 Floating WhatsApp Contact Widget */}
       <WhatsAppFloat />
     </div>
   );
@@ -53,11 +65,15 @@ export default function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
-          {/* ⚡ DEVSOLE Cloud CRM Route (Ye line add hui hai) */}
+          {/* ⚡ DEVSOLE Cloud CRM Route */}
           <Route path="/crm/*" element={<CrmApp />} />
 
+          {/* 🛡️ Website Admin Route */}
           <Route path="/admin/*" element={<AdminApp />} />
+
+          {/* 🌐 Public Client Website */}
           <Route path="/*" element={<PublicSite />} />
         </Routes>
       </BrowserRouter>

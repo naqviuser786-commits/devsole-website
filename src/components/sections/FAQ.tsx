@@ -50,7 +50,13 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative mx-auto max-w-4xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden">
+    <section
+      id="faq"
+      itemScope
+      itemType="https://schema.org/FAQPage"
+      aria-label="Frequently Asked Questions"
+      className="relative mx-auto max-w-4xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Direct Clarity"
         title="Frequently Asked Questions"
@@ -58,13 +64,17 @@ export function FAQ() {
         align="center"
       />
 
-      <div className="mt-14 space-y-4">
+      <div className="mt-12 sm:mt-14 space-y-4">
         {FAQS.map((faq, index) => {
           const isOpen = openIndex === index;
+          const faqId = `faq-answer-${index}`;
 
           return (
             <div
               key={faq.q}
+              itemScope
+              itemType="https://schema.org/Question"
+              itemProp="mainEntity"
               className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
                 isOpen
                   ? 'border-energy-bright/60 bg-gradient-to-b from-energy/10 via-navy-950/80 to-navy-950 shadow-[0_0_30px_rgba(0,240,255,0.12)]'
@@ -74,8 +84,9 @@ export function FAQ() {
               <button
                 type="button"
                 onClick={() => toggle(index)}
-                className="flex w-full items-center justify-between p-5 sm:p-7 text-left transition-colors"
                 aria-expanded={isOpen}
+                aria-controls={faqId}
+                className="flex w-full items-center justify-between p-5 sm:p-7 text-left transition-colors"
               >
                 <div className="flex items-center gap-3 sm:gap-4 pr-3">
                   <span className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-base sm:text-lg shadow-sm">
@@ -83,6 +94,7 @@ export function FAQ() {
                   </span>
 
                   <span
+                    itemProp="name"
                     className={`font-display text-sm sm:text-base font-semibold transition-colors ${
                       isOpen ? 'text-energy-bright' : 'text-white'
                     }`}
@@ -104,8 +116,14 @@ export function FAQ() {
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-6 sm:px-7 sm:pb-7 text-xs sm:text-sm leading-relaxed text-chrome-300 border-t border-white/5 pt-4 animate-fade">
-                  {faq.a}
+                <div
+                  id={faqId}
+                  itemScope
+                  itemType="https://schema.org/Answer"
+                  itemProp="acceptedAnswer"
+                  className="px-5 pb-6 sm:px-7 sm:pb-7 text-xs sm:text-sm leading-relaxed text-chrome-300 border-t border-white/5 pt-4 animate-fade"
+                >
+                  <p itemProp="text">{faq.a}</p>
                 </div>
               )}
             </div>
@@ -119,7 +137,7 @@ export function FAQ() {
           Have a unique requirement not covered here?
         </h4>
         <p className="mt-2 text-xs sm:text-sm text-chrome-400">
-          Speak directly with founder & lead project manager Aoun Abbas on WhatsApp.
+          Speak directly with founder & lead architect Aoun Abbas on WhatsApp.
         </p>
         <a
           href={`https://wa.me/${phone}?text=Hi%20Aoun,%20I%20have%20a%20specific%20question%20regarding%20a%20project.`}

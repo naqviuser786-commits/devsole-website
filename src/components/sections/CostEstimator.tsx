@@ -19,17 +19,17 @@ const DEFAULT_PROJECT_TYPES: Option[] = [
 ];
 
 const DEFAULT_SCOPES: Option[] = [
-  { id: 'mvp', name: 'Starter MVP (1–5 Screens)', icon: '📱', priceUSD: 0, pricePKR: 0 },
-  { id: 'growth', name: 'Growth Platform (6–12 Screens)', icon: '💻', priceUSD: 150, pricePKR: 40000 },
-  { id: 'enterprise', name: 'Enterprise Scale (13+ Screens)', icon: '🌐', priceUSD: 350, pricePKR: 100000 },
+  { id: 'mvp', name: 'Starter MVP (1–5 Views)', icon: '📱', priceUSD: 0, pricePKR: 0 },
+  { id: 'growth', name: 'Growth Platform (6–12 Views)', icon: '💻', priceUSD: 150, pricePKR: 40000 },
+  { id: 'enterprise', name: 'Enterprise Scale (13+ Views)', icon: '🌐', priceUSD: 350, pricePKR: 100000 },
 ];
 
 const DEFAULT_ADDONS: Option[] = [
   { id: 'admin', name: 'Admin Panel Dashboard', icon: '📊', priceUSD: 100, pricePKR: 30000 },
-  { id: 'auth', name: 'Authentication & Roles', icon: '🔐', priceUSD: 75, pricePKR: 20000 },
-  { id: 'payment', name: 'Payment Gateway (Stripe/Card)', icon: '💳', priceUSD: 75, pricePKR: 20000 },
+  { id: 'auth', name: 'Authentication & RBAC Roles', icon: '🔐', priceUSD: 75, pricePKR: 20000 },
+  { id: 'payment', name: 'Payment Gateway Integration', icon: '💳', priceUSD: 75, pricePKR: 20000 },
   { id: 'pdf', name: 'Automated PDF Quote Generator', icon: '📄', priceUSD: 40, pricePKR: 12000 },
-  { id: 'filters', name: 'Live Instant Search & Filters', icon: '🔍', priceUSD: 60, pricePKR: 15000 },
+  { id: 'filters', name: 'Live Multi-Index Search & Filters', icon: '🔍', priceUSD: 60, pricePKR: 15000 },
   { id: '3d', name: 'Interactive 3D WebGL Element', icon: '🧊', priceUSD: 150, pricePKR: 40000 },
 ];
 
@@ -50,7 +50,7 @@ export function CostEstimator() {
   const [selectedAddons, setSelectedAddons] = useState<string[]>(['admin', 'auth']);
   const [selectedTimeline, setSelectedTimeline] = useState<Option>(DEFAULT_TIMELINES[0]);
 
-  // Fetch Live Pricing Catalog from Supabase
+  // Fetch Live Pricing Catalog from Supabase (Connected to CRM /crm/pricing)
   useEffect(() => {
     async function fetchPricing() {
       try {
@@ -119,11 +119,11 @@ export function CostEstimator() {
     const text = `Hi DEVSOLE! I just generated a project estimate on your website:
 • Architecture: ${selectedType.name}
 • Scale: ${selectedScope.name}
-• Features: ${addonNames || 'Standard'}
+• Features: ${addonNames || 'Standard Core'}
 • Timeline: ${selectedTimeline.name}
 • Estimated Cost: $${totals.totalUSD.toLocaleString()} USD / PKR ${totals.totalPKR.toLocaleString()}
 
-I would like to discuss this roadmap with your engineering team.`;
+I would like to discuss this development roadmap with your engineering team.`;
 
     const phone = siteSettings.whatsapp.replace(/\D/g, '');
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
@@ -137,15 +137,21 @@ I would like to discuss this roadmap with your engineering team.`;
   };
 
   return (
-    <section id="estimator" className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden">
+    <section
+      id="estimator"
+      itemScope
+      itemType="https://schema.org/PriceSpecification"
+      aria-label="DEVSOLE Web Development Cost Estimator"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Instant Project Calculator"
         title="Estimate Your Project Cost in Real-Time"
-        description="Select your platform scope and features to get an upfront estimate, then send it directly to our lead engineer."
+        description="Select your platform scope, views, and required feature modules to get an upfront estimate, then transmit it directly to our lead engineering desk."
         align="center"
       />
 
-      {/* Currency Switcher */}
+      {/* Currency Switcher: 100% Mobile Fluid */}
       <div className="mt-8 flex justify-center">
         <div className="inline-flex max-w-full items-center rounded-full border border-white/10 bg-navy-950/80 p-1 backdrop-blur-md shadow-inner">
           <button
@@ -176,7 +182,7 @@ I would like to discuss this roadmap with your engineering team.`;
       <div className="mt-10 grid gap-8 lg:grid-cols-3">
         {/* Left 2 Columns: Options Selector */}
         <div className="space-y-8 lg:col-span-2">
-          {/* Step 1: Project Type */}
+          {/* Step 1: Project Architecture */}
           <div className="rounded-3xl border border-white/10 bg-navy-950/70 p-6 sm:p-7 backdrop-blur-md">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
               Step 01
@@ -192,6 +198,7 @@ I would like to discuss this roadmap with your engineering team.`;
                   <button
                     key={type.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedType(type)}
                     className={`flex items-center justify-between rounded-2xl border p-3.5 sm:p-4 text-left transition-all ${
                       isSelected
@@ -221,7 +228,7 @@ I would like to discuss this roadmap with your engineering team.`;
             </div>
           </div>
 
-          {/* Step 2: Scope */}
+          {/* Step 2: Scale & Views */}
           <div className="rounded-3xl border border-white/10 bg-navy-950/70 p-6 sm:p-7 backdrop-blur-md">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
               Step 02
@@ -237,6 +244,7 @@ I would like to discuss this roadmap with your engineering team.`;
                   <button
                     key={scope.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedScope(scope)}
                     className={`flex flex-col justify-between rounded-2xl border p-4 text-left transition-all ${
                       isSelected
@@ -259,13 +267,13 @@ I would like to discuss this roadmap with your engineering team.`;
             </div>
           </div>
 
-          {/* Step 3: Add-on Features */}
+          {/* Step 3: Add-on Modules */}
           <div className="rounded-3xl border border-white/10 bg-navy-950/70 p-6 sm:p-7 backdrop-blur-md">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
               Step 03
             </span>
             <h3 className="mt-1 font-display text-base sm:text-lg font-bold text-white">
-              Advanced Engineering Add-ons
+              Engineering Add-on Modules
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -275,6 +283,7 @@ I would like to discuss this roadmap with your engineering team.`;
                   <button
                     key={addon.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => toggleAddon(addon.id)}
                     className={`flex items-center justify-between rounded-2xl border p-3.5 sm:p-4 text-left transition-all ${
                       isSelected
@@ -304,13 +313,13 @@ I would like to discuss this roadmap with your engineering team.`;
             </div>
           </div>
 
-          {/* Step 4: Timeline */}
+          {/* Step 4: Sprint Timeline */}
           <div className="rounded-3xl border border-white/10 bg-navy-950/70 p-6 sm:p-7 backdrop-blur-md">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
               Step 04
             </span>
             <h3 className="mt-1 font-display text-base sm:text-lg font-bold text-white">
-              Deployment Timeline
+              Sprint Timeline
             </h3>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -320,6 +329,7 @@ I would like to discuss this roadmap with your engineering team.`;
                   <button
                     key={t.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedTimeline(t)}
                     className={`flex items-center justify-between rounded-2xl border p-3.5 sm:p-4 text-left transition-all ${
                       isSelected
@@ -341,25 +351,31 @@ I would like to discuss this roadmap with your engineering team.`;
           </div>
         </div>
 
-        {/* Right Column: Real-Time Sticky Summary Card */}
+        {/* Right Column: Real-Time Sticky Summary Card with Schema Microdata */}
         <div className="lg:col-span-1">
-          <div className="sticky top-28 rounded-3xl border-2 border-energy-bright/50 bg-gradient-to-b from-energy/20 via-navy-950 to-navy-950 p-6 sm:p-7 backdrop-blur-xl shadow-[0_0_40px_rgba(0,240,255,0.18)]">
+          <div className="sticky top-24 sm:top-28 rounded-3xl border-2 border-energy-bright/50 bg-gradient-to-b from-energy/20 via-navy-950 to-navy-950 p-6 sm:p-7 backdrop-blur-xl shadow-[0_0_40px_rgba(0,240,255,0.18)]">
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
-                Live Estimate
+                Live Calculation
               </span>
               <span className="h-2 w-2 animate-pulse rounded-full bg-energy-bright shadow-[0_0_6px_#00f0ff]" />
             </div>
 
             <div className="mt-4 border-b border-white/10 pb-5">
-              <p className="text-xs text-chrome-400">Estimated Project Cost</p>
+              <p className="text-xs text-chrome-400">Estimated Project Investment</p>
               <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-display text-3xl sm:text-4xl font-extrabold text-white">
+                <span
+                  itemProp="price"
+                  className="font-display text-3xl sm:text-4xl font-extrabold text-white"
+                >
                   {currency === 'USD'
                     ? `$${totals.totalUSD.toLocaleString()}`
                     : `PKR ${totals.totalPKR.toLocaleString()}`}
                 </span>
-                <span className="font-mono text-xs font-semibold text-chrome-400">
+                <span
+                  itemProp="priceCurrency"
+                  className="font-mono text-xs font-semibold text-chrome-400"
+                >
                   {currency === 'USD' ? 'USD' : 'PKR'}
                 </span>
               </div>
@@ -394,15 +410,15 @@ I would like to discuss this roadmap with your engineering team.`;
                 href={generateWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-energy-bright py-3.5 text-xs sm:text-sm font-bold text-navy-950 shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all hover:scale-105 active:scale-95"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-energy-bright py-3.5 text-xs sm:text-sm font-bold text-navy-950 shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all hover:scale-105 active:scale-95 text-center"
               >
-                <span>💬 Lock Estimate & Send to WhatsApp →</span>
+                <span>💬 Lock Estimate & Discuss on WhatsApp →</span>
               </a>
               <a
                 href="#contact"
                 className="block text-center text-xs font-medium text-chrome-400 transition-colors hover:text-white"
               >
-                Or submit inquiry via form below ↓
+                Or submit technical brief via form ↓
               </a>
             </div>
           </div>

@@ -27,25 +27,37 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
   const [activeHash, setActiveHash] = useState('#home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
+    let ticking = false;
 
-      for (const link of NAV_LINKS) {
+    const updateActiveSection = () => {
+      const scrollPos = window.scrollY + 220;
+
+      for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
+        const link = NAV_LINKS[i];
         const id = link.href.replace('#', '');
         const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          if (scrollPos >= top) {
             setActiveHash(link.href);
             break;
           }
         }
       }
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // RAF throttling prevents CPU lockup so 3D HeaderLogo rotates without jitter
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateActiveSection();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleClick = (href: string) => {

@@ -17,11 +17,11 @@ const SPRINTS: SprintStage[] = [
   {
     step: '01',
     days: 'Days 1 – 3',
-    phase: 'Discovery & Modeling',
+    phase: 'Discovery & Architecture',
     icon: '📋',
     title: 'Requirement Blueprint & Schema Design',
     summary:
-      'We deconstruct your business goals into exact technical specifications, design relational database schemas, and establish the user journey wireframes.',
+      'We deconstruct your business goals into technical specifications, design normalized relational database schemas, and establish user journey wireframes.',
     deliverables: [
       'Technical Scope & Feature Matrix',
       'Normalized Relational DB Schema',
@@ -37,7 +37,7 @@ const SPRINTS: SprintStage[] = [
     icon: '💻',
     title: 'Mobile-First UI & Staging Sandbox',
     summary:
-      'Developing responsive interfaces with modern CSS/Tailwind, fluid cyberpunk micro-interactions, and setting up an isolated live staging preview.',
+      'Developing responsive interfaces with modern CSS/Tailwind, intuitive high-converting micro-interactions, and setting up an isolated staging sandbox for review.',
     deliverables: [
       'Mobile-First Responsive Layouts',
       'Private Staging URL for Client Review',
@@ -69,7 +69,7 @@ const SPRINTS: SprintStage[] = [
     icon: '🚀',
     title: 'Cloud Deployment, QA & Full IP Transfer',
     summary:
-      'Rigorous cross-browser stress testing, Lighthouse 99+ speed optimization, live server deployment, and complete handover of Git repository and credentials.',
+      'Rigorous cross-browser stress testing, Lighthouse 95+ speed verification, live server deployment, and complete handover of Git repository and credentials.',
     deliverables: [
       'Production Cloud Server Deployment',
       'Google 95+ PageSpeed Verification',
@@ -85,7 +85,19 @@ export function Process() {
   const phone = siteSettings.whatsapp.replace(/\D/g, '');
 
   return (
-    <section id="process" className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden">
+    <section
+      id="process"
+      itemScope
+      itemType="https://schema.org/HowTo"
+      aria-label="DEVSOLE Agile Engineering Process"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
+      <meta itemProp="name" content="DEVSOLE 21-Day Agile Web Engineering Process" />
+      <meta
+        itemProp="description"
+        content="From technical blueprint to production cloud deployment, our transparent 21-day execution lifecycle."
+      />
+
       <SectionHeading
         eyebrow="Agile Delivery"
         title="Predictable 4-Stage Sprint Roadmap"
@@ -94,13 +106,16 @@ export function Process() {
       />
 
       {/* 4-Stage Sprint Cards: 1 col on phone, 2 on tablet, 4 on desktop */}
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {SPRINTS.map((sprint, index) => {
           const isSelected = activeSprint === index;
 
           return (
             <div
               key={sprint.step}
+              itemScope
+              itemType="https://schema.org/HowToStep"
+              itemProp="step"
               onClick={() => setActiveSprint(index)}
               className={`group relative flex cursor-pointer flex-col justify-between rounded-3xl p-6 sm:p-7 backdrop-blur-md transition-all duration-300 ${
                 isSelected
@@ -108,6 +123,8 @@ export function Process() {
                   : 'border border-white/10 bg-navy-950/60 hover:border-white/20 hover:bg-white/[0.03]'
               }`}
             >
+              <meta itemProp="position" content={sprint.step} />
+
               <div>
                 {/* Step Top Bar: Icon + Step + Days */}
                 <div className="flex items-center justify-between">
@@ -139,11 +156,17 @@ export function Process() {
                   </span>
                 </div>
 
-                <h3 className="mt-1 font-display text-base font-bold text-white leading-snug">
+                <h3
+                  itemProp="name"
+                  className="mt-1 font-display text-base font-bold text-white leading-snug"
+                >
                   {sprint.title}
                 </h3>
 
-                <p className="mt-3 text-xs leading-relaxed text-chrome-400">
+                <p
+                  itemProp="text"
+                  className="mt-3 text-xs leading-relaxed text-chrome-400"
+                >
                   {sprint.summary}
                 </p>
               </div>
@@ -179,7 +202,7 @@ export function Process() {
               You review, test, and approve staging builds before any milestone clearance.
             </h4>
             <p className="mt-1.5 text-xs sm:text-sm text-chrome-400">
-              Direct sprint communication with lead architect Aoun Abbas ensures your project never gets delayed or derailed.
+              Direct sprint communication with lead architect Aoun Abbas ensures your project is delivered on schedule without technical debt.
             </p>
           </div>
 

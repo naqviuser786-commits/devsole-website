@@ -24,7 +24,6 @@ export function Contact() {
     const budget = (form.elements.namedItem('budget') as HTMLSelectElement)?.value;
     const message = (form.elements.namedItem('message') as HTMLTextAreaElement)?.value;
 
-    // Budget se numeric value extract karein CRM ke liye
     let estValue = 500;
     if (budget.includes('750 – $1,200')) estValue = 950;
     else if (budget.includes('1,200+')) estValue = 1500;
@@ -49,12 +48,11 @@ export function Contact() {
         .select()
         .single();
 
-      // Log in Realtime Activity Trail
       if (newLead) {
         await supabase.from('crm_activities').insert({
           entity_type: 'lead',
           entity_id: newLead.id,
-          action: `⚡ New Website Lead: ${name} (${service})`,
+          action: `⚡ New Project Inquiry: ${name} (${service})`,
         });
       }
     } catch {
@@ -63,7 +61,7 @@ export function Contact() {
 
     // 2. Email Dispatch via FormSubmit
     const payload = {
-      _subject: `⚡ New Project Lead: ${name} (${service})`,
+      _subject: `⚡ New Project Inquiry: ${name} (${service})`,
       _template: 'table',
       _captcha: 'false',
       Client_Name: name,
@@ -102,22 +100,27 @@ export function Contact() {
 • Budget: ${clientData.budget}
 • WhatsApp: ${clientData.phone}
 
-Looking forward to your project roadmap.`;
+Looking forward to discussing the project roadmap.`;
 
     const phone = siteSettings.whatsapp.replace(/\D/g, '');
     return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
   };
 
   return (
-    <section id="contact" className="relative mx-auto max-w-4xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden">
+    <section
+      id="contact"
+      itemScope
+      itemType="https://schema.org/ContactPage"
+      className="relative mx-auto max-w-4xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Start a Project"
         title="Let's Build Something Exceptional"
-        description="Share your project requirements with DEVSOLE — our lead team will respond with a roadmap & estimate."
+        description="Share your project requirements with DEVSOLE — our lead team will respond with a tailored roadmap & estimate within 24 hours."
         align="center"
       />
 
-      {/* Direct Contact Glowing Capsule Badges */}
+      {/* Direct Contact Badges */}
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm">
         <a
           href={`mailto:${siteSettings.email}`}
@@ -144,10 +147,10 @@ Looking forward to your project roadmap.`;
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label className="mb-2 block text-xs font-semibold text-chrome-400">Client Name *</label>
-            <input name="clientName" required placeholder="Your Name" className={inputClass} />
+            <input name="clientName" required placeholder="Your Full Name" className={inputClass} />
           </div>
           <div>
-            <label className="mb-2 block text-xs font-semibold text-chrome-400">Email Address *</label>
+            <label className="mb-2 block text-xs font-semibold text-chrome-400">Work Email *</label>
             <input name="email" required type="email" placeholder="you@company.com" className={inputClass} />
           </div>
         </div>
@@ -158,7 +161,7 @@ Looking forward to your project roadmap.`;
             <input name="phone" required placeholder="+92 300 0000000" className={inputClass} />
           </div>
           <div>
-            <label className="mb-2 block text-xs font-semibold text-chrome-400">Service Required *</label>
+            <label className="mb-2 block text-xs font-semibold text-chrome-400">Service Category *</label>
             <select name="service" required className={inputClass} defaultValue="">
               <option value="" disabled className="bg-navy-950">Select a Service</option>
               <option value="Custom Web Application" className="bg-navy-950">Custom Web Application ($450 / PKR 125K)</option>
@@ -185,12 +188,12 @@ Looking forward to your project roadmap.`;
         </div>
 
         <div>
-          <label className="mb-2 block text-xs font-semibold text-chrome-400">Project Details Brief *</label>
+          <label className="mb-2 block text-xs font-semibold text-chrome-400">Project Overview & Goals *</label>
           <textarea
             name="message"
             required
             rows={4}
-            placeholder="Tell us about the project goals, features required, and target timeline..."
+            placeholder="Tell us about the project scope, required features, and target launch timeline..."
             className={inputClass}
           />
         </div>
@@ -204,7 +207,7 @@ Looking forward to your project roadmap.`;
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                <span>Transmitting to DEVSOLE Cloud...</span>
+                <span>Sending Project Brief...</span>
               </span>
             ) : (
               'Submit Project Inquiry →'
@@ -213,7 +216,7 @@ Looking forward to your project roadmap.`;
         </div>
       </form>
 
-      {/* Submission Success Modal: 100% Responsive */}
+      {/* Submission Confirmation Modal */}
       {showSuccessModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"
@@ -229,12 +232,12 @@ Looking forward to your project roadmap.`;
             </div>
 
             <h3 className="mt-5 font-display text-xl sm:text-2xl font-bold text-white">
-              Inquiry Dispatched!
+              Inquiry Received!
             </h3>
 
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-chrome-300">
               Thank you {clientData.name ? <strong className="text-white">{clientData.name}</strong> : 'for reaching out'}. 
-              Your brief has been delivered directly to DEVSOLE Cloud. Our lead architect will respond within 24 hours.
+              Your project brief has been delivered directly to our engineering team. Lead architect Aoun Abbas will review your requirements and respond within 24 hours.
             </p>
 
             <div className="mt-6 flex flex-col gap-3">

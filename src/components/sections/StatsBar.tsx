@@ -100,38 +100,41 @@ function StatCounter({
 
 export function StatsBar() {
   return (
-    <section className="relative mx-auto -mt-6 max-w-6xl px-4 sm:px-6 pb-20 overflow-hidden">
+    <section
+      aria-label="Agency Production Telemetry"
+      className="relative mx-auto -mt-6 max-w-6xl px-4 sm:px-6 pb-20 overflow-hidden"
+    >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <StatCounter
           icon="🚀"
           target={15}
           suffix="+"
           label="Shipped Deployments"
-          description="Custom full-stack web apps, PropTech portals, and automated SaaS tools live in production."
+          description="Bespoke full-stack web apps, PropTech platforms, and SaaS automation systems running live in production."
         />
         <StatCounter
           icon="⚡"
-          target={1.2}
+          target={0.8}
           prefix="< "
           suffix="s"
           decimals={1}
           label="Speed Benchmark"
-          description="Sub-second global response times engineered via lean server architecture and index optimization."
+          description="Sub-second global TTFB latency achieved through lean server endpoints and composite database indexing."
         />
         <StatCounter
           icon="🛡️"
           target={99.9}
           suffix="%"
           decimals={1}
-          label="System Reliability"
-          description="Fault-tolerant database architectures with structured relational data pipelines."
+          label="Production Uptime"
+          description="Fault-tolerant relational schemas and secure REST API pipelines designed for continuous enterprise load."
         />
         <StatCounter
           icon="🎯"
           target={100}
           suffix="%"
-          label="Milestone Precision"
-          description="Strict adherence to delivery sprints, transparent progress staging, and verified handoffs."
+          label="Milestone SLA"
+          description="Strict adherence to 1-week sprint delivery, private staging reviews, and verified production handovers."
         />
       </div>
     </section>

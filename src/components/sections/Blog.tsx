@@ -114,27 +114,49 @@ export function Blog() {
   const [activeArticle, setActiveArticle] = useState<ArticleDetail | null>(null);
 
   return (
-    <section id="blog" className="relative mx-auto max-w-6xl px-6 py-28">
+    <section
+      id="blog"
+      itemScope
+      itemType="https://schema.org/Blog"
+      aria-label="DEVSOLE Engineering Insights & Articles"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
+      <meta itemProp="name" content="DEVSOLE Engineering Blog" />
+      <meta
+        itemProp="description"
+        content="Deep dives into full-stack web engineering, PropTech innovations, and SaaS automation by our team."
+      />
+
       <SectionHeading
         eyebrow="Insights & Articles"
         title="From the DEVSOLE Engineering Blog"
         description="Deep dives into full-stack web engineering, PropTech innovations, and SaaS automation by our team."
+        align="left"
       />
 
-      {/* Blog Cards Grid with HD Cover Images */}
+      {/* Blog Cards Grid with Schema.org/BlogPosting */}
       <div className="mt-12 grid gap-6 sm:grid-cols-3">
         {ARTICLES.map((post) => (
           <article
             key={post.id}
+            itemScope
+            itemType="https://schema.org/BlogPosting"
+            itemProp="blogPost"
             onClick={() => setActiveArticle(post)}
             className="group flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-navy-950/70 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:border-energy-bright/60 hover:bg-white/[0.04] hover:shadow-[0_0_35px_rgba(0,240,255,0.2)]"
           >
+            <meta itemProp="headline" content={post.title} />
+            <meta itemProp="image" content={post.image} />
+            <div itemProp="author" itemScope itemType="https://schema.org/Person">
+              <meta itemProp="name" content="Aoun Abbas" />
+            </div>
+
             <div>
               {/* Cover Image Frame with Tag */}
               <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-white/10 bg-navy-900">
                 <img
                   src={post.image}
-                  alt={post.title}
+                  alt={`${post.title} — DEVSOLE Engineering`}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                 />
@@ -152,7 +174,10 @@ export function Blog() {
                 <h3 className="font-display text-base sm:text-lg font-bold leading-snug text-white transition-colors group-hover:text-energy-bright">
                   {post.title}
                 </h3>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-chrome-400 line-clamp-3">
+                <p
+                  itemProp="description"
+                  className="mt-2.5 text-xs sm:text-sm leading-relaxed text-chrome-400 line-clamp-3"
+                >
                   {post.excerpt}
                 </p>
               </div>
@@ -168,7 +193,7 @@ export function Blog() {
         ))}
       </div>
 
-      {/* 🚀 ARTICLE READING MODAL POPUP */}
+      {/* 🚀 ARTICLE READING MODAL POPUP: 100% Responsive */}
       {activeArticle && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"
@@ -182,7 +207,7 @@ export function Blog() {
             {/* Close Button */}
             <button
               onClick={() => setActiveArticle(null)}
-              className="absolute right-6 top-6 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-navy-950/80 text-sm font-bold text-white transition-colors hover:border-energy-bright hover:bg-energy/20 hover:text-energy-bright"
+              className="absolute right-5 top-5 sm:right-6 sm:top-6 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-navy-950/80 text-sm font-bold text-white transition-colors hover:border-energy-bright hover:bg-energy/20 hover:text-energy-bright"
             >
               ✕
             </button>

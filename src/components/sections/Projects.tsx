@@ -127,15 +127,21 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="relative mx-auto max-w-6xl px-6 py-28">
+    <section
+      id="projects"
+      itemScope
+      itemType="https://schema.org/ItemList"
+      aria-label="DEVSOLE Engineering Portfolio"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Dedicated Portfolio"
-        title="Featured Case Studies & Live Projects"
-        description="Filter our engineering work by industry domain or click any project to inspect full architecture details."
+        title="Featured Case Studies & Live Deployments"
+        description="Filter our engineering work by industry domain or click any project to inspect full architecture details, tech stack, and live demos."
       />
 
-      {/* 📂 CATEGORY FILTER TABS */}
-      <div className="mt-10 flex flex-wrap items-center gap-2.5 pb-2">
+      {/* 📂 Category Filter Tabs: 100% Fluid Responsive */}
+      <div className="mt-10 flex flex-wrap items-center gap-2 sm:gap-2.5 pb-2">
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           const count = getCount(tab.id);
@@ -145,7 +151,7 @@ export function Projects() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${
+              className={`flex items-center gap-2 rounded-full px-3.5 sm:px-4 py-2 text-xs font-semibold transition-all duration-300 ${
                 isActive
                   ? 'bg-energy-bright text-navy-950 shadow-[0_0_20px_rgba(0,240,255,0.4)] scale-105'
                   : 'border border-white/10 bg-white/[0.02] text-chrome-400 hover:border-energy/40 hover:bg-white/[0.05] hover:text-white'
@@ -164,14 +170,20 @@ export function Projects() {
         })}
       </div>
 
-      {/* 🖥️ PROJECTS GRID */}
+      {/* 🖥️ Projects Grid with Semantic Microdata */}
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project) => (
           <article
             key={project.id}
+            itemScope
+            itemType="https://schema.org/SoftwareApplication"
+            itemProp="itemListElement"
             onClick={() => setActiveProject(project)}
             className="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-navy-950/70 backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:border-energy-bright/60 hover:bg-white/[0.04] hover:shadow-[0_0_40px_rgba(0,240,255,0.22)] animate-fade"
           >
+            <meta itemProp="applicationCategory" content={project.category} />
+            <meta itemProp="operatingSystem" content="Web Browser" />
+
             <div>
               {/* Mockup Frame */}
               <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-white/10 bg-navy-900/80">
@@ -187,8 +199,9 @@ export function Projects() {
 
                 {project.image ? (
                   <img
+                    itemProp="image"
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} — Engineered by DEVSOLE`}
                     loading="lazy"
                     className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-108"
                   />
@@ -206,10 +219,16 @@ export function Projects() {
                   {project.category}
                 </span>
 
-                <h3 className="mt-2 font-display text-lg font-bold text-white transition-colors group-hover:text-energy-bright">
+                <h3
+                  itemProp="name"
+                  className="mt-2 font-display text-base sm:text-lg font-bold text-white transition-colors group-hover:text-energy-bright"
+                >
                   {project.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-chrome-400 line-clamp-2">
+                <p
+                  itemProp="description"
+                  className="mt-2 text-xs leading-relaxed text-chrome-400 line-clamp-2"
+                >
                   {project.description}
                 </p>
               </div>
@@ -236,7 +255,7 @@ export function Projects() {
         ))}
       </div>
 
-      {/* 🚀 PROJECT DETAILS MODAL */}
+      {/* 🚀 Project Details Modal: 100% Responsive */}
       {activeProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"

@@ -6,8 +6,9 @@ let lenis: Lenis | null = null;
 
 /**
  * Starts Lenis smooth scrolling and drives it from GSAP's own ticker so
- * ScrollTrigger (which reads the native scroll position) stays perfectly
- * in sync with the smoothed scroll. Returns a cleanup function.
+ * ScrollTrigger stays in perfect sync with the smoothed scroll.
+ * 
+ * Optimized for 60Hz, 120Hz, and 144Hz high-refresh displays.
  */
 export function initSmoothScroll(): () => void {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,7 +18,7 @@ export function initSmoothScroll(): () => void {
   lenis = new Lenis({
     duration: prefersReducedMotion ? 0 : 1.1,
     smoothWheel: !prefersReducedMotion,
-    syncTouch: false, // native touch scroll feels better on mobile than smoothed touch
+    syncTouch: false, // native touch scroll on mobile is superior to virtual touch
   });
 
   lenis.on('scroll', ScrollTrigger.update);
@@ -25,8 +26,11 @@ export function initSmoothScroll(): () => void {
   const tickerCallback = (time: number) => {
     lenis?.raf(time * 1000);
   };
+
   gsap.ticker.add(tickerCallback);
-  gsap.ticker.lagSmoothing(0);
+
+  // Standard lag smoothing prevents stutter jumps during high refresh rate frame drops
+  gsap.ticker.lagSmoothing(500, 33);
 
   return () => {
     gsap.ticker.remove(tickerCallback);

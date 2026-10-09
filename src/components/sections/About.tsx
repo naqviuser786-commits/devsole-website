@@ -9,24 +9,29 @@ const STRENGTH_ICONS = [
 
 export function About() {
   return (
-    <section id="about" className="relative mx-auto max-w-6xl px-6 py-28">
+    <section
+      id="about"
+      itemScope
+      itemType="https://schema.org/AboutPage"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Who We Are"
         title="What is DEVSOLE?"
-        description="The ultimate single destination for modern web engineering and digital execution."
+        description="The dedicated single destination for high-velocity full-stack engineering, PropTech platforms, and custom SaaS tools."
       />
 
-      <div className="mt-14 grid gap-8 lg:grid-cols-12">
+      <div className="mt-12 sm:mt-14 grid gap-8 lg:grid-cols-12">
         {/* Left Col: Brand Story (7 cols) */}
-        <div className="flex flex-col justify-between rounded-3xl border border-white/10 bg-navy-950/70 p-8 sm:p-10 backdrop-blur-md transition-all hover:border-energy/40 hover:shadow-[0_0_35px_rgba(0,240,255,0.12)] lg:col-span-7">
+        <div className="flex flex-col justify-between rounded-3xl border border-white/10 bg-navy-950/70 p-7 sm:p-10 backdrop-blur-md transition-all hover:border-energy/40 hover:shadow-[0_0_35px_rgba(0,240,255,0.12)] lg:col-span-7">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-energy-bright/40 bg-energy/10 px-3.5 py-1 text-xs font-semibold text-energy-bright">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-energy-bright" />
-              <span>Core Origin & Purpose</span>
+              <span>Core Origin & Philosophy</span>
             </div>
 
             <h3 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">
-              Brand Identity & Name Meaning
+              Brand Identity & Engineering Vision
             </h3>
 
             <p className="mt-4 text-sm sm:text-base leading-relaxed text-chrome-300">
@@ -41,7 +46,7 @@ export function About() {
           <div className="mt-8 flex flex-wrap gap-3 border-t border-white/5 pt-6">
             <span className="inline-flex items-center gap-1.5 rounded-xl border border-energy-bright/40 bg-energy/15 px-4 py-2 text-xs font-bold text-energy-bright shadow-[0_0_15px_rgba(0,240,255,0.2)]">
               <span>⚡</span>
-              <span>Dev = Innovation</span>
+              <span>Dev = Innovation & Engineering</span>
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-chrome-300">
               <span>🎯</span>
@@ -50,29 +55,27 @@ export function About() {
           </div>
         </div>
 
-        {/* Right Col: High-Tech Telemetry & Mission Card (5 cols) */}
-        <div className="flex flex-col justify-between rounded-3xl border border-energy-bright/40 bg-gradient-to-b from-energy/20 via-navy-950 to-navy-950 p-8 backdrop-blur-xl shadow-[0_0_40px_rgba(0,240,255,0.15)] lg:col-span-5">
-          {/* Top Simulated Terminal Header */}
+        {/* Right Col: Verified Delivery Architecture Card (5 cols) */}
+        <div className="flex flex-col justify-between rounded-3xl border border-energy-bright/40 bg-gradient-to-b from-energy/20 via-navy-950 to-navy-950 p-7 sm:p-8 backdrop-blur-xl shadow-[0_0_40px_rgba(0,240,255,0.15)] lg:col-span-5">
           <div>
+            {/* Authentic Agency Quality Header */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 font-mono text-[10px] text-chrome-500">
-                  architecture_engine.sh
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-energy-bright shadow-[0_0_8px_#00f0ff]" />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+                  Delivery Commitments
                 </span>
               </div>
-              <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold uppercase text-emerald-400 font-mono">
-                Active
+              <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold uppercase text-emerald-400 font-mono">
+                Verified
               </span>
             </div>
 
-            {/* Mission & Vision Sleek Modules */}
+            {/* Mission & Vision Modules */}
             <div className="mt-6 space-y-4">
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-energy-bright/20 text-xs text-energy-bright">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-energy-bright/20 text-xs text-energy-bright">
                     🎯
                   </span>
                   <h4 className="font-display text-sm font-bold text-white">Our Mission</h4>
@@ -84,7 +87,7 @@ export function About() {
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-energy-bright/20 text-xs text-energy-bright">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-energy-bright/20 text-xs text-energy-bright">
                     🔭
                   </span>
                   <h4 className="font-display text-sm font-bold text-white">Our Vision</h4>
@@ -96,18 +99,18 @@ export function About() {
             </div>
           </div>
 
-          {/* Bottom Live System Benchmark Pill */}
+          {/* Bottom Live Delivery Standard Banner */}
           <div className="mt-6 flex items-center justify-between rounded-xl border border-energy-bright/30 bg-energy/10 px-4 py-2.5 text-xs">
             <span className="flex items-center gap-2 text-chrome-300 font-medium">
               <span className="h-2 w-2 animate-ping rounded-full bg-energy-bright" />
-              <span>Global Production SLA</span>
+              <span>100% Source Code & IP Handover</span>
             </span>
-            <span className="font-mono font-bold text-energy-bright">99.9% Live</span>
+            <span className="font-mono font-bold text-energy-bright">Guaranteed</span>
           </div>
         </div>
       </div>
 
-      {/* 3 Core Strengths with Glowing Badges */}
+      {/* 3 Core Strengths Grid */}
       <div className="mt-10 grid gap-6 sm:grid-cols-3">
         {brandDetails.strengths.map((s, index) => {
           const meta = STRENGTH_ICONS[index] || STRENGTH_ICONS[0];

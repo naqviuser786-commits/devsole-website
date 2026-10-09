@@ -24,19 +24,20 @@ export const DevsoleLogo = forwardRef<DevsoleLogoHandle, DevsoleLogoProps>(
     const clonedScene = useMemo(() => {
       const clone = scene.clone(true);
 
-      // 1. Chrome + Neon Edge Material (Center: Chrome, Edges: Neon Glow)
+      // 1. Stable Premium Metallic Chrome Material (Controlled highlights so Bloom never flashes)
       const chromeNeonMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color('#d8e2ec'), // Silver Chrome metal
-        metalness: 0.95,                   // Maximum chrome reflection
-        roughness: 0.1,                    // Smooth mirror polish
-        emissive: new THREE.Color('#021526'), // Deep navy base shadow
+        color: new THREE.Color('#cdd8e6'),
+        metalness: 0.88,
+        roughness: 0.22,
+        emissive: new THREE.Color('#031224'),
+        emissiveIntensity: 0.2,
       });
 
-      // Fresnel Rim Shader: Edges par Neon glow, Center par pure Chrome shine
+      // Fresnel Rim Shader with Soft Clamping to completely eliminate harsh flashing fireflies
       chromeNeonMaterial.onBeforeCompile = (shader) => {
-        shader.uniforms.rimColor = { value: new THREE.Color('#00f0ff') }; // Electric neon cyan
-        shader.uniforms.rimIntensity = { value: 2.2 };
-        shader.uniforms.rimPower = { value: 2.0 };
+        shader.uniforms.rimColor = { value: new THREE.Color('#00e5ff') };
+        shader.uniforms.rimIntensity = { value: 1.25 };
+        shader.uniforms.rimPower = { value: 2.2 };
 
         shader.fragmentShader = `
           uniform vec3 rimColor;
@@ -48,19 +49,19 @@ export const DevsoleLogo = forwardRef<DevsoleLogoHandle, DevsoleLogoProps>(
           `#include <dithering_fragment>
            vec3 viewDir = normalize(vViewPosition);
            vec3 n = normalize(vNormal);
-           float rim = 1.0 - max(0.0, abs(dot(n, viewDir)));
+           float rim = clamp(1.0 - abs(dot(n, viewDir)), 0.0, 1.0);
            rim = pow(rim, rimPower);
-           gl_FragColor.rgb += rimColor * rim * rimIntensity;`
+           gl_FragColor.rgb += rimColor * (rim * rimIntensity);`
         );
       };
 
-      // 2. Inner Symbols (< aur .) ke liye Glowing Neon Material
+      // 2. Inner Symbols glowing neon cyan material
       const innerNeonMaterial = new THREE.MeshStandardMaterial({
         color: new THREE.Color('#00d8ff'),
-        emissive: new THREE.Color('#00f0ff'),
-        emissiveIntensity: 1.6,
-        roughness: 0.15,
-        metalness: 0.8,
+        emissive: new THREE.Color('#00e5ff'),
+        emissiveIntensity: 1.2,
+        roughness: 0.25,
+        metalness: 0.6,
       });
 
       clone.traverse((child) => {
@@ -74,16 +75,19 @@ export const DevsoleLogo = forwardRef<DevsoleLogoHandle, DevsoleLogoProps>(
             name.includes('dot');
 
           child.material = isInnerSymbol ? innerNeonMaterial : chromeNeonMaterial;
+          child.castShadow = false;
+          child.receiveShadow = false;
         }
       });
 
       return clone;
     }, [scene]);
 
-    // Smooth continuous rotation
+    // Constant, ultra-smooth continuous rotation (clamped delta prevents scroll frame stutters)
     useFrame((_, delta) => {
       if (groupRef.current) {
-        groupRef.current.rotation.y += delta * 0.35;
+        const safeDelta = Math.min(delta, 0.033); // Avoid wild delta jumps on scroll
+        groupRef.current.rotation.y += safeDelta * 0.35;
       }
     });
 

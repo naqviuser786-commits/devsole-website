@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /crm
+Disallow: /crm/
 
+# Canonical Sitemap Location
 Sitemap: https://devsolesoft.com/sitemap.xml

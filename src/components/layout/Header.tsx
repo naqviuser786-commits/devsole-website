@@ -17,15 +17,18 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Mobile menu open hone par background page scroll lock karna
+  // Mobile menu open hone par background page scroll reliably lock karna
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [mobileOpen]);
 
@@ -34,6 +37,7 @@ export function Header() {
   return (
     <>
       <header
+        role="banner"
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
           compact ? 'py-2 sm:py-2.5' : 'py-3 sm:py-4'
         }`}
@@ -50,7 +54,7 @@ export function Header() {
             <a
               href="#home"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-2.5 shrink-0"
+              className="flex items-center gap-2.5 shrink-0 focus-visible:outline-energy-bright"
               aria-label="DEVSOLE home"
             >
               <HeaderLogo />
@@ -71,7 +75,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setDiscoveryOpen(true)}
-                className="hidden sm:inline-flex rounded-full bg-gradient-to-b from-energy-soft to-energy px-4 py-2 text-xs font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-lg"
+                className="hidden sm:inline-flex rounded-full bg-gradient-to-b from-energy-soft to-energy px-4 py-2 text-xs font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-lg focus-visible:outline-energy-bright"
               >
                 Start a Project
               </button>
@@ -80,10 +84,10 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileOpen((prev) => !prev)}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white transition-colors hover:border-energy-bright hover:bg-energy/10 lg:hidden"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white transition-colors hover:border-energy-bright hover:bg-energy/10 focus-visible:outline-energy-bright lg:hidden"
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav"
-                aria-label="Toggle navigation menu"
+                aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
               >
                 {mobileOpen ? (
                   <span className="text-base font-bold text-energy-bright">✕</span>
@@ -95,15 +99,15 @@ export function Header() {
           </div>
         </div>
 
-        {/* 📱 MOBILE OVERLAY & SLIDE-DOWN DRAWER */}
+        {/* 📱 MOBILE OVERLAY & SLIDE-DOWN DRAWER: 100% Fluid Responsive */}
         {mobileOpen && (
           <div
-            className="fixed inset-0 top-[60px] z-30 flex flex-col bg-navy-950/80 backdrop-blur-xl animate-fade lg:hidden"
+            className="fixed inset-0 top-[56px] sm:top-[64px] z-30 flex flex-col bg-navy-950/85 backdrop-blur-2xl animate-fade lg:hidden"
             onClick={() => setMobileOpen(false)}
           >
             <div
               id="mobile-nav"
-              className="mx-3 mt-2 flex max-h-[85vh] flex-col overflow-y-auto rounded-3xl border border-white/15 bg-navy-950/95 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.9)] animate-modal"
+              className="mx-3 mt-2 flex max-h-[82vh] flex-col overflow-y-auto rounded-3xl border border-white/15 bg-navy-950/95 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.9)] animate-modal"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Navigation Items */}
@@ -139,7 +143,7 @@ export function Header() {
         )}
       </header>
 
-      {/* VIP Discovery Consultation Modal */}
+      {/* Discovery Consultation Modal */}
       <DiscoveryModal isOpen={discoveryOpen} onClose={() => setDiscoveryOpen(false)} />
     </>
   );

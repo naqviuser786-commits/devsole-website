@@ -3,19 +3,22 @@ const TICKER_ITEMS = [
   '✦ Sub-Second Full-Stack Web Apps',
   '✦ Automated SaaS Pricing Calculators',
   '✦ Custom PHP & Relational MySQL Architecture',
-  '✦ 0.8s Global Load Time Benchmark',
+  '✦ < 0.8s Global Core Web Vitals Benchmark',
   '✦ Dynamic E-Commerce Marketplaces',
   '✦ 100% IP & Source Code Ownership',
-  '✦ Cyberpunk Responsive UI & 3D Engineering',
+  '✦ High-Performance Responsive UI & 3D WebGL',
   '✦ Direct Founder Consultations',
 ];
 
 export function TechMarquee() {
   return (
-    <div className="relative w-full overflow-hidden border-y border-white/5 bg-navy-950/60 py-4 backdrop-blur-md">
+    <div
+      aria-label="Core Capabilities Ticker"
+      className="relative w-full overflow-hidden border-y border-white/5 bg-navy-950/60 py-4 backdrop-blur-md"
+    >
       {/* Left and Right Gradient Fade Overlays */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-navy-950 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-navy-950 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-20 bg-gradient-to-r from-navy-950 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-20 bg-gradient-to-l from-navy-950 to-transparent" />
 
       {/* Infinite Seamless Moving Track */}
       <div className="animate-marquee flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.2em] text-chrome-400">

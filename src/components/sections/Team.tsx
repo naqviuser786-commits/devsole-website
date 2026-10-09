@@ -27,7 +27,15 @@ export function Team() {
   };
 
   return (
-    <section id="team" className="relative mx-auto max-w-6xl px-6 py-28">
+    <section
+      id="team"
+      itemScope
+      itemType="https://schema.org/Organization"
+      aria-label="DEVSOLE Leadership & Engineering Team"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
+      <meta itemProp="name" content="DEVSOLE" />
+
       <SectionHeading
         eyebrow="Leadership & Engineers"
         title="Meet the Team Behind DEVSOLE"
@@ -35,7 +43,7 @@ export function Team() {
         align="center"
       />
 
-      <div className="mt-14 grid items-start gap-8 md:grid-cols-3">
+      <div className="mt-12 sm:mt-14 grid items-start gap-8 md:grid-cols-3">
         {teamMembers.map((member) => {
           const isFounder = member.name.toUpperCase().includes('AOUN');
           const photoData = getMemberPhoto(member.name);
@@ -43,12 +51,18 @@ export function Team() {
           return (
             <div
               key={member.id}
+              itemScope
+              itemType="https://schema.org/Person"
+              itemProp="employee"
               className={`group relative flex flex-col justify-between rounded-3xl p-7 sm:p-8 backdrop-blur-md transition-all duration-500 ${
                 isFounder
                   ? 'border-2 border-energy-bright/60 bg-gradient-to-b from-energy/20 via-navy-950/90 to-navy-950 shadow-[0_0_45px_rgba(0,240,255,0.22)] md:-translate-y-3 hover:border-energy-bright hover:shadow-[0_0_60px_rgba(0,240,255,0.35)]'
                   : 'border border-white/10 bg-navy-950/70 hover:border-energy-bright/50 hover:bg-white/[0.03] hover:shadow-[0_0_35px_rgba(0,240,255,0.15)]'
               }`}
             >
+              <meta itemProp="worksFor" content="DEVSOLE" />
+              <meta itemProp="knowsAbout" content={member.skills.join(', ')} />
+
               {/* Founder VIP Glow Badge */}
               {isFounder && (
                 <div className="absolute -top-3.5 right-6 z-10">
@@ -60,12 +74,13 @@ export function Team() {
               )}
 
               <div>
-                {/* Profile Portrait Header */}
+                {/* Profile Portrait Header with Image SEO */}
                 <div className="flex items-center gap-4">
                   <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-2xl border-2 border-energy-bright/50 bg-navy-900 shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-transform duration-300 group-hover:scale-105 group-hover:border-energy-bright">
                     <img
+                      itemProp="image"
                       src={photoData.local}
-                      alt={member.name}
+                      alt={`${member.name} — ${member.role} at DEVSOLE`}
                       loading="lazy"
                       className="h-full w-full object-cover object-top"
                       onError={(e) => {
@@ -79,7 +94,7 @@ export function Team() {
                       className={`absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-navy-950 ${
                         isFounder ? 'bg-energy-bright shadow-[0_0_10px_#00f0ff]' : 'bg-energy-soft'
                       }`}
-                      title="Verified DEVSOLE Member"
+                      title="Verified DEVSOLE Engineer"
                     >
                       ✓
                     </span>
@@ -87,13 +102,17 @@ export function Team() {
 
                   <div>
                     <h3
+                      itemProp="name"
                       className={`font-display text-lg sm:text-xl font-bold ${
                         isFounder ? 'text-white' : 'text-chrome-100'
                       }`}
                     >
                       {member.name}
                     </h3>
-                    <p className="mt-0.5 text-xs font-semibold text-energy-bright">
+                    <p
+                      itemProp="jobTitle"
+                      className="mt-0.5 text-xs font-semibold text-energy-bright"
+                    >
                       {member.role}
                     </p>
                   </div>

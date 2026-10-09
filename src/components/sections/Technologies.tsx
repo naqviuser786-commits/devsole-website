@@ -19,7 +19,7 @@ interface TechCategory {
 const TECH_CATEGORIES: TechCategory[] = [
   {
     title: 'Frontend & Reactive UI',
-    subtitle: 'High-speed, accessible, and responsive interfaces',
+    subtitle: 'High-speed, accessible, and responsive user interfaces',
     items: [
       {
         name: 'React & TypeScript',
@@ -27,7 +27,7 @@ const TECH_CATEGORIES: TechCategory[] = [
         icon: '⚛️',
         role: 'Type-safe reactive state & modular components',
         whyDevsole:
-          'Strict typing eliminates 95% of runtime bugs while React virtual DOM delivers instant state updates without page flashes.',
+          'Strict static typing eliminates 95% of runtime bugs while React virtual DOM delivers instant state updates without page flashes.',
         color: '#00f0ff',
       },
       {
@@ -36,25 +36,25 @@ const TECH_CATEGORIES: TechCategory[] = [
         icon: '🎨',
         role: 'Zero-runtime stylesheet optimization',
         whyDevsole:
-          'Purges unused styles on build, resulting in stylesheets under 15KB for blazing-fast mobile rendering.',
+          'Purges unused styles on production build, resulting in minified stylesheets under 15KB for blazing-fast mobile rendering.',
         color: '#38bdf8',
       },
       {
         name: 'HTML5 & Modern CSS3',
         badge: 'Semantic Web',
         icon: '🌐',
-        role: 'Responsive Flexbox, CSS Grid & animations',
+        role: 'Responsive Flexbox, CSS Grid & micro-animations',
         whyDevsole:
-          'Native semantic markup ensures top Google SEO indexing and 100% cross-device compatibility.',
+          'Native semantic markup ensures top Google SEO indexing, accessibility compliance, and 100% cross-device compatibility.',
         color: '#f97316',
       },
       {
-        name: 'Three.js & Custom Motion',
-        badge: 'Cyberpunk 3D',
+        name: 'Three.js & WebGL 3D',
+        badge: 'Hardware Acceleration',
         icon: '🧊',
-        role: 'Hardware-accelerated WebGL visuals',
+        role: 'Hardware-accelerated interactive 3D elements',
         whyDevsole:
-          'Delivers high-end 60fps 3D micro-interactions with adaptive performance tiers for lower-end devices.',
+          'Delivers high-end 60fps 3D visuals with adaptive performance tiers to keep memory consumption low on mobile devices.',
         color: '#a855f7',
       },
     ],
@@ -64,12 +64,12 @@ const TECH_CATEGORIES: TechCategory[] = [
     subtitle: 'Sub-millisecond endpoints and ACID-compliant storage',
     items: [
       {
-        name: 'PHP 8.x Server-Side',
+        name: 'PHP 8.2 Server-Side',
         badge: 'Native Backend Logic',
         icon: '🐘',
         role: 'Lightweight REST APIs & form data pipelines',
         whyDevsole:
-          'Executes requests in under 15ms without bloated framework overhead, reducing required server resources drastically.',
+          'Executes requests in under 15ms without bloated framework overhead, reducing required server memory and infrastructure costs.',
         color: '#818cf8',
       },
       {
@@ -78,7 +78,7 @@ const TECH_CATEGORIES: TechCategory[] = [
         icon: '🗄️',
         role: 'Structured schemas, indexes & foreign keys',
         whyDevsole:
-          'Composite index optimization allows queries across tens of thousands of records to execute in milliseconds.',
+          'Composite index optimization allows high-concurrency queries across tens of thousands of records to execute in milliseconds.',
         color: '#38bdf8',
       },
       {
@@ -94,46 +94,46 @@ const TECH_CATEGORIES: TechCategory[] = [
         name: 'RESTful API Pipelines',
         badge: 'Data Integrations',
         icon: '🔌',
-        role: 'Secure JSON endpoints & third-party hooks',
+        role: 'Secure JSON endpoints & third-party webhooks',
         whyDevsole:
-          'Sanitized input validation and token security protect against SQL injections and unauthorized payloads.',
+          'Sanitized input validation and token security protect against SQL injections, CSRF attacks, and unauthorized payloads.',
         color: '#10b981',
       },
     ],
   },
   {
     title: 'DevOps & Cloud Environment',
-    subtitle: 'Local sandboxes, version control and live servers',
+    subtitle: 'Containerization, version control, and global edge CDNs',
     items: [
       {
         name: 'GitHub Version Control',
-        badge: 'Git Repositories',
+        badge: 'Atomic Versioning',
         icon: '🐙',
         role: 'Atomic commit tracking & collaboration',
         whyDevsole:
-          'Guarantees 100% transparent version history and seamless complete code handover upon project completion.',
+          'Guarantees 100% transparent version history and seamless complete code handover upon milestone clearance.',
         color: '#ffffff',
       },
       {
-        name: 'Laragon Server Environment',
-        badge: 'Local Staging Sandbox',
-        icon: '🚀',
-        role: 'Isolated Apache, PHP & MySQL testing',
+        name: 'Docker & Staging Sandboxes',
+        badge: 'Isolated Environments',
+        icon: '🐳',
+        role: 'Isolated Apache, PHP & MySQL staging review',
         whyDevsole:
-          'Allows our engineers to simulate production cloud environments locally before deploying live.',
+          'Allows our engineers to simulate production cloud environments and test builds before deploying live to public domains.',
         color: '#06b6d4',
       },
       {
-        name: 'HeidiSQL / phpMyAdmin',
-        badge: 'Database Workbench',
+        name: 'SQL Query Profiling',
+        badge: 'Database Benchmarking',
         icon: '🔍',
-        role: 'Query profiling & schema architecture',
+        role: 'Query execution profiling & schema optimization',
         whyDevsole:
-          'Used to benchmark and optimize query execution plans to prevent database bottlenecks under traffic spikes.',
+          'Used to benchmark and optimize query execution plans to eliminate database bottlenecks during high traffic spikes.',
         color: '#fbbf24',
       },
       {
-        name: 'Cloud Edge Hosting',
+        name: 'Global Cloud Edge CDN',
         badge: 'Global Production CDN',
         icon: '☁️',
         role: 'SSL encryption, HTTP/2 & edge caching',
@@ -149,16 +149,22 @@ export function Technologies() {
   const [inspectedTech, setInspectedTech] = useState<TechItem>(TECH_CATEGORIES[0].items[0]);
 
   return (
-    <section id="technologies" className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden">
+    <section
+      id="technologies"
+      itemScope
+      itemType="https://schema.org/ItemList"
+      aria-label="DEVSOLE Engineered Architecture & Tech Stack"
+      className="relative mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 overflow-hidden"
+    >
       <SectionHeading
         eyebrow="Engineered Architecture"
         title="Battle-Tested, High-Velocity Tech Stack"
-        description="Click or hover any technology to inspect our technical benchmarks and why we chose it for production speed."
+        description="Click or hover any technology to inspect our technical benchmarks and why we chose it for production speed and scalability."
         align="center"
       />
 
-      {/* 3-Column Technology Matrix: 1 col on mobile, 3 cols on desktop */}
-      <div className="mt-14 grid gap-6 sm:gap-8 lg:grid-cols-3">
+      {/* 3-Column Technology Matrix */}
+      <div className="mt-12 sm:mt-14 grid gap-6 sm:gap-8 lg:grid-cols-3">
         {TECH_CATEGORIES.map((cat) => (
           <div
             key={cat.title}
@@ -177,6 +183,9 @@ export function Technologies() {
                   return (
                     <div
                       key={tech.name}
+                      itemScope
+                      itemType="https://schema.org/TechArticle"
+                      itemProp="itemListElement"
                       onClick={() => setInspectedTech(tech)}
                       onMouseEnter={() => setInspectedTech(tech)}
                       className={`group cursor-pointer rounded-2xl border p-3.5 sm:p-4 transition-all duration-300 ${
@@ -190,7 +199,10 @@ export function Technologies() {
                           <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm shadow-sm">
                             {tech.icon}
                           </span>
-                          <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-energy-bright transition-colors">
+                          <h4
+                            itemProp="headline"
+                            className="text-xs sm:text-sm font-bold text-white group-hover:text-energy-bright transition-colors"
+                          >
                             {tech.name}
                           </h4>
                         </div>

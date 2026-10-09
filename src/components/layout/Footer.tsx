@@ -48,7 +48,10 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-white/5 bg-navy-950/80 backdrop-blur-md overflow-hidden">
+    <footer
+      role="contentinfo"
+      className="relative border-t border-white/5 bg-navy-950/80 backdrop-blur-md overflow-hidden"
+    >
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
         {/* Brand & Professional Tagline */}
         <div>
@@ -59,19 +62,19 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-xs sm:text-sm leading-relaxed text-chrome-400">
-            Engineering high-performance web applications, scalable SaaS solutions, and modern digital experiences designed to elevate your business.
+            Engineering high-performance web applications, scalable SaaS solutions, and custom PropTech platforms built to accelerate business revenue worldwide.
           </p>
 
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] text-emerald-400 font-mono">
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-[11px] text-emerald-400 font-mono">
             <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
-            <span>Systems 99.9% Operational</span>
+            <span>Available for New Projects</span>
           </div>
         </div>
 
         {/* Navigation Links */}
         <div>
           <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-energy-bright">
-            Navigate
+            Navigation
           </h3>
           <ul className="mt-4 space-y-2.5">
             {NAV_LINKS.map((link) => (
@@ -151,11 +154,11 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Copyright & Guarantee */}
+      {/* Bottom Copyright & Trust Guarantee */}
       <div className="border-t border-white/5 px-4 sm:px-6 py-6 text-center text-xs text-chrome-500 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-6xl mx-auto">
         <p>© {year} {companyName}. All rights reserved.</p>
-        <p className="text-[11px] text-chrome-600">
-          Built with React, TypeScript, Tailwind CSS & Custom 3D WebGL
+        <p className="text-[11px] text-chrome-500">
+          Crafted for high performance, sub-second latency, and verified milestone delivery.
         </p>
       </div>
     </footer>

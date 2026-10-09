@@ -13,13 +13,13 @@ export const siteSettings = {
 
 export const brandDetails = {
   meaning: '"DevSole" is a combination of two words: "Dev" (Development & Innovation) and "Sole" (Single Dedicated Solution). It represents: The Ultimate Single Destination for All Digital & Web Development Needs.',
-  essence: 'DevSole is a modern web agency that empowers businesses by providing a powerful web identity, ultra-fast performance, and automated SaaS tools.',
-  mission: 'To provide businesses with fast, secure, scalable, and conversion-focused digital tools.',
-  vision: 'To make modern web engineering and user experience (UX) accessible and automated for every business.',
+  essence: 'DevSole is a modern web engineering agency that empowers businesses by providing high-converting web applications, sub-second performance, and automated SaaS tools.',
+  mission: 'To provide growing businesses with fast, secure, scalable, and conversion-focused digital platforms.',
+  vision: 'To make modern web engineering and intuitive user experience (UX) accessible, automated, and scalable for every enterprise.',
   strengths: [
-    { title: 'High-Speed Performance', desc: 'Blazing fast load times and optimized asset pipelines.' },
-    { title: 'Clean Modular Architecture', desc: 'Maintainable, secure, and future-proof code quality.' },
-    { title: 'Scalable Infrastructure', desc: 'Seamless delivery from local environments to cloud deployment.' }
+    { title: 'High-Speed Performance', desc: 'Sub-second load times, optimized asset pipelines, and 99+ Core Web Vitals.' },
+    { title: 'Clean Modular Architecture', desc: 'Maintainable, type-safe, and secure code quality built for high traffic.' },
+    { title: 'Scalable Infrastructure', desc: 'Seamless deployment pipeline from local sandboxes to global cloud edge CDNs.' }
   ]
 };
 
@@ -27,26 +27,26 @@ export const services = [
   {
     id: '1',
     title: 'Custom Full-Stack Web Apps',
-    description: 'Interactive, secure, and dynamic websites built on HTML5, CSS3, JavaScript, PHP, and MySQL architecture.',
-    features: ['Custom PHP Architecture', 'MySQL Database Integration', 'Dynamic User Portals', 'Cross-Device Responsiveness']
+    description: 'Interactive, secure, and dynamic web applications built on modern JavaScript, clean server-side endpoints, and relational MySQL architecture.',
+    features: ['Custom Modular Architecture', 'Relational MySQL Optimization', 'Dynamic Client Portals', 'Cross-Device Responsiveness']
   },
   {
     id: '2',
     title: 'PropTech & Real Estate Solutions',
-    description: 'Property marketplace platforms with live search filters, agent directories, and client lead portals.',
-    features: ['Advanced Search Filters', 'Interactive Property Cards', 'Direct Agent Inquiries', 'Lead Generation Pipeline']
+    description: 'Property marketplace platforms engineered with sub-second multi-filters, agent routing pipelines, and automated lead capture.',
+    features: ['Advanced Search & Location Filters', 'Interactive Property Cards', 'Direct Agent WhatsApp Routing', 'Lead Generation Pipeline']
   },
   {
     id: '3',
     title: 'SaaS & Estimator Calculators',
-    description: 'Interactive real-time pricing tools, custom deal estimators, and automated PDF quote export features.',
-    features: ['Real-Time Math Calculations', 'Instant PDF Quote Export', 'Custom Service Selection', 'Client Order Collection']
+    description: 'Interactive real-time pricing tools, custom quotation engines, and automated PDF estimate generation pipelines.',
+    features: ['Real-Time Math Calculations', 'Instant PDF Quote Export', 'Bespoke Scope Customization', 'High-Intent Lead Collection']
   },
   {
     id: '4',
     title: 'E-Commerce & Dynamic Portals',
-    description: 'Custom dynamic shopping carts, database form integration, and robust admin management controls.',
-    features: ['Dynamic Cart Drawer', 'Category Filtering', 'Discount Coupon Logic', 'Secure Checkout Handlers']
+    description: 'High-speed online shopping systems, dynamic cart drawers, database inventory management, and secure checkout integration.',
+    features: ['Dynamic Slide-Out Cart', 'Sub-Second Category Filtering', 'Automated Coupon Engine', 'Verified Payment Gateway Flow']
   }
 ];
 
@@ -114,31 +114,31 @@ export const projects = [
 ];
 
 export const technologies = {
-  frontend: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Modern CSS Grid & Flexbox', 'Tailwind CSS', 'Custom Animations'],
-  backend: ['PHP (Server-Side Scripting)', 'MySQL (Relational Database)', 'REST APIs', 'PDF Generation Engines'],
-  devops: ['Laragon (Local Dev Server)', 'HeidiSQL / phpMyAdmin', 'GitHub (Version Control)', 'InfinityFree (Cloud Hosting)']
+  frontend: ['React & TypeScript', 'Tailwind CSS', 'HTML5 & Modern CSS3', 'Three.js & WebGL', 'Custom Animations'],
+  backend: ['PHP 8.2 (Server-Side Logic)', 'MySQL (Relational Database)', 'RESTful APIs', 'Automated PDF Generation'],
+  devops: ['Docker & Staging Sandboxes', 'SQL Query Profiling & Optimization', 'GitHub Enterprise Version Control', 'Cloud Edge Hosting & Global CDNs']
 };
 
 export const processSteps = [
   {
     step: '01',
     title: 'Requirement Analysis & Discovery',
-    description: 'We define the business goals, layout planning, technical scope, and feature breakdown for the project.'
+    description: 'We define business goals, layout planning, technical scope, and feature breakdown for the project.'
   },
   {
     step: '02',
     title: 'UI/UX & Frontend Development',
-    description: 'Developing mobile-first responsive layouts, modern cyberpunk styling, and interactive fluid UI elements.'
+    description: 'Developing mobile-first responsive layouts, high-converting interfaces, and interactive fluid elements.'
   },
   {
     step: '03',
     title: 'Backend & Database Engineering',
-    description: 'Integrating PHP scripts, designing structured MySQL databases, and setting up dynamic form pipelines.'
+    description: 'Integrating sanitized server-side endpoints, designing structured MySQL databases, and setting up dynamic form pipelines.'
   },
   {
     step: '04',
     title: 'QA Testing & Cloud Deployment',
-    description: 'Conducting thorough cross-browser testing, code optimization, and final deployment to live production servers.'
+    description: 'Conducting thorough cross-browser testing, code optimization, and final deployment to live cloud servers.'
   }
 ];
 
@@ -162,7 +162,7 @@ export const teamMembers = [
     role: 'Lead Frontend Developer & UI/UX Designer',
     focus: 'Responsive Web Layouts, Dynamic UI Elements, Modern Styling & Interactive User Interfaces.',
     responsibilities: [
-      'Mobile-first responsive designs using HTML5/CSS3/JS',
+      'Mobile-first responsive designs using modern CSS and React',
       'Dynamic pricing tools & interactive user calculators',
       'Cross-browser optimization & performance tuning',
       'Translating brand visions into clean design systems'
@@ -178,9 +178,9 @@ export const teamMembers = [
       'Secure server-side logic & form submission pipelines in PHP',
       'Structured relational database schemas with MySQL',
       'Automated features: PDF generation & notification pipelines',
-      'Local server configuration & SQL query optimization'
+      'Query execution profiling & SQL performance tuning'
     ],
-    skills: ['PHP', 'MySQL', 'Database Architecture', 'Laragon', 'HeidiSQL', 'Cloud Deployment']
+    skills: ['PHP', 'MySQL', 'Database Architecture', 'REST APIs', 'Cloud Deployment']
   }
 ];
 
