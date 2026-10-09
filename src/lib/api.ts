@@ -1,4 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api';
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? 'http://localhost:4000/api' : '');
 
 export class ApiRequestError extends Error {
   status: number;
@@ -9,6 +11,11 @@ export class ApiRequestError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  // Live website par agar external backend URL na ho to localhost par request na bhejein (Chrome popup permanent fix)
+  if (!API_BASE) {
+    return undefined as unknown as T;
+  }
+
   const res = await fetch(`${API_BASE}${path}`, {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
