@@ -4,9 +4,9 @@ import { siteSettings } from '@/data/siteData';
 export function WhatsAppFloat() {
   const [hovered, setHovered] = useState(false);
 
-  const phone = siteSettings.whatsapp.replace(/\D/g, '');
+  const phone = (siteSettings?.whatsapp || '+923706492398').replace(/\D/g, '');
   const message = encodeURIComponent(
-    'Hi DEVSOLE! I am interested in building a high-performance web project with your engineering team. Let us discuss.'
+    'Hi DEVSOLE Soft! I am interested in building a high-performance web project with your engineering team. Let us discuss.'
   );
   const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
 
@@ -14,30 +14,27 @@ export function WhatsAppFloat() {
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center">
       {/* Floating Tooltip Tag (Desktop only) */}
       <div
-        className={`mr-3 hidden items-center rounded-xl border border-energy-bright/40 bg-navy-950/95 px-3.5 py-1.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(0,240,255,0.25)] backdrop-blur-md transition-all duration-300 sm:flex ${
+        className={`mr-2.5 hidden items-center rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur-md transition-all duration-200 sm:flex ${
           hovered ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0 pointer-events-none'
         }`}
       >
-        <span className="mr-1.5 h-2 w-2 animate-pulse rounded-full bg-energy-bright" />
-        Chat with DEVSOLE
+        <span className="mr-2 h-2 w-2 rounded-full bg-[#25D366] shadow-[0_0_6px_#25D366]" />
+        Direct Founder Chat
       </div>
 
-      {/* Floating Glowing Button */}
+      {/* Floating Official WhatsApp Button */}
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noreferrer noopener"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-energy-bright/60 bg-navy-950/90 shadow-[0_0_25px_rgba(0,240,255,0.35)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-energy-bright hover:shadow-[0_0_40px_rgba(0,240,255,0.6)] focus-visible:outline-energy-bright"
-        aria-label="Direct WhatsApp Consultation with DEVSOLE Lead Architect"
+        className="group relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_6px_20px_rgba(37,211,102,0.35)] transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-emerald-500"
+        aria-label="Direct WhatsApp Consultation with DEVSOLE Soft"
       >
-        {/* Soft Outer Pulse Ring */}
-        <span className="absolute -inset-1 animate-ping rounded-full bg-energy-bright/20 opacity-75 pointer-events-none" />
-
-        {/* WhatsApp Official SVG Icon in Cyber Neon Style */}
+        {/* Official WhatsApp Pure White SVG Icon */}
         <svg
-          className="relative h-6 w-6 sm:h-7 sm:w-7 fill-energy-bright transition-transform duration-300 group-hover:scale-110"
+          className="h-5 w-5 sm:h-6 sm:w-6 fill-white transition-transform duration-200 group-hover:scale-105"
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
@@ -47,3 +44,5 @@ export function WhatsAppFloat() {
     </div>
   );
 }
+
+export default WhatsAppFloat;

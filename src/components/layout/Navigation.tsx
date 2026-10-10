@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export interface NavLink {
   label: string;
@@ -9,11 +9,13 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Technologies', href: '#technologies' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Reviews', href: '#testimonials' },
+  { label: 'Stack', href: '#technologies' },
   { label: 'Process', href: '#process' },
   { label: 'Team', href: '#team' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Estimator', href: '#estimator' },
+  { label: 'Insights', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -25,29 +27,46 @@ interface NavigationProps {
 
 export function Navigation({ className, isMobile = false, onNavigate }: NavigationProps) {
   const [activeHash, setActiveHash] = useState('#home');
+  const isClickingRef = useRef(false);
+  const clickTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     let ticking = false;
 
     const updateActiveSection = () => {
-      const scrollPos = window.scrollY + 220;
+      if (isClickingRef.current) {
+        ticking = false;
+        return;
+      }
 
-      for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
-        const link = NAV_LINKS[i];
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70) {
+        setActiveHash('#contact');
+        ticking = false;
+        return;
+      }
+
+      const scrollAnchor = window.scrollY + 140;
+      let currentActive = NAV_LINKS[0].href;
+
+      for (const link of NAV_LINKS) {
         const id = link.href.replace('#', '');
         const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
-          if (scrollPos >= top) {
-            setActiveHash(link.href);
+          const height = el.offsetHeight;
+          if (scrollAnchor >= top && scrollAnchor < top + height) {
+            currentActive = link.href;
             break;
+          } else if (scrollAnchor >= top) {
+            currentActive = link.href;
           }
         }
       }
+
+      setActiveHash(currentActive);
       ticking = false;
     };
 
-    // RAF throttling prevents CPU lockup so 3D HeaderLogo rotates without jitter
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(updateActiveSection);
@@ -57,18 +76,46 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
 
     window.addEventListener('scroll', onScroll, { passive: true });
     updateActiveSection();
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (clickTimeoutRef.current) {
+        window.clearTimeout(clickTimeoutRef.current);
+      }
+    };
   }, []);
 
-  const handleClick = (href: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     setActiveHash(href);
+
+    isClickingRef.current = true;
+    if (clickTimeoutRef.current) {
+      window.clearTimeout(clickTimeoutRef.current);
+    }
+    clickTimeoutRef.current = window.setTimeout(() => {
+      isClickingRef.current = false;
+    }, 900);
+
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      const headerOffset = 90;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+
     if (onNavigate) onNavigate();
   };
 
-  // 📱 MOBILE VIEW: Full-width touch friendly cards with glowing active state
   if (isMobile) {
     return (
-      <nav className={`flex flex-col gap-1.5 w-full ${className ?? ''}`} aria-label="Mobile Navigation">
+      <nav className={`flex flex-col gap-1 w-full ${className ?? ''}`} aria-label="Mobile Navigation">
         {NAV_LINKS.map((link) => {
           const isActive = activeHash === link.href;
 
@@ -76,21 +123,20 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
             <a
               key={link.href}
               href={link.href}
-              onClick={() => handleClick(link.href)}
-              className={`flex items-center justify-between w-full px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 ${
+              onClick={(e) => handleClick(e, link.href)}
+              className={`flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-xs transition-colors duration-150 ${
                 isActive
-                  ? 'border border-energy-bright/60 bg-energy/15 text-energy-bright shadow-[0_0_20px_rgba(0,240,255,0.2)]'
-                  : 'border border-white/5 bg-white/[0.02] text-chrome-300 hover:border-white/20 hover:bg-white/[0.05] hover:text-white'
+                  ? 'bg-white/10 text-white font-bold border border-white/15'
+                  : 'text-slate-300 hover:text-white hover:bg-white/5 font-medium'
               }`}
             >
               <span>{link.label}</span>
               {isActive ? (
-                <span className="flex items-center gap-1.5 text-xs text-energy-bright">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-energy-bright shadow-[0_0_6px_#00f0ff]" />
-                  Active
-                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_6px_#3b82f6]" />
               ) : (
-                <span className="text-chrome-600 text-xs">→</span>
+                <svg className="h-3.5 w-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               )}
             </a>
           );
@@ -99,10 +145,9 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
     );
   }
 
-  // 🖥️ DESKTOP VIEW: Floating Glass Capsule Dock
   return (
     <nav className={className} aria-label="Desktop Navigation">
-      <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 shadow-inner backdrop-blur-md">
+      <div className="flex items-center gap-0.5 rounded-xl border border-white/10 bg-white/[0.03] p-1 backdrop-blur-md overflow-x-auto max-w-full">
         {NAV_LINKS.map((link) => {
           const isActive = activeHash === link.href;
 
@@ -110,16 +155,13 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
             <a
               key={link.href}
               href={link.href}
-              onClick={() => handleClick(link.href)}
-              className={`relative rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide transition-all duration-300 ${
+              onClick={(e) => handleClick(e, link.href)}
+              className={`relative whitespace-nowrap rounded-lg px-2.5 py-1 text-[11px] transition-all duration-150 ${
                 isActive
-                  ? 'border border-energy-bright/60 bg-gradient-to-r from-energy/25 to-energy-bright/15 text-white shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                  : 'border border-transparent text-chrome-400 hover:border-white/10 hover:bg-white/[0.05] hover:text-white'
+                  ? 'bg-white/10 text-white shadow-2xs font-semibold border border-white/15'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5 font-medium'
               }`}
             >
-              {isActive && (
-                <span className="absolute -top-0.5 right-1 h-1 w-1 animate-ping rounded-full bg-energy-bright" />
-              )}
               {link.label}
             </a>
           );
@@ -128,3 +170,5 @@ export function Navigation({ className, isMobile = false, onNavigate }: Navigati
     </nav>
   );
 }
+
+export default Navigation;

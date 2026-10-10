@@ -1,25 +1,34 @@
 export const siteSettings = {
-  companyName: 'DEVSOLE',
-  heroHeading: 'Modern Full-Stack Web Development & SaaS Automation',
-  heroSubtitle: 'Fast, responsive, and high-converting web applications along with custom digital platforms tailored for your business growth.',
-  ctaProjects: 'Explore Projects',
-  ctaContact: 'Get a Quote',
+  companyName: 'DEVSOLE Soft',
+  heroHeading: 'Custom Full-Stack Web Engineering & Digital Solutions',
+  heroSubtitle: 'We architect high-performance web platforms, specialized PropTech systems, and custom SaaS tools with sub-second response times and complete source code ownership.',
+  ctaProjects: 'Explore Production Work',
+  ctaContact: 'Start a Project',
   email: 'devsole.official@gmail.com',
   whatsapp: '+92 370 6492398',
   phone: '+92 370 6492398',
-  address: 'Lahore / Remote Global Delivery',
-  activeStatus: 'Available for New Projects',
+  address: 'Lahore, Pakistan · Global Project Delivery',
+  activeStatus: 'Available for New Sprints',
 };
 
 export const brandDetails = {
-  meaning: '"DevSole" is a combination of two words: "Dev" (Development & Innovation) and "Sole" (Single Dedicated Solution). It represents: The Ultimate Single Destination for All Digital & Web Development Needs.',
-  essence: 'DevSole is a modern web engineering agency that empowers businesses by providing high-converting web applications, sub-second performance, and automated SaaS tools.',
-  mission: 'To provide growing businesses with fast, secure, scalable, and conversion-focused digital platforms.',
-  vision: 'To make modern web engineering and intuitive user experience (UX) accessible, automated, and scalable for every enterprise.',
+  meaning: '"DEVSOLE Soft" stands for single-source engineering excellence: "Dev" represents modern web innovation, and "Sole" signifies your dedicated, end-to-end software partner.',
+  essence: 'DEVSOLE Soft is an independent web engineering studio focused on building revenue-generating web applications, specialized real estate portals, and automated business tools.',
+  mission: 'To deliver high-reliability web systems with sub-second performance, bulletproof database design, and zero technical debt.',
+  vision: 'To establish an engineering standard where every web application is fast by default, scalable under high traffic, and handed over with complete client ownership.',
   strengths: [
-    { title: 'High-Speed Performance', desc: 'Sub-second load times, optimized asset pipelines, and 99+ Core Web Vitals.' },
-    { title: 'Clean Modular Architecture', desc: 'Maintainable, type-safe, and secure code quality built for high traffic.' },
-    { title: 'Scalable Infrastructure', desc: 'Seamless deployment pipeline from local sandboxes to global cloud edge CDNs.' }
+    { 
+      title: 'Sub-Second Response', 
+      desc: 'Optimized relational queries, minimal bundle payloads, and 95+ Core Web Vitals.' 
+    },
+    { 
+      title: 'Modular Code Hygiene', 
+      desc: 'Strict type safety, sanitized server endpoints, and clean relational schema architecture.' 
+    },
+    { 
+      title: 'Full Intellectual Property', 
+      desc: '100% complete GitHub repository, database schemas, and infrastructure handed directly to you.' 
+    }
   ]
 };
 
@@ -27,26 +36,26 @@ export const services = [
   {
     id: '1',
     title: 'Custom Full-Stack Web Apps',
-    description: 'Interactive, secure, and dynamic web applications built on modern JavaScript, clean server-side endpoints, and relational MySQL architecture.',
-    features: ['Custom Modular Architecture', 'Relational MySQL Optimization', 'Dynamic Client Portals', 'Cross-Device Responsiveness']
+    description: 'Bespoke web applications built on modern JavaScript, clean server-side endpoints, and relational MySQL architecture designed for long-term scalability.',
+    features: ['Modular Component Architecture', 'Relational MySQL Optimization', 'Custom Client & Admin Portals', 'Responsive Cross-Device Layouts']
   },
   {
     id: '2',
     title: 'PropTech & Real Estate Solutions',
-    description: 'Property marketplace platforms engineered with sub-second multi-filters, agent routing pipelines, and automated lead capture.',
-    features: ['Advanced Search & Location Filters', 'Interactive Property Cards', 'Direct Agent WhatsApp Routing', 'Lead Generation Pipeline']
+    description: 'High-converting real estate portals with instant multi-parameter filtering, interactive property showcases, and direct agent WhatsApp routing.',
+    features: ['Sub-Second Property Search & Filters', 'Interactive Media & Floorplan Cards', 'Direct WhatsApp Agent Routing', 'Automated Lead Capture Pipeline']
   },
   {
     id: '3',
-    title: 'SaaS & Estimator Calculators',
-    description: 'Interactive real-time pricing tools, custom quotation engines, and automated PDF estimate generation pipelines.',
-    features: ['Real-Time Math Calculations', 'Instant PDF Quote Export', 'Bespoke Scope Customization', 'High-Intent Lead Collection']
+    title: 'SaaS Tools & Cost Calculators',
+    description: 'Interactive real-time estimation engines, dynamic quotation builders, and automated PDF export systems that pre-qualify prospective clients.',
+    features: ['Real-Time Mathematical Logic', 'Instant Automated PDF Export', 'Multi-Currency (PKR & USD) Support', 'Direct Sales Webhook Integrations']
   },
   {
     id: '4',
     title: 'E-Commerce & Dynamic Portals',
-    description: 'High-speed online shopping systems, dynamic cart drawers, database inventory management, and secure checkout integration.',
-    features: ['Dynamic Slide-Out Cart', 'Sub-Second Category Filtering', 'Automated Coupon Engine', 'Verified Payment Gateway Flow']
+    description: 'Lightweight, conversion-optimized online commerce platforms featuring slide-out cart drawers, dynamic inventory filtering, and secure payment flows.',
+    features: ['Instant Dynamic Cart Drawer', 'Relational Inventory Filtering', 'Custom Promo & Discount Engine', 'Verified Payment Gateway Flow']
   }
 ];
 
@@ -122,23 +131,23 @@ export const technologies = {
 export const processSteps = [
   {
     step: '01',
-    title: 'Requirement Analysis & Discovery',
-    description: 'We define business goals, layout planning, technical scope, and feature breakdown for the project.'
+    title: 'Technical Scope & Architectural Blueprint',
+    description: 'We deconstruct business requirements, outline technical specifications, design relational database schemas, and define milestones.'
   },
   {
     step: '02',
-    title: 'UI/UX & Frontend Development',
-    description: 'Developing mobile-first responsive layouts, high-converting interfaces, and interactive fluid elements.'
+    title: 'Responsive Frontend & Interactive UI',
+    description: 'Developing high-precision, mobile-first responsive interfaces with fluid micro-interactions and rigorous device testing.'
   },
   {
     step: '03',
-    title: 'Backend & Database Engineering',
-    description: 'Integrating sanitized server-side endpoints, designing structured MySQL databases, and setting up dynamic form pipelines.'
+    title: 'Server-Side Endpoints & Database Integration',
+    description: 'Implementing sanitized server endpoints, relational MySQL indexing, dynamic form pipelines, and automated third-party integrations.'
   },
   {
     step: '04',
-    title: 'QA Testing & Cloud Deployment',
-    description: 'Conducting thorough cross-browser testing, code optimization, and final deployment to live cloud servers.'
+    title: 'Cross-Device QA & Live Cloud Handover',
+    description: 'Conducting comprehensive performance benchmarking, cross-browser audits, live deployment, and complete Git repository transfer.'
   }
 ];
 
@@ -146,13 +155,13 @@ export const teamMembers = [
   {
     id: '1',
     name: 'AOUN ABBAS',
-    role: 'Founder, Lead Project Manager & Web Developer',
+    role: 'Founder & Lead Full-Stack Architect',
     focus: 'Strategic Leadership, End-to-End Project Execution, Client Relations & Full-Stack Web Architecture.',
     responsibilities: [
-      'Agency Leadership & Strategic Client Consultations',
-      'Roadmap Planning & On-Time Project Delivery',
-      'Full-Stack Architecture & Code Reviews',
-      'Final Quality Assurance & Production Deployment'
+      'Agency Leadership & Technical Consultations',
+      'Roadmap Architecture & On-Time Sprint Delivery',
+      'Full-Stack Architecture & Code Quality Reviews',
+      'Production Deployment & Milestone Handover'
     ],
     skills: ['Agile Leadership', 'Full-Stack Architecture', 'PHP', 'MySQL', 'JavaScript', 'GitHub']
   },

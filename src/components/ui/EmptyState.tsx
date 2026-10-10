@@ -2,11 +2,13 @@ interface EmptyStateProps {
   message: string;
 }
 
-/** Honest placeholder for sections with no admin-entered content yet — never fabricated copy. */
+/** Honest placeholder for sections with no dynamic content yet */
 export function EmptyState({ message }: EmptyStateProps) {
   return (
-    <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center text-sm text-chrome-500">
+    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 px-6 py-10 text-center text-xs sm:text-sm text-slate-500 font-medium">
       {message}
     </div>
   );
 }
+
+export default EmptyState;

@@ -11,13 +11,13 @@ export function Header() {
   const [discoveryOpen, setDiscoveryOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setCompact(window.scrollY > 24);
+    const onScroll = () => setCompact(window.scrollY > 20);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Mobile menu open hone par background page scroll reliably lock karna
+  // Lock background scroll when mobile drawer is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -32,7 +32,7 @@ export function Header() {
     };
   }, [mobileOpen]);
 
-  const phone = siteSettings.whatsapp.replace(/\D/g, '');
+  const phone = (siteSettings?.whatsapp || '+923706492398').replace(/\D/g, '');
 
   return (
     <>
@@ -44,70 +44,99 @@ export function Header() {
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-6">
           <div
-            className={`flex items-center justify-between rounded-full border border-white/10 px-3.5 sm:px-6 py-2 transition-all duration-300 ${
+            className={`flex items-center justify-between rounded-2xl border px-3 sm:px-5 py-2.5 transition-all duration-300 ${
               compact
-                ? 'bg-navy-950/90 shadow-2xl backdrop-blur-2xl'
-                : 'bg-navy-950/60 shadow-lg backdrop-blur-xl'
+                ? 'border-white/15 bg-[#080c18]/90 shadow-[0_12px_40px_rgba(0,0,0,0.7)] backdrop-blur-2xl'
+                : 'border-white/10 bg-[#06080f]/75 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl'
             }`}
           >
-            {/* Brand Logo & Name */}
+            {/* Brand Logo & Studio Wordmark */}
             <a
               href="#home"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-2.5 shrink-0 focus-visible:outline-energy-bright"
-              aria-label="DEVSOLE home"
+              className="flex items-center gap-2.5 shrink-0 focus-visible:outline-blue-500"
+              aria-label="DEVSOLE Soft Home"
             >
               <HeaderLogo />
-              <span className="font-display text-sm sm:text-base font-bold tracking-wider text-white">
-                DEVSOLE
-              </span>
+              <div className="flex flex-col">
+                <span className="font-display text-sm sm:text-base font-bold tracking-tight text-white flex items-center gap-1.5">
+                  DEVSOLE <span className="text-blue-500 font-extrabold">Soft</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 hidden sm:inline-block shadow-[0_0_8px_#10b981] animate-pulse" />
+                </span>
+                <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono hidden sm:inline font-semibold">
+                  Engineering Studio
+                </span>
+              </div>
             </a>
 
-            {/* Desktop Center Dock Navigation */}
+            {/* Desktop Center Floating Segmented Navigation Dock */}
             <Navigation className="hidden items-center lg:flex" />
 
             {/* Right Action Tools */}
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              {/* 🔊 Sound FX Toggle */}
+            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+              {/* Sound FX Toggle */}
               <SoundToggle />
 
-              {/* 🚀 Start a Project Button (Desktop & Tablet) */}
+              {/* Direct WhatsApp Pill (Tablets & Desktops) */}
+              <a
+                href={`https://wa.me/${phone}?text=Hi%20DEVSOLE%20Soft!%20I%20would%20like%20to%20discuss%20a%20project%20roadmap.`}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden md:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 hover:text-emerald-300 px-3 py-1.5 text-xs font-semibold transition-all shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                title="Direct WhatsApp Consultation"
+              >
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
+                <span>WhatsApp</span>
+              </a>
+
+              {/* High-End Direct CTA Button */}
               <button
                 type="button"
                 onClick={() => setDiscoveryOpen(true)}
-                className="hidden sm:inline-flex rounded-full bg-gradient-to-b from-energy-soft to-energy px-4 py-2 text-xs font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-lg focus-visible:outline-energy-bright"
+                className="hidden sm:inline-flex items-center justify-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 text-xs font-semibold shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-blue-500"
               >
-                Start a Project
+                <span>Start a Project</span>
+                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
               </button>
 
-              {/* 🍔 Sleek Mobile Hamburger Toggle */}
+              {/* Mobile Hamburger Toggle */}
               <button
                 type="button"
                 onClick={() => setMobileOpen((prev) => !prev)}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white transition-colors hover:border-energy-bright hover:bg-energy/10 focus-visible:outline-energy-bright lg:hidden"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-200 transition-colors hover:border-white/20 hover:bg-white/[0.08] focus-visible:outline-blue-500 lg:hidden"
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav"
                 aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
               >
                 {mobileOpen ? (
-                  <span className="text-base font-bold text-energy-bright">✕</span>
+                  <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
                 ) : (
-                  <span className="text-lg leading-none font-bold">☰</span>
+                  <svg className="h-4 w-4 text-slate-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                  </svg>
                 )}
               </button>
             </div>
           </div>
         </div>
 
-        {/* 📱 MOBILE OVERLAY & SLIDE-DOWN DRAWER: 100% Fluid Responsive */}
+        {/* Mobile Slide-Down Sheet Drawer on Obsidian Studio Frame */}
         {mobileOpen && (
           <div
-            className="fixed inset-0 top-[56px] sm:top-[64px] z-30 flex flex-col bg-navy-950/85 backdrop-blur-2xl animate-fade lg:hidden"
+            className="fixed inset-0 top-[56px] sm:top-[64px] z-30 flex flex-col bg-black/60 backdrop-blur-md animate-fade lg:hidden"
             onClick={() => setMobileOpen(false)}
           >
             <div
               id="mobile-nav"
-              className="mx-3 mt-2 flex max-h-[82vh] flex-col overflow-y-auto rounded-3xl border border-white/15 bg-navy-950/95 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.9)] animate-modal"
+              className="mx-3 mt-2 flex max-h-[82vh] flex-col overflow-y-auto rounded-2xl border border-white/10 bg-[#080c18] p-4 sm:p-5 shadow-2xl animate-modal"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Navigation Items */}
@@ -117,25 +146,30 @@ export function Header() {
               />
 
               {/* Mobile Actions Drawer Bottom */}
-              <div className="mt-5 space-y-3 border-t border-white/10 pt-4">
+              <div className="mt-4 space-y-2 border-t border-white/10 pt-3.5">
                 <button
                   type="button"
                   onClick={() => {
                     setMobileOpen(false);
                     setDiscoveryOpen(true);
                   }}
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-energy-bright py-3.5 text-xs font-bold text-navy-950 shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-transform active:scale-95"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white py-3 text-xs font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-colors"
                 >
-                  <span>🚀 Start a Project (Discovery) →</span>
+                  <span>Start a Project Consultation</span>
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
                 </button>
 
                 <a
-                  href={`https://wa.me/${phone}?text=Hi%20DEVSOLE!%20I%20am%20browsing%20your%20website%20on%20mobile%20and%20want%20to%20discuss%20a%20project.`}
+                  href={`https://wa.me/${phone}?text=Hi%20DEVSOLE%20Soft!%20I%20am%20browsing%20your%20website%20and%20want%20to%20discuss%20a%20project.`}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] py-3 text-xs font-semibold text-chrome-300 hover:text-white"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 py-2.5 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 transition-colors"
                 >
-                  <span>💬 Direct WhatsApp Chat</span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
+                  <span>Direct WhatsApp Channel</span>
                 </a>
               </div>
             </div>

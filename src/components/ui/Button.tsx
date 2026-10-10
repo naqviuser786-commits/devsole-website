@@ -3,13 +3,13 @@ import { type ButtonHTMLAttributes, type AnchorHTMLAttributes, forwardRef } from
 type Variant = 'primary' | 'ghost';
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-energy-bright disabled:opacity-50 disabled:pointer-events-none';
+  'inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 focus-visible:outline-blue-600 disabled:opacity-50 disabled:pointer-events-none active:translate-y-0';
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-gradient-to-b from-energy-soft to-energy text-white shadow-glow hover:shadow-glow-lg hover:-translate-y-0.5',
+    'bg-slate-900 hover:bg-slate-800 text-white shadow-xs hover:-translate-y-0.5',
   ghost:
-    'border border-chrome-700/70 bg-white/[0.03] text-chrome-100 backdrop-blur hover:border-energy/60 hover:bg-white/[0.06]',
+    'border border-slate-200 bg-white text-slate-800 shadow-2xs hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5',
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
