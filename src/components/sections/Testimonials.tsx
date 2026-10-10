@@ -15,53 +15,6 @@ export interface ReviewItem {
   createdAt?: string;
 }
 
-const AUTHENTIC_DEFAULT_REVIEWS: ReviewItem[] = [
-  {
-    id: 'def-1',
-    clientName: 'Hamza Tariq',
-    role: 'Founder & CEO',
-    company: 'UrbanNest PropTech',
-    projectTag: 'PropTech & Real Estate',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=80',
-    rating: 5,
-    content:
-      'DEVSOLE Soft engineered our real estate portal from scratch. The instant search filters, direct WhatsApp agent pipeline, and sub-second load times doubled our buyer inquiries within the first 3 weeks.',
-  },
-  {
-    id: 'def-2',
-    clientName: 'Marcus Vance',
-    role: 'Head of Product',
-    company: 'ScaleMetrics SaaS',
-    projectTag: 'SaaS Tool & Automation',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&q=80',
-    rating: 5,
-    content:
-      'The dynamic pricing calculator and automated PDF quotation generator Aoun and his team engineered eliminated our manual proposal backlog entirely. Extremely clean, maintainable architecture.',
-  },
-  {
-    id: 'def-3',
-    clientName: 'Sarah Jenkins',
-    role: 'E-Commerce Operations Lead',
-    company: 'Velox Apparel Studio',
-    projectTag: 'E-Commerce Marketplace',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&q=80',
-    rating: 5,
-    content:
-      'Our previous site suffered from sluggish mobile speed. DEVSOLE Soft rebuilt the frontend into a responsive modern platform with 99 PageSpeed score, driving an immediate 30%+ increase in orders.',
-  },
-  {
-    id: 'def-4',
-    clientName: 'Danyal Siddiqui',
-    role: 'Managing Partner',
-    company: 'Apex Logistics Global',
-    projectTag: 'Custom Web Application',
-    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=240&q=80',
-    rating: 5,
-    content:
-      'Top-notch sprint delivery. Transparent weekly staging links, daily communication, and zero unexpected delays. Handed over complete Git repo and documentation upon milestone clearance.',
-  },
-];
-
 function StarRating({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'lg' }) {
   const iconSize = size === 'lg' ? 'h-5 w-5' : 'h-3.5 w-3.5';
 
@@ -86,7 +39,8 @@ const inputClass =
   'w-full rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-blue-500 focus:bg-white/[0.05] focus:outline-none transition-colors';
 
 export function Testimonials() {
-  const [reviews, setReviews] = useState<ReviewItem[]>(AUTHENTIC_DEFAULT_REVIEWS);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -101,7 +55,7 @@ export function Testimonials() {
   const [hoverRating, setHoverRating] = useState(0);
   const [content, setContent] = useState('');
 
-  // Fetch Live Reviews from Supabase
+  // Fetch Sirf Real Reviews from Supabase Database
   useEffect(() => {
     async function fetchReviews() {
       try {
@@ -110,7 +64,7 @@ export function Testimonials() {
           .select('*')
           .order('created_at', { ascending: false });
 
-        if (!error && data && data.length > 0) {
+        if (!error && data) {
           const liveList: ReviewItem[] = data.map((r) => ({
             id: r.id,
             clientName: r.client_name,
@@ -128,7 +82,9 @@ export function Testimonials() {
           setReviews(liveList);
         }
       } catch {
-        // Fallback to defaults
+        setReviews([]);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -186,13 +142,14 @@ export function Testimonials() {
         entity_type: 'review',
         action: `New Client Review from ${newReviewItem.clientName} (${newReviewItem.rating} Stars)`,
       });
+
+      setReviews((prev) => [newReviewItem, ...prev]);
     } catch {
       // Fallback
+    } finally {
+      setSubmitting(false);
+      setSubmittedSuccess(true);
     }
-
-    setReviews([newReviewItem, ...reviews]);
-    setSubmitting(false);
-    setSubmittedSuccess(true);
 
     setTimeout(() => {
       setName('');
@@ -211,7 +168,6 @@ export function Testimonials() {
       aria-label="DEVSOLE Soft Client Testimonials & Reviews"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-28 overflow-hidden bg-transparent"
     >
-      {/* Subtle Studio Grid Atmosphere */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
@@ -219,18 +175,20 @@ export function Testimonials() {
       <SectionHeading
         eyebrow="Verified Track Record"
         title="Client Reviews & Production Impact"
-        description="Read authentic feedback from founders and engineering leaders, or submit verified feedback from your project."
+        description="Authentic feedback from real partners and founders. Have you worked with us? Share your experience."
         align="center"
       />
 
       {/* Aggregate Rating Banner + Write Review Action */}
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 shadow-2xs backdrop-blur-md">
-          <StarRating rating={5} />
-          <span className="text-xs font-mono font-semibold text-slate-200">
-            {metrics.avg} / 5.0 Rating Across {metrics.total} Verified Deliveries
-          </span>
-        </div>
+        {reviews.length > 0 && (
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 shadow-2xs backdrop-blur-md">
+            <StarRating rating={Math.round(Number(metrics.avg))} />
+            <span className="text-xs font-mono font-semibold text-slate-200">
+              {metrics.avg} / 5.0 Rating Across {metrics.total} Verified {metrics.total === 1 ? 'Delivery' : 'Deliveries'}
+            </span>
+          </div>
+        )}
 
         <button
           type="button"
@@ -248,65 +206,80 @@ export function Testimonials() {
         </button>
       </div>
 
-      {/* Testimonials 3-Column Studio Grid */}
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {displayedReviews.map((review) => (
-          <figure
-            key={review.id}
-            className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0c101d] p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
+      {/* Reviews Content Area */}
+      {loading ? (
+        <div className="mt-12 text-center text-xs text-slate-500">Loading client feedback...</div>
+      ) : reviews.length === 0 ? (
+        /* Clean Empty State (Jab tak koi real review na ho) */
+        <div className="mt-12 rounded-2xl border border-dashed border-white/10 bg-[#0c101d]/60 p-10 text-center max-w-xl mx-auto">
+          <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
+            ⭐
+          </div>
+          <h4 className="font-display text-sm font-bold text-white">No Client Reviews Published Yet</h4>
+          <p className="mt-1.5 text-xs text-slate-400">
+            Have you completed a sprint with DEVSOLE Soft? Click below to leave verified feedback.
+          </p>
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300"
           >
-            <div>
-              {/* Star Rating & Category Tag */}
-              <div className="flex items-center justify-between gap-2">
-                <StarRating rating={review.rating} />
-                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono font-semibold text-blue-400 truncate max-w-[170px]">
-                  {review.projectTag}
-                </span>
+            <span>+ Be the First to Review</span>
+            <span>→</span>
+          </button>
+        </div>
+      ) : (
+        /* Real Reviews Grid */
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {displayedReviews.map((review) => (
+            <figure
+              key={review.id}
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0c101d] p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <StarRating rating={review.rating} />
+                  <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono font-semibold text-blue-400 truncate max-w-[170px]">
+                    {review.projectTag}
+                  </span>
+                </div>
+
+                <blockquote className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-300 font-normal">
+                  "{review.content}"
+                </blockquote>
               </div>
 
-              {/* Review Body */}
-              <blockquote className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-300 font-normal">
-                "{review.content}"
-              </blockquote>
-            </div>
+              <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
+                <div className="relative shrink-0">
+                  <img
+                    src={review.avatar}
+                    alt={`${review.clientName} - DEVSOLE Soft`}
+                    loading="lazy"
+                    className="h-10 w-10 rounded-xl border border-white/10 object-cover shadow-2xs"
+                  />
+                  <span
+                    className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-white shadow-2xs"
+                    title="Verified Delivery"
+                  >
+                    <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                </div>
 
-            {/* Client Signature */}
-            <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
-              <div className="relative shrink-0">
-                <img
-                  src={review.avatar}
-                  alt={`${review.clientName} - DEVSOLE Soft`}
-                  loading="lazy"
-                  className="h-10 w-10 rounded-xl border border-white/10 object-cover shadow-2xs"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                      review.clientName
-                    )}&background=0f172a&color=ffffff&bold=true`;
-                  }}
-                />
-                <span
-                  className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-white shadow-2xs"
-                  title="Verified Delivery"
-                >
-                  <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </span>
-              </div>
-
-              <div className="overflow-hidden">
-                <h4 className="text-xs sm:text-sm font-bold text-white truncate">
-                  {review.clientName}
-                </h4>
-                <p className="text-[11px] text-slate-400 truncate">
-                  {review.role} · <strong className="text-slate-300 font-medium">{review.company}</strong>
-                </p>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+                <div className="overflow-hidden">
+                  <h4 className="text-xs sm:text-sm font-bold text-white truncate">
+                    {review.clientName}
+                  </h4>
+                  <p className="text-[11px] text-slate-400 truncate">
+                    {review.role} · <strong className="text-slate-300 font-medium">{review.company}</strong>
+                  </p>
+                </div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
 
       {/* View All Reviews Toggle */}
       {reviews.length > 3 && (
@@ -321,7 +294,7 @@ export function Testimonials() {
           >
             <span>
               {showAllReviews
-                ? 'Show Featured Deliveries Only'
+                ? 'Show Recent Deliveries Only'
                 : `View All Client Reviews (${reviews.length})`}
             </span>
             <svg className={`h-3.5 w-3.5 text-slate-400 transition-transform ${showAllReviews ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -331,7 +304,7 @@ export function Testimonials() {
         </div>
       )}
 
-      {/* ================= REVIEW SUBMISSION MODAL ================= */}
+      {/* Review Submission Modal */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"
@@ -354,14 +327,14 @@ export function Testimonials() {
             </button>
 
             <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded">
-              Milestone Feedback
+              Verified Client Review
             </span>
 
             <h3 className="mt-2 font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
               Submit Review for DEVSOLE Soft
             </h3>
             <p className="mt-1 text-xs text-slate-400 font-normal">
-              Your verified rating is recorded directly into our production registry.
+              Your feedback is published directly to our live website.
             </p>
 
             {submittedSuccess ? (
@@ -375,7 +348,7 @@ export function Testimonials() {
                   Review Published Live
                 </h4>
                 <p className="mt-1 text-xs text-emerald-400">
-                  Thank you, {name}! Your feedback is now visible on the website.
+                  Thank you, {name}! Your review is now live.
                 </p>
               </div>
             ) : (
@@ -419,7 +392,7 @@ export function Testimonials() {
                     </label>
                     <input
                       required
-                      placeholder="e.g. Alex Morgan"
+                      placeholder="Your Full Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className={inputClass}
@@ -431,7 +404,7 @@ export function Testimonials() {
                       Role / Position
                     </label>
                     <input
-                      placeholder="e.g. Founder & CTO"
+                      placeholder="e.g. Founder, CEO, Manager"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                       className={inputClass}
@@ -445,7 +418,7 @@ export function Testimonials() {
                       Company / Organization
                     </label>
                     <input
-                      placeholder="e.g. Apex Tech Solutions"
+                      placeholder="Company Name"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       className={inputClass}
@@ -477,7 +450,7 @@ export function Testimonials() {
                   <textarea
                     required
                     rows={3}
-                    placeholder="Describe delivery pace, code hygiene, and sprint communication..."
+                    placeholder="Describe delivery pace, code hygiene, and project results..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     className={inputClass}
