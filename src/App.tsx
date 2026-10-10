@@ -10,6 +10,12 @@ import { AdminApp } from '@/admin/AdminApp';
 import { CrmApp } from '@/crm/CrmApp';
 import { initSmoothScroll } from '@/lib/lenis';
 
+// 🌐 Sitelinks & Dedicated SEO Pages
+import { ServicesPage } from '@/pages/ServicesPage';
+import { AboutPage } from '@/pages/AboutPage';
+import { ProjectsPage } from '@/pages/ProjectsPage';
+import { ContactPage } from '@/pages/ContactPage';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -115,7 +121,16 @@ function PublicSite() {
         <Header />
         <main className="flex-1 w-full">
           <Routes>
+            {/* Homepage */}
             <Route path="/" element={<Home />} />
+
+            {/* Dedicated Google Sitelinks Pages */}
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+
+            {/* 404 Fallback */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

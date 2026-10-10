@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- 1. Homepage -->
   <url>
     <loc>https://devsolesoft.com/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -11,4 +13,37 @@
       <image:title>DEVSOLE — High-Performance Full-Stack Web Development</image:title>
     </image:image>
   </url>
+
+  <!-- 2. Services Sitelink Page -->
+  <url>
+    <loc>https://devsolesoft.com/services</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 3. Projects / Work Sitelink Page -->
+  <url>
+    <loc>https://devsolesoft.com/projects</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. About Us Sitelink Page -->
+  <url>
+    <loc>https://devsolesoft.com/about</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 5. Contact Us Sitelink Page -->
+  <url>
+    <loc>https://devsolesoft.com/contact</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
