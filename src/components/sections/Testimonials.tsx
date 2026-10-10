@@ -101,7 +101,7 @@ export function Testimonials() {
   const [hoverRating, setHoverRating] = useState(0);
   const [content, setContent] = useState('');
 
-  // Fetch Live Reviews from Supabase (Preserving CRM connection)
+  // Fetch Live Reviews from Supabase
   useEffect(() => {
     async function fetchReviews() {
       try {
@@ -208,13 +208,9 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      itemScope
-      itemType="https://schema.org/Organization"
       aria-label="DEVSOLE Soft Client Testimonials & Reviews"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-28 overflow-hidden bg-transparent"
     >
-      <meta itemProp="name" content="DEVSOLE Soft" />
-
       {/* Subtle Studio Grid Atmosphere */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
@@ -229,17 +225,7 @@ export function Testimonials() {
 
       {/* Aggregate Rating Banner + Write Review Action */}
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <div
-          itemProp="aggregateRating"
-          itemScope
-          itemType="https://schema.org/AggregateRating"
-          className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 shadow-2xs backdrop-blur-md"
-        >
-          <meta itemProp="ratingValue" content={metrics.avg} />
-          <meta itemProp="bestRating" content="5" />
-          <meta itemProp="worstRating" content="1" />
-          <meta itemProp="reviewCount" content={String(metrics.total)} />
-
+        <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 shadow-2xs backdrop-blur-md">
           <StarRating rating={5} />
           <span className="text-xs font-mono font-semibold text-slate-200">
             {metrics.avg} / 5.0 Rating Across {metrics.total} Verified Deliveries
@@ -267,15 +253,8 @@ export function Testimonials() {
         {displayedReviews.map((review) => (
           <figure
             key={review.id}
-            itemScope
-            itemType="https://schema.org/Review"
             className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0c101d] p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
           >
-            <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-              <meta itemProp="ratingValue" content={String(review.rating)} />
-              <meta itemProp="bestRating" content="5" />
-            </div>
-
             <div>
               {/* Star Rating & Category Tag */}
               <div className="flex items-center justify-between gap-2">
@@ -286,10 +265,7 @@ export function Testimonials() {
               </div>
 
               {/* Review Body */}
-              <blockquote
-                itemProp="reviewBody"
-                className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-300 font-normal"
-              >
+              <blockquote className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-300 font-normal">
                 "{review.content}"
               </blockquote>
             </div>
@@ -319,16 +295,8 @@ export function Testimonials() {
                 </span>
               </div>
 
-              <div
-                className="overflow-hidden"
-                itemProp="author"
-                itemScope
-                itemType="https://schema.org/Person"
-              >
-                <h4
-                  itemProp="name"
-                  className="text-xs sm:text-sm font-bold text-white truncate"
-                >
+              <div className="overflow-hidden">
+                <h4 className="text-xs sm:text-sm font-bold text-white truncate">
                   {review.clientName}
                 </h4>
                 <p className="text-[11px] text-slate-400 truncate">
