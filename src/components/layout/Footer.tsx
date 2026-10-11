@@ -1,4 +1,6 @@
+// FILE: src/components/layout/Footer.tsx
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { HeaderLogo } from './HeaderLogo';
 import { NAV_LINKS } from './Navigation';
 import { useApiData } from '@/hooks/useApiData';
@@ -134,20 +136,20 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Navigation Links */}
+        {/* Multi-Page Navigation Internal Links for Fast Routing & SEO Crawling */}
         <div>
           <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-white">
             Navigation
           </h3>
           <ul className="mt-3.5 space-y-2">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
+              <li key={link.path}>
+                <Link
+                  to={link.path}
                   className="text-xs sm:text-sm text-slate-400 transition-colors hover:text-blue-400 font-medium"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

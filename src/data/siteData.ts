@@ -1,61 +1,106 @@
+// FILE: src/data/siteData.ts
+
 export const siteSettings = {
   companyName: 'DEVSOLE Soft',
-  heroHeading: 'Custom Full-Stack Web Engineering & Digital Solutions',
-  heroSubtitle: 'We architect high-performance web platforms, specialized PropTech systems, and custom SaaS tools with sub-second response times and complete source code ownership.',
-  ctaProjects: 'Explore Production Work',
+  heroHeading: 'Web Development, SEO & Custom Software That Drives Sales',
+  heroSubtitle: 'We build fast, modern websites, online stores, and custom web portals that rank on Google, load in under 1 second, and turn visitors into real paying clients. 100% complete source code ownership.',
+  ctaProjects: 'View Our Work',
   ctaContact: 'Start a Project',
   email: 'devsole.official@gmail.com',
   whatsapp: '+92 370 6492398',
   phone: '+92 370 6492398',
-  address: 'Lahore, Pakistan · Global Project Delivery',
-  activeStatus: 'Available for New Sprints',
+  address: 'Lahore, Pakistan · Global Client Delivery',
+  activeStatus: 'Available for New Projects',
 };
 
 export const brandDetails = {
-  meaning: '"DEVSOLE Soft" stands for single-source engineering excellence: "Dev" represents modern web innovation, and "Sole" signifies your dedicated, end-to-end software partner.',
-  essence: 'DEVSOLE Soft is an independent web engineering studio focused on building revenue-generating web applications, specialized real estate portals, and automated business tools.',
-  mission: 'To deliver high-reliability web systems with sub-second performance, bulletproof database design, and zero technical debt.',
-  vision: 'To establish an engineering standard where every web application is fast by default, scalable under high traffic, and handed over with complete client ownership.',
+  meaning: '"DEVSOLE Soft" stands for complete software solutions from one trusted team: "Dev" for modern development, and "Sole" for your single, dedicated tech partner.',
+  essence: 'We are an independent web development and software company based in Lahore, helping businesses in Pakistan and worldwide build fast websites, online stores, and custom software that generate revenue.',
+  mission: 'To build websites and software that load in under 1 second, look world-class on mobile, never break, and belong 100% to the client.',
+  vision: 'To be the most reliable tech partner for growing businesses — with fixed timelines, transparent pricing, and zero technical confusion.',
   strengths: [
     { 
-      title: 'Sub-Second Response', 
-      desc: 'Optimized relational queries, minimal bundle payloads, and 95+ Core Web Vitals.' 
+      title: 'Under 1-Second Load Speed', 
+      desc: 'Websites load instantly on 4G and mobile so you never lose a customer to slow pages.' 
     },
     { 
-      title: 'Modular Code Hygiene', 
-      desc: 'Strict type safety, sanitized server endpoints, and clean relational schema architecture.' 
+      title: '100% Code & Asset Ownership', 
+      desc: 'You own all source code, database, and accounts. Zero recurring platform lock-in or hidden fees.' 
     },
     { 
-      title: 'Full Intellectual Property', 
-      desc: '100% complete GitHub repository, database schemas, and infrastructure handed directly to you.' 
+      title: 'Direct WhatsApp & Lead Routing', 
+      desc: 'Customer inquiries go straight to your WhatsApp and email within seconds so you close deals faster.' 
     }
   ]
 };
 
+// 🎯 6 Crystal-Clear, Client-Friendly Services (Aam Fahan Wording)
 export const services = [
   {
     id: '1',
-    title: 'Custom Full-Stack Web Apps',
-    description: 'Bespoke web applications built on modern JavaScript, clean server-side endpoints, and relational MySQL architecture designed for long-term scalability.',
-    features: ['Modular Component Architecture', 'Relational MySQL Optimization', 'Custom Client & Admin Portals', 'Responsive Cross-Device Layouts']
+    title: 'Web Development',
+    description: 'Custom websites, business portals, and web applications built to look modern, load under 1 second, and work smoothly on all mobile devices and laptops.',
+    features: [
+      'Mobile-Friendly & Responsive Layouts',
+      'Under 1-Second Page Load Speed (< 0.8s)',
+      'Custom Forms & Direct WhatsApp Routing',
+      '100% Complete Source Code Ownership'
+    ]
   },
   {
     id: '2',
-    title: 'PropTech & Real Estate Solutions',
-    description: 'High-converting real estate portals with instant multi-parameter filtering, interactive property showcases, and direct agent WhatsApp routing.',
-    features: ['Sub-Second Property Search & Filters', 'Interactive Media & Floorplan Cards', 'Direct WhatsApp Agent Routing', 'Automated Lead Capture Pipeline']
+    title: 'SEO & Google Ranking',
+    description: 'Get your business to the top of Google search results so potential clients find you organically every day without spending fortunes on paid ads.',
+    features: [
+      'Keyword Research & Competitor Analysis',
+      'On-Page SEO & Google Schema Setup',
+      'Fast Page Speed & Core Web Vitals Fixes',
+      'Local SEO & Google Maps Ranking'
+    ]
   },
   {
     id: '3',
-    title: 'SaaS Tools & Cost Calculators',
-    description: 'Interactive real-time estimation engines, dynamic quotation builders, and automated PDF export systems that pre-qualify prospective clients.',
-    features: ['Real-Time Mathematical Logic', 'Instant Automated PDF Export', 'Multi-Currency (PKR & USD) Support', 'Direct Sales Webhook Integrations']
+    title: 'E-Commerce & Online Stores',
+    description: 'Modern online stores with clean product catalogs, quick slide-out carts, credit card / bank payment gateways, and instant WhatsApp order alerts.',
+    features: [
+      'Fast 1-Click Slide-Out Cart Drawer',
+      'Online Card Payments & Cash on Delivery',
+      'Easy Product & Inventory Management',
+      'Automated Customer WhatsApp Alerts'
+    ]
   },
   {
     id: '4',
-    title: 'E-Commerce & Dynamic Portals',
-    description: 'Lightweight, conversion-optimized online commerce platforms featuring slide-out cart drawers, dynamic inventory filtering, and secure payment flows.',
-    features: ['Instant Dynamic Cart Drawer', 'Relational Inventory Filtering', 'Custom Promo & Discount Engine', 'Verified Payment Gateway Flow']
+    title: 'Real Estate & Business Portals',
+    description: 'Custom property portals, booking platforms, and client management dashboards with instant filters and direct agent contact buttons.',
+    features: [
+      'Property Search with Instant Filters',
+      'Direct Agent WhatsApp Lead Buttons',
+      'Admin Dashboard to Add/Edit Listings',
+      'Mobile-Friendly Photo & Video Galleries'
+    ]
+  },
+  {
+    id: '5',
+    title: 'Custom Calculators & Automation',
+    description: 'Interactive price quote calculators, automated PDF proposal generators, and custom tools that pre-qualify clients and save hours of manual work.',
+    features: [
+      'Real-Time Live Price & Cost Calculators',
+      'Instant Downloadable Branded PDF Quotes',
+      'Multi-Currency Support (PKR & USD)',
+      'Automated Lead Capture to CRM'
+    ]
+  },
+  {
+    id: '6',
+    title: 'UI/UX Design & Website Redesign',
+    description: 'Give your old, outdated website a modern, luxury look that builds immediate trust and makes your company look like a market leader.',
+    features: [
+      'Clean Modern Obsidian & Light Layouts',
+      'Easy-to-Navigate Mobile Menus',
+      'Conversion-Focused Call-to-Actions',
+      'Zero Template Clutter or Broken Elements'
+    ]
   }
 ];
 
@@ -63,91 +108,107 @@ export const projects = [
   {
     id: '1',
     title: 'Real Space Properties',
-    category: 'Full-Stack Real Estate Web Application',
-    description: 'Advanced live property search filters, interactive property cards, direct agent contact forms, and lead generation backend.',
+    category: 'Real Estate Portal & Lead System',
+    description: 'A modern property website featuring instant location and budget filters, interactive property cards, and direct WhatsApp agent contact buttons.',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['HTML5', 'Modern CSS', 'JavaScript', 'PHP', 'MySQL'],
+    technologies: ['Custom Web Design', 'PHP Backend', 'MySQL Database', 'WhatsApp Lead API'],
     featured: true,
     status: 'Live Project'
   },
   {
     id: '2',
     title: 'Universal Quote Estimator',
-    category: 'Interactive SaaS Calculator & Automation',
-    description: 'Dynamic service selection, instant cost calculation, client order details collection, and automated PDF summary generation.',
+    category: 'Interactive Price Calculator & PDF Tool',
+    description: 'An automated pricing tool where clients select services, see an instant total cost, and download a branded PDF quote in under 2 seconds.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['JavaScript ES6', 'PHP Backend', 'PDF Integration'],
+    technologies: ['React & JavaScript', 'Automated PDF Engine', 'Multi-Currency (PKR/USD)'],
     featured: true,
-    status: 'Live SaaS Tool'
+    status: 'Live Tool'
   },
   {
     id: '3',
     title: 'Nexus E-Commerce Store',
-    category: 'Dynamic E-Commerce Marketplace',
-    description: 'Interactive product catalog, category filtering, shopping cart drawer, discount coupon manager, and secure checkout system.',
+    category: 'Online Shopping Store & Checkout',
+    description: 'A fast online marketplace with category filtering, slide-out shopping cart, coupon codes, and secure online payment checkout.',
     image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['HTML5', 'Tailwind CSS', 'JavaScript', 'PHP', 'MySQL'],
+    technologies: ['E-Commerce Engine', 'Payment Gateway', 'Cart Drawer', 'Order Alerts'],
     featured: false,
     status: 'Demo Portfolio'
   },
   {
     id: '4',
-    title: 'Apex Analytics Admin Dashboard',
-    category: 'SaaS Admin Portal & Data Visualization',
-    description: 'Real-time revenue charts, user management table, automated export reports (CSV/PDF), and custom theme toggle.',
+    title: 'Apex Business Admin Portal',
+    category: 'Custom Admin Dashboard & Reports',
+    description: 'A secure business management portal with daily revenue charts, customer management table, and automated CSV/PDF report downloads.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['JavaScript Charts API', 'CSS Grid', 'PHP Backend'],
+    technologies: ['Admin Dashboard', 'Role-Based Access', 'Data Visualizations'],
     featured: false,
     status: 'Demo Portfolio'
   },
   {
     id: '5',
-    title: 'Lumina Creative Agency Portfolio',
-    category: 'Branding Showcase & Interactive Portal',
-    description: 'Smooth scroll animations, interactive project filter categories, dark/light neon mode, and client testimonial carousel.',
+    title: 'Lumina Agency Portfolio',
+    category: 'Modern Business Website',
+    description: 'A sleek, luxury portfolio website built to showcase past client work, case studies, and customer testimonials with smooth page transitions.',
     image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['HTML5', 'CSS Animations', 'JavaScript'],
+    technologies: ['Modern UI/UX', 'Mobile Responsive', 'High-Speed CDN'],
     featured: false,
     status: 'Demo Portfolio'
   },
   {
     id: '6',
-    title: 'HealthPulse Care & Portal',
-    category: 'Healthcare & Online Appointment Booking',
-    description: 'Doctor directory search, online schedule booking form, client feedback portal, and automated confirmation response.',
+    title: 'HealthPulse Clinic & Appointments',
+    category: 'Healthcare Website & Booking Portal',
+    description: 'A medical clinic website where patients browse doctors, book consultation appointments online, and receive WhatsApp confirmations.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-    technologies: ['JavaScript', 'PHP', 'MySQL Database'],
+    technologies: ['Online Booking Form', 'Doctor Directory', 'Automated Confirmations'],
     featured: false,
     status: 'Demo Portfolio'
   }
 ];
 
 export const technologies = {
-  frontend: ['React & TypeScript', 'Tailwind CSS', 'HTML5 & Modern CSS3', 'Three.js & WebGL', 'Custom Animations'],
-  backend: ['PHP 8.2 (Server-Side Logic)', 'MySQL (Relational Database)', 'RESTful APIs', 'Automated PDF Generation'],
-  devops: ['Docker & Staging Sandboxes', 'SQL Query Profiling & Optimization', 'GitHub Enterprise Version Control', 'Cloud Edge Hosting & Global CDNs']
+  frontend: [
+    'React & Modern JavaScript',
+    'Tailwind CSS & Mobile Design',
+    'HTML5 & Clean CSS',
+    'Fast Responsive Layouts'
+  ],
+  backend: [
+    'PHP 8.2 (Secure Server Code)',
+    'MySQL (Fast Relational Database)',
+    'REST APIs & Webhooks',
+    'Automated PDF & Email Systems'
+  ],
+  devops: [
+    'Global Edge CDN & Cloud Hosting',
+    'SSL Security & Encryption',
+    'GitHub Complete Code Handover',
+    'Daily Cloud Backups'
+  ]
 };
 
+// 📅 4 Transparent Sprint Stages (Aam Zuban me Delivery Steps)
 export const processSteps = [
   {
     step: '01',
-    title: 'Technical Scope & Architectural Blueprint',
-    description: 'We deconstruct business requirements, outline technical specifications, design relational database schemas, and define milestones.'
+    title: 'Planning & Scope Lock',
+    description: 'We discuss your business goals, decide required pages and features, and lock in a fixed budget and timeline with zero hidden costs.'
   },
   {
     step: '02',
-    title: 'Responsive Frontend & Interactive UI',
-    description: 'Developing high-precision, mobile-first responsive interfaces with fluid micro-interactions and rigorous device testing.'
+    title: 'Design & Mobile Preview',
+    description: 'We design modern, mobile-friendly screens and share a private staging link so you can click around and approve the look.'
   },
   {
     step: '03',
-    title: 'Server-Side Endpoints & Database Integration',
-    description: 'Implementing sanitized server endpoints, relational MySQL indexing, dynamic form pipelines, and automated third-party integrations.'
+    title: 'Development & Integrations',
+    description: 'We code the website, connect forms to WhatsApp and email, set up databases and payments, and verify speed across all devices.'
   },
   {
     step: '04',
-    title: 'Cross-Device QA & Live Cloud Handover',
-    description: 'Conducting comprehensive performance benchmarking, cross-browser audits, live deployment, and complete Git repository transfer.'
+    title: 'Live Launch & 100% Handover',
+    description: 'We launch on your domain, verify Google speed scores, and hand over all admin logins, passwords, and source code files to you.'
   }
 ];
 
@@ -155,61 +216,71 @@ export const teamMembers = [
   {
     id: '1',
     name: 'AOUN ABBAS',
-    role: 'Founder & Lead Full-Stack Architect',
-    focus: 'Strategic Leadership, End-to-End Project Execution, Client Relations & Full-Stack Web Architecture.',
+    role: 'Founder & Lead Software Architect',
+    focus: 'Direct Client Consultations, System Architecture, Full-Stack Development & On-Time Project Delivery.',
     responsibilities: [
-      'Agency Leadership & Technical Consultations',
-      'Roadmap Architecture & On-Time Sprint Delivery',
-      'Full-Stack Architecture & Code Quality Reviews',
-      'Production Deployment & Milestone Handover'
+      'Direct Technical Calls & Project Planning with Clients',
+      'Full-Stack Architecture & High-Speed Code Quality',
+      'Database Optimization & Payment API Integrations',
+      'Final Production Deployment & 100% Code Handover'
     ],
-    skills: ['Agile Leadership', 'Full-Stack Architecture', 'PHP', 'MySQL', 'JavaScript', 'GitHub']
+    skills: ['Web Architecture', 'PHP & MySQL', 'React & JavaScript', 'Payment Gateways', 'GitHub'],
+    socialLinks: {
+      github: 'https://github.com/naqviuser786-commits',
+      linkedin: 'https://www.linkedin.com/company/devsoleofficial/'
+    }
   },
   {
     id: '2',
     name: 'Amina Mazhar',
     role: 'Lead Frontend Developer & UI/UX Designer',
-    focus: 'Responsive Web Layouts, Dynamic UI Elements, Modern Styling & Interactive User Interfaces.',
+    focus: 'Mobile-Friendly Web Design, Clean Interfaces, Fast Loading Pages & Conversion-Focused Layouts.',
     responsibilities: [
-      'Mobile-first responsive designs using modern CSS and React',
-      'Dynamic pricing tools & interactive user calculators',
-      'Cross-browser optimization & performance tuning',
-      'Translating brand visions into clean design systems'
+      'Mobile-first responsive layouts that look great on any screen',
+      'Modern UI/UX styling using clean Tailwind CSS',
+      'Fast page load speed optimization and visual polish',
+      'Interactive pricing calculators and user-friendly forms'
     ],
-    skills: ['HTML5 & CSS3', 'JavaScript (ES6+)', 'Tailwind CSS', 'UI/UX Design', 'CSS Animations']
+    skills: ['UI/UX Design', 'Tailwind CSS', 'React', 'HTML5 & CSS3', 'Mobile Optimization'],
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/company/devsoleofficial/'
+    }
   },
   {
     id: '3',
     name: 'Syeda Momna',
     role: 'Lead Backend Developer & Database Engineer',
-    focus: 'Server-Side Architecture, Database Schema Design, API Handling & Dynamic Data Processing.',
+    focus: 'Secure Server Logic, Database Design, Form Data Pipelines & Automated Business Systems.',
     responsibilities: [
-      'Secure server-side logic & form submission pipelines in PHP',
-      'Structured relational database schemas with MySQL',
-      'Automated features: PDF generation & notification pipelines',
-      'Query execution profiling & SQL performance tuning'
+      'Secure server logic and instant lead submission pipelines',
+      'Relational database architecture for fast search queries',
+      'Automated PDF invoice generation and WhatsApp triggers',
+      'Security audits, data protection, and API integrations'
     ],
-    skills: ['PHP', 'MySQL', 'Database Architecture', 'REST APIs', 'Cloud Deployment']
+    skills: ['PHP Backend', 'MySQL Database', 'REST APIs', 'Cloud Hosting', 'Data Security'],
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/company/devsoleofficial/'
+    }
   }
 ];
 
 export const blogPosts = [
   {
     id: '1',
-    title: 'Why Your Business Needs an Automated Real-Time Pricing Calculator',
-    excerpt: 'Manual quotations can often disengage clients. Discover how instant dynamic estimators can increase your conversion rates by 3x.',
+    title: 'How an Instant Price Calculator Can 3x Your Website Inquiries',
+    excerpt: 'Clients hate waiting 24 hours for a manual quote. Learn how interactive online calculators pre-qualify buyers and generate instant leads.',
     tag: 'SaaS & Automation'
   },
   {
     id: '2',
-    title: 'How Full-Stack PropTech Applications Boost Real Estate Client Conversions',
-    excerpt: 'Learn how advanced property search filters and direct lead integrations automate business workflows for real estate brokers.',
-    tag: 'PropTech'
+    title: 'Why Real Estate Websites Need Direct WhatsApp Routing to Close Deals',
+    excerpt: 'Traditional email forms lose 60% of property buyers. See how direct WhatsApp routing helps real estate brokers close leads on the spot.',
+    tag: 'Real Estate'
   },
   {
     id: '3',
-    title: 'Optimizing PHP & MySQL Performance for Fast Web Applications',
-    excerpt: 'How to achieve millisecond load speeds without heavy servers by utilizing lightweight architecture and indexed database queries.',
-    tag: 'Engineering'
+    title: 'How We Make Websites Load in Under 1 Second (And Why It Matters)',
+    excerpt: 'Slow websites destroy Google rankings and ad budgets. Discover how clean code and indexed databases deliver sub-second speeds.',
+    tag: 'Speed & SEO'
   }
 ];

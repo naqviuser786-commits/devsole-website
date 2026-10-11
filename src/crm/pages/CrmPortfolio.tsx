@@ -1,3 +1,4 @@
+// FILE: src/crm/pages/CrmPortfolio.tsx
 import { useEffect, useState, useCallback, useRef, type FormEvent, type ChangeEvent } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useCrmAuth } from '../CrmAuthContext';
@@ -15,6 +16,14 @@ export interface PortfolioProject {
   featured: boolean;
   created_at: string;
 }
+
+// 🎯 Synchronized Categories matching the Live Website Tabs
+export const PORTFOLIO_CATEGORIES = [
+  'Websites & Web Apps',
+  'Real Estate & Portals',
+  'Calculators & SaaS Tools',
+  'E-Commerce Stores',
+];
 
 export function CrmPortfolio() {
   const { profile } = useCrmAuth();
@@ -255,13 +264,13 @@ function PortfolioProjectModal({
 }) {
   const { profile } = useCrmAuth();
   const [title, setTitle] = useState(project?.title || '');
-  const [category, setCategory] = useState(project?.category || 'Custom Web Application');
+  const [category, setCategory] = useState(project?.category || 'Websites & Web Apps');
   const [description, setDescription] = useState(project?.description || '');
   const [image, setImage] = useState(project?.image || '');
   const [liveUrl, setLiveUrl] = useState(project?.live_url || '');
   const [githubUrl, setGithubUrl] = useState(project?.github_url || '');
   const [technologies, setTechnologies] = useState(
-    project ? project.technologies.join(', ') : 'HTML5, Tailwind CSS, JavaScript, PHP, MySQL'
+    project ? project.technologies.join(', ') : 'React, Tailwind CSS, PHP 8.2, MySQL'
   );
   const [status, setStatus] = useState(project?.status || 'Live Project');
   const [featured, setFeatured] = useState(project?.featured || false);
@@ -309,7 +318,7 @@ function PortfolioProjectModal({
         return;
       }
     } catch {
-      // Supabase storage bucket not configured fallback
+      // Supabase storage bucket fallback
     }
 
     // 2. Automatic Fallback: Local Base64 Canvas Compression (< 300KB)
@@ -411,7 +420,7 @@ function PortfolioProjectModal({
             <label className="mb-1 block font-semibold text-chrome-400">Project Title *</label>
             <input
               required
-              placeholder="e.g. Apex Global Logistics Platform"
+              placeholder="e.g. Real Space Properties Portal"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className={inputClass}
@@ -419,21 +428,22 @@ function PortfolioProjectModal({
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
+            {/* 🎯 Updated Category Dropdown (100% Synced with Website Tabs) */}
             <div>
-              <label className="mb-1 block font-semibold text-chrome-400">Category Tag *</label>
+              <label className="mb-1 block font-semibold text-chrome-400">Category Tag (Website Tab) *</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className={inputClass}
               >
-                <option value="Full-Stack Real Estate Web Application">
-                  PropTech & Real Estate
-                </option>
-                <option value="Interactive SaaS Calculator & Automation">SaaS & Automation</option>
-                <option value="Dynamic E-Commerce Marketplace">E-Commerce Marketplace</option>
-                <option value="Custom Web Application">Custom Web Application</option>
-                <option value="Branding Showcase & Interactive Portal">Creative Agency & Branding</option>
-                <option value="Healthcare & Online Appointment Booking">Healthcare & Medical</option>
+                <option value="Websites & Web Apps">Websites & Web Apps</option>
+                <option value="Real Estate & Portals">Real Estate & Portals</option>
+                <option value="Calculators & SaaS Tools">Calculators & SaaS Tools</option>
+                <option value="E-Commerce Stores">E-Commerce Stores</option>
+                {/* Legacy compatibility */}
+                {project && !PORTFOLIO_CATEGORIES.includes(project.category) && (
+                  <option value={project.category}>{project.category} (Legacy)</option>
+                )}
               </select>
             </div>
 
@@ -445,7 +455,7 @@ function PortfolioProjectModal({
                 className={inputClass}
               >
                 <option value="Live Project">Live Project</option>
-                <option value="Live SaaS Tool">Live SaaS Tool</option>
+                <option value="Live Tool">Live Tool</option>
                 <option value="Case Study">Case Study</option>
                 <option value="Demo Portfolio">Demo Portfolio</option>
                 <option value="Client Handover">Client Handover</option>
@@ -460,7 +470,7 @@ function PortfolioProjectModal({
             <textarea
               required
               rows={3}
-              placeholder="Explain the features, architecture, and client impact..."
+              placeholder="Explain the features, client benefits, and business results..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className={inputClass}
@@ -610,7 +620,7 @@ function PortfolioProjectModal({
               Technologies (Comma Separated)
             </label>
             <input
-              placeholder="React, TypeScript, PHP 8.2, MySQL, Tailwind CSS"
+              placeholder="React, Tailwind CSS, PHP 8.2, MySQL"
               value={technologies}
               onChange={(e) => setTechnologies(e.target.value)}
               className={inputClass}

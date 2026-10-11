@@ -1,3 +1,4 @@
+// FILE: src/components/sections/Testimonials.tsx
 import { useState, useEffect, useMemo, type FormEvent } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { supabase } from '@/lib/supabase';
@@ -24,7 +25,7 @@ function StarRating({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'lg
         <svg
           key={index}
           className={`${iconSize} ${
-            index <= rating ? 'text-amber-400 fill-amber-400' : 'text-slate-600 fill-slate-700'
+            index <= rating ? 'text-amber-400 fill-amber-400' : 'text-slate-700 fill-slate-800'
           }`}
           viewBox="0 0 24 24"
         >
@@ -36,11 +37,12 @@ function StarRating({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'lg
 }
 
 const inputClass =
-  'w-full rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-blue-500 focus:bg-white/[0.05] focus:outline-none transition-colors';
+  'w-full rounded-xl border border-white/10 bg-[#06080f] px-3.5 py-2.5 text-xs text-white placeholder:text-slate-500 focus:border-blue-500 focus:bg-white/[0.04] focus:outline-none transition-colors font-sans';
 
 export function Testimonials() {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -100,9 +102,21 @@ export function Testimonials() {
     return { avg, total };
   }, [reviews]);
 
-  const displayedReviews = useMemo(() => {
-    return showAllReviews ? reviews : reviews.slice(0, 3);
-  }, [reviews, showAllReviews]);
+  // Dynamic Category Filter
+  const filteredReviews = useMemo(() => {
+    let list = reviews;
+    if (selectedCategory !== 'all') {
+      list = list.filter((r) => {
+        const tag = r.projectTag.toLowerCase();
+        if (selectedCategory === 'proptech') return tag.includes('proptech') || tag.includes('estate');
+        if (selectedCategory === 'saas') return tag.includes('saas') || tag.includes('calculator') || tag.includes('tool');
+        if (selectedCategory === 'fullstack') return tag.includes('web application') || tag.includes('custom') || tag.includes('app');
+        if (selectedCategory === 'ecommerce') return tag.includes('commerce') || tag.includes('store');
+        return true;
+      });
+    }
+    return showAllReviews ? list : list.slice(0, 3);
+  }, [reviews, selectedCategory, showAllReviews]);
 
   async function handleSubmitReview(e: FormEvent) {
     e.preventDefault();
@@ -168,21 +182,24 @@ export function Testimonials() {
       aria-label="DEVSOLE Soft Client Testimonials & Reviews"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-28 overflow-hidden bg-transparent"
     >
+      {/* Subtle Studio Grid Atmosphere */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
+        <div className="bg-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
-      <SectionHeading
-        eyebrow="Verified Track Record"
-        title="Client Reviews & Production Impact"
-        description="Authentic feedback from real partners and founders. Have you worked with us? Share your experience."
-        align="center"
-      />
+      <div data-gsap="mask-up">
+        <SectionHeading
+          eyebrow="Verified Production Track Record"
+          title="Client Reviews & Production Track Record"
+          description="Authentic feedback from real partners and founders across custom full-stack web applications, PropTech portals, and automated SaaS platforms."
+          align="center"
+        />
+      </div>
 
-      {/* Aggregate Rating Banner + Write Review Action */}
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+      {/* Aggregate Rating Banner + Live Review Action */}
+      <div data-gsap="fade-up" className="mt-8 flex flex-wrap items-center justify-center gap-3">
         {reviews.length > 0 && (
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 shadow-2xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[#0c101d] px-4 py-2 shadow-2xs backdrop-blur-md">
             <StarRating rating={Math.round(Number(metrics.avg))} />
             <span className="text-xs font-mono font-semibold text-slate-200">
               {metrics.avg} / 5.0 Rating Across {metrics.total} Verified {metrics.total === 1 ? 'Delivery' : 'Deliveries'}
@@ -206,37 +223,76 @@ export function Testimonials() {
         </button>
       </div>
 
+      {/* Segmented Category Filter Bar */}
+      <div data-gsap="fade-up" className="mt-7 flex justify-center">
+        <div className="inline-flex max-w-full items-center rounded-xl border border-white/10 bg-[#080c18] p-1 shadow-2xs overflow-x-auto">
+          {[
+            { id: 'all', label: 'All Reviews' },
+            { id: 'proptech', label: 'PropTech' },
+            { id: 'saas', label: 'SaaS & Calculators' },
+            { id: 'fullstack', label: 'Custom Web Apps' },
+            { id: 'ecommerce', label: 'E-Commerce' },
+          ].map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => {
+                soundFX.playClick();
+                setSelectedCategory(cat.id);
+              }}
+              className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all duration-150 ${
+                selectedCategory === cat.id
+                  ? 'bg-blue-600/20 text-white shadow-2xs border border-blue-500/30 font-bold'
+                  : 'text-slate-400 hover:text-white font-medium'
+              }`}
+            >
+              <span>{cat.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Reviews Content Area */}
       {loading ? (
-        <div className="mt-12 text-center text-xs text-slate-500">Loading client feedback...</div>
+        <div className="mt-12 text-center text-xs font-mono text-slate-500">
+          Fetching verified client reviews from Supabase...
+        </div>
       ) : reviews.length === 0 ? (
-        /* Clean Empty State (Jab tak koi real review na ho) */
-        <div className="mt-12 rounded-2xl border border-dashed border-white/10 bg-[#0c101d]/60 p-10 text-center max-w-xl mx-auto">
-          <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
-            ⭐
+        /* Empty State with Studio Polish */
+        <div data-gsap="fade-up" className="mt-12 rounded-2xl border border-dashed border-white/10 bg-[#0c101d]/60 p-10 text-center max-w-xl mx-auto shadow-sm">
+          <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3 shadow-inner">
+            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
           </div>
           <h4 className="font-display text-sm font-bold text-white">No Client Reviews Published Yet</h4>
-          <p className="mt-1.5 text-xs text-slate-400">
-            Have you completed a sprint with DEVSOLE Soft? Click below to leave verified feedback.
+          <p className="mt-1.5 text-xs text-slate-400 leading-relaxed font-normal">
+            Have you completed an engineering sprint with DEVSOLE Soft? Click below to leave verified feedback for the engineering desk.
           </p>
           <button
             type="button"
-            onClick={() => setIsModalOpen(true)}
-            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300"
+            onClick={() => {
+              soundFX.playClick();
+              setIsModalOpen(true);
+            }}
+            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
           >
             <span>+ Be the First to Review</span>
             <span>→</span>
           </button>
         </div>
       ) : (
-        /* Real Reviews Grid */
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {displayedReviews.map((review) => (
+        /* Live Reviews Grid */
+        <div data-gsap="stagger-group" className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredReviews.map((review) => (
             <figure
               key={review.id}
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0c101d] p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
+              onMouseEnter={() => soundFX.playHover()}
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0c101d] p-6 sm:p-7 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1 overflow-hidden"
             >
-              <div>
+              <div className="bg-grid absolute inset-0 opacity-10 pointer-events-none rounded-2xl" />
+
+              <div className="relative z-10">
                 <div className="flex items-center justify-between gap-2">
                   <StarRating rating={review.rating} />
                   <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono font-semibold text-blue-400 truncate max-w-[170px]">
@@ -249,7 +305,7 @@ export function Testimonials() {
                 </blockquote>
               </div>
 
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
+              <figcaption className="relative z-10 mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
                 <div className="relative shrink-0">
                   <img
                     src={review.avatar}
@@ -259,9 +315,9 @@ export function Testimonials() {
                   />
                   <span
                     className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-white shadow-2xs"
-                    title="Verified Delivery"
+                    title="Verified Delivery Sign-off"
                   >
-                    <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </span>
@@ -283,7 +339,7 @@ export function Testimonials() {
 
       {/* View All Reviews Toggle */}
       {reviews.length > 3 && (
-        <div className="mt-10 flex justify-center">
+        <div data-gsap="fade-up" className="mt-10 flex justify-center">
           <button
             type="button"
             onClick={() => {
@@ -304,15 +360,15 @@ export function Testimonials() {
         </div>
       )}
 
-      {/* Review Submission Modal */}
+      {/* Review Submission Modal (Linear / Raycast Style) */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', backdropFilter: 'blur(12px)' }}
+          style={{ backgroundColor: 'rgba(3, 5, 10, 0.82)', backdropFilter: 'blur(16px)' }}
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0c101d] text-slate-100 p-6 sm:p-8 shadow-2xl animate-modal max-h-[92vh] overflow-y-auto"
+            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0c101d] text-slate-100 p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.8)] animate-modal max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -326,15 +382,15 @@ export function Testimonials() {
               </svg>
             </button>
 
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded">
-              Verified Client Review
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 rounded">
+              Verified Delivery Sign-Off
             </span>
 
             <h3 className="mt-2 font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
               Submit Review for DEVSOLE Soft
             </h3>
-            <p className="mt-1 text-xs text-slate-400 font-normal">
-              Your feedback is published directly to our live website.
+            <p className="mt-1 text-xs text-slate-400 font-normal leading-relaxed">
+              Your feedback is published directly to our live engineering portal and records in our production track record.
             </p>
 
             {submittedSuccess ? (
@@ -348,7 +404,7 @@ export function Testimonials() {
                   Review Published Live
                 </h4>
                 <p className="mt-1 text-xs text-emerald-400">
-                  Thank you, {name}! Your review is now live.
+                  Thank you, {name}! Your review is now live on DEVSOLE Soft.
                 </p>
               </div>
             ) : (
@@ -362,16 +418,19 @@ export function Testimonials() {
                       <button
                         type="button"
                         key={star}
-                        onClick={() => setRating(star)}
+                        onClick={() => {
+                          soundFX.playClick();
+                          setRating(star);
+                        }}
                         onMouseEnter={() => setHoverRating(star)}
                         onMouseLeave={() => setHoverRating(0)}
-                        className="p-1 focus:outline-none transition-transform hover:scale-120"
+                        className="p-1 focus:outline-none transition-transform hover:scale-125"
                       >
                         <svg
                           className={`h-5 w-5 ${
                             (hoverRating || rating) >= star
                               ? 'text-amber-400 fill-amber-400'
-                              : 'text-slate-600 fill-slate-700'
+                              : 'text-slate-700 fill-slate-800'
                           }`}
                           viewBox="0 0 24 24"
                         >
@@ -404,7 +463,7 @@ export function Testimonials() {
                       Role / Position
                     </label>
                     <input
-                      placeholder="e.g. Founder, CEO, Manager"
+                      placeholder="e.g. Founder, CEO, CTO"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                       className={inputClass}
@@ -427,7 +486,7 @@ export function Testimonials() {
 
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-slate-300">
-                      Delivered Category
+                      Delivered Project Scope
                     </label>
                     <select
                       value={projectTag}
@@ -438,19 +497,19 @@ export function Testimonials() {
                       <option value="PropTech & Real Estate" className="bg-[#0c101d] text-white">PropTech & Real Estate Portal</option>
                       <option value="SaaS Tool & Automation" className="bg-[#0c101d] text-white">SaaS Tool & Automation</option>
                       <option value="E-Commerce Marketplace" className="bg-[#0c101d] text-white">E-Commerce Marketplace</option>
-                      <option value="UI/UX Engineering" className="bg-[#0c101d] text-white">UI/UX & Web Performance</option>
+                      <option value="High-Performance Systems" className="bg-[#0c101d] text-white">High-Performance Web Systems</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="mb-1 block text-xs font-semibold text-slate-300">
-                    Review Feedback *
+                    Production Feedback & Outcome *
                   </label>
                   <textarea
                     required
                     rows={3}
-                    placeholder="Describe delivery pace, code hygiene, and project results..."
+                    placeholder="Describe delivery pace, code hygiene, staging reviews, and operational results..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     className={inputClass}
@@ -471,7 +530,7 @@ export function Testimonials() {
                     className="inline-flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 text-xs font-semibold shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-colors"
                   >
                     <span>{submitting ? 'Publishing...' : 'Submit Review Live'}</span>
-                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
                     </svg>

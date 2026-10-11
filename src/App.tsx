@@ -1,3 +1,4 @@
+// FILE: src/App.tsx
 import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
@@ -10,10 +11,16 @@ import { AdminApp } from '@/admin/AdminApp';
 import { CrmApp } from '@/crm/CrmApp';
 import { initSmoothScroll } from '@/lib/lenis';
 
-// 🌐 Sitelinks & Dedicated SEO Pages
+// 🌐 All 10 Dedicated Google SEO Pages
 import { ServicesPage } from '@/pages/ServicesPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { ProjectsPage } from '@/pages/ProjectsPage';
+import { ReviewsPage } from '@/pages/ReviewsPage';
+import { TechnologiesPage } from '@/pages/TechnologiesPage';
+import { ProcessPage } from '@/pages/ProcessPage';
+import { TeamPage } from '@/pages/TeamPage';
+import { EstimatorPage } from '@/pages/EstimatorPage';
+import { BlogPage } from '@/pages/BlogPage';
 import { ContactPage } from '@/pages/ContactPage';
 
 function ScrollToTop() {
@@ -34,7 +41,7 @@ function PublicSite() {
     return cleanup;
   }, []);
 
-  // Hardware-accelerated Desktop Cursor Spotlight (Zero Re-render Performance Engine)
+  // Hardware-accelerated Desktop Cursor Spotlight (Zero Re-render Engine)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(pointer: coarse)').matches) return;
@@ -116,21 +123,27 @@ function PublicSite() {
         <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
-      {/* 4. Main Content Layer */}
+      {/* 4. Main Multi-Page Content Layer */}
       <div className="relative z-10 flex min-h-screen flex-col">
         <Header />
         <main className="flex-1 w-full">
           <Routes>
-            {/* Homepage */}
+            {/* 1. Homepage */}
             <Route path="/" element={<Home />} />
 
-            {/* Dedicated Google Sitelinks Pages */}
-            <Route path="/services" element={<ServicesPage />} />
+            {/* 2. All 10 Dedicated Google SEO Pages */}
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/technologies" element={<TechnologiesPage />} />
+            <Route path="/process" element={<ProcessPage />} />
+            <Route path="/team" element={<TeamPage />} />
+            <Route path="/estimator" element={<EstimatorPage />} />
+            <Route path="/blog" element={<BlogPage />} />
             <Route path="/contact" element={<ContactPage />} />
 
-            {/* 404 Fallback */}
+            {/* 3. 404 Fallback */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
@@ -149,13 +162,13 @@ export default function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          {/* ⚡ DEVSOLE Cloud CRM Route (Internal Use - Untouched) */}
+          {/* ⚡ DEVSOLE Cloud CRM Route (Internal Use - 100% Untouched) */}
           <Route path="/crm/*" element={<CrmApp />} />
 
-          {/* 🛡️ Website Admin Route */}
+          {/* 🛡️ Website Admin Route (100% Untouched) */}
           <Route path="/admin/*" element={<AdminApp />} />
 
-          {/* 🌐 Public Client Website */}
+          {/* 🌐 Public Multi-Page SEO Client Website */}
           <Route path="/*" element={<PublicSite />} />
         </Routes>
       </BrowserRouter>

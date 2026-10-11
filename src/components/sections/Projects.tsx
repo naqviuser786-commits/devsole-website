@@ -1,7 +1,9 @@
+// FILE: src/components/sections/Projects.tsx
 import { useState, useEffect, useMemo } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { projects as staticProjects, siteSettings } from '@/data/siteData';
 import { supabase } from '@/lib/supabase';
+import { soundFX } from '@/lib/soundFx';
 
 interface ProjectType {
   id: string;
@@ -16,18 +18,20 @@ interface ProjectType {
   githubUrl?: string;
 }
 
+// 🎯 Client-Friendly Everyday Tab Categories
 const TABS = [
-  { id: 'all', label: 'All Architecture' },
-  { id: 'proptech', label: 'PropTech & Real Estate' },
-  { id: 'saas', label: 'SaaS & Automation' },
-  { id: 'ecommerce', label: 'E-Commerce' },
-  { id: 'fullstack', label: 'Custom Web Apps' },
+  { id: 'all', label: 'All Projects' },
+  { id: 'proptech', label: 'Real Estate & Portals' },
+  { id: 'saas', label: 'Calculators & SaaS Tools' },
+  { id: 'ecommerce', label: 'E-Commerce Stores' },
+  { id: 'fullstack', label: 'Websites & Web Apps' },
 ];
 
 export function Projects() {
   const [projectList, setProjectList] = useState<ProjectType[]>(staticProjects as ProjectType[]);
   const [activeTab, setActiveTab] = useState('all');
   const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
+  const [modalTab, setModalTab] = useState<'overview' | 'architecture'>('overview');
 
   // Fetch Live Projects from Supabase CMS (Preserving CRM connection)
   useEffect(() => {
@@ -72,7 +76,8 @@ export function Projects() {
       return projectList.filter(
         (p) =>
           p.category.toLowerCase().includes('real estate') ||
-          p.category.toLowerCase().includes('proptech')
+          p.category.toLowerCase().includes('proptech') ||
+          p.category.toLowerCase().includes('portal')
       );
     }
     if (activeTab === 'saas') {
@@ -80,19 +85,26 @@ export function Projects() {
         (p) =>
           p.category.toLowerCase().includes('saas') ||
           p.category.toLowerCase().includes('calculator') ||
+          p.category.toLowerCase().includes('estimator') ||
+          p.category.toLowerCase().includes('tool') ||
           p.category.toLowerCase().includes('analytics')
       );
     }
     if (activeTab === 'ecommerce') {
-      return projectList.filter((p) => p.category.toLowerCase().includes('commerce'));
+      return projectList.filter((p) => 
+        p.category.toLowerCase().includes('commerce') ||
+        p.category.toLowerCase().includes('store') ||
+        p.category.toLowerCase().includes('shop')
+      );
     }
     if (activeTab === 'fullstack') {
       return projectList.filter(
         (p) =>
-          p.category.toLowerCase().includes('branding') ||
+          p.category.toLowerCase().includes('website') ||
+          p.category.toLowerCase().includes('web application') ||
+          p.category.toLowerCase().includes('custom') ||
           p.category.toLowerCase().includes('healthcare') ||
-          p.category.toLowerCase().includes('full-stack') ||
-          p.category.toLowerCase().includes('custom')
+          p.category.toLowerCase().includes('agency')
       );
     }
     return projectList;
@@ -104,24 +116,32 @@ export function Projects() {
       return projectList.filter(
         (p) =>
           p.category.toLowerCase().includes('real estate') ||
-          p.category.toLowerCase().includes('proptech')
+          p.category.toLowerCase().includes('proptech') ||
+          p.category.toLowerCase().includes('portal')
       ).length;
     if (tabId === 'saas')
       return projectList.filter(
         (p) =>
           p.category.toLowerCase().includes('saas') ||
           p.category.toLowerCase().includes('calculator') ||
+          p.category.toLowerCase().includes('estimator') ||
+          p.category.toLowerCase().includes('tool') ||
           p.category.toLowerCase().includes('analytics')
       ).length;
     if (tabId === 'ecommerce')
-      return projectList.filter((p) => p.category.toLowerCase().includes('commerce')).length;
+      return projectList.filter((p) => 
+        p.category.toLowerCase().includes('commerce') ||
+        p.category.toLowerCase().includes('store') ||
+        p.category.toLowerCase().includes('shop')
+      ).length;
     if (tabId === 'fullstack')
       return projectList.filter(
         (p) =>
-          p.category.toLowerCase().includes('branding') ||
+          p.category.toLowerCase().includes('website') ||
+          p.category.toLowerCase().includes('web application') ||
+          p.category.toLowerCase().includes('custom') ||
           p.category.toLowerCase().includes('healthcare') ||
-          p.category.toLowerCase().includes('full-stack') ||
-          p.category.toLowerCase().includes('custom')
+          p.category.toLowerCase().includes('agency')
       ).length;
     return 0;
   };
@@ -133,22 +153,24 @@ export function Projects() {
       id="projects"
       itemScope
       itemType="https://schema.org/ItemList"
-      aria-label="DEVSOLE Soft Engineering Portfolio"
+      aria-label="DEVSOLE Soft Production Portfolio and Client Projects"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-28 overflow-hidden bg-transparent"
     >
       {/* Subtle Studio Grid Atmosphere */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
+        <div className="bg-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
-      <SectionHeading
-        eyebrow="Production Portfolio"
-        title="Featured Work & Live Case Studies"
-        description="Filter our engineering work by industry domain or inspect any project for architecture specifications, tech stack, and live previews."
-      />
+      <div data-gsap="mask-up">
+        <SectionHeading
+          eyebrow="Our Work · Production Portfolio"
+          title="Recent Client Projects & Live Systems"
+          description="Browse our recently delivered websites, real estate portals, online stores, and custom software tools. Click on any project to inspect live features, technologies, and delivery details."
+        />
+      </div>
 
       {/* Segmented Filter Control Dock */}
-      <div className="mt-8 flex items-center justify-start overflow-x-auto pb-2 max-w-full">
+      <div data-gsap="fade-up" className="mt-8 flex items-center justify-start overflow-x-auto pb-2 max-w-full">
         <div className="inline-flex items-center gap-1 rounded-xl border border-white/10 bg-[#080c18] p-1 shadow-2xs">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -158,10 +180,13 @@ export function Projects() {
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  soundFX.playClick();
+                  setActiveTab(tab.id);
+                }}
                 className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all duration-150 ${
                   isActive
-                    ? 'bg-white/10 text-white shadow-2xs border border-white/15'
+                    ? 'bg-blue-600/20 text-white shadow-2xs border border-blue-500/30 font-bold'
                     : 'text-slate-400 hover:text-white font-medium'
                 }`}
               >
@@ -181,33 +206,32 @@ export function Projects() {
         </div>
       </div>
 
-      {/* Projects Grid */}
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Projects Grid (Clean Human Studio Cards — Zero AI Window Dots) */}
+      <div data-gsap="stagger-group" className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project) => (
           <article
             key={project.id}
             itemScope
             itemType="https://schema.org/SoftwareApplication"
             itemProp="itemListElement"
-            onClick={() => setActiveProject(project)}
-            className="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#0c101d] p-2.5 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
+            onClick={() => {
+              soundFX.playClick();
+              setActiveProject(project);
+              setModalTab('overview');
+            }}
+            onMouseEnter={() => soundFX.playHover()}
+            className="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#0c101d] p-3 shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-blue-500/40 hover:shadow-[0_8px_35px_rgba(0,0,0,0.7)] transition-all duration-300 hover:-translate-y-1"
           >
             <meta itemProp="applicationCategory" content={project.category} />
             <meta itemProp="operatingSystem" content="Web Browser" />
 
             <div>
-              {/* Media Preview Frame with Mac Window Chrome */}
+              {/* Media Preview Frame */}
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#080c18] shadow-inner">
-                {/* Window Control Header */}
-                <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between bg-[#06080f] border-b border-white/10 px-3 py-1.5 backdrop-blur-md">
-                  <div className="flex items-center gap-1.5">
-                    <div className="h-2 w-2 rounded-full bg-[#ff5f56]" />
-                    <div className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
-                    <div className="h-2 w-2 rounded-full bg-[#27c93f]" />
-                  </div>
-
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/75 px-2 py-0.5 text-[9px] font-mono font-semibold text-slate-200 backdrop-blur-md">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                {/* Clean Status Badge Overlay (No AI Traffic Dots Clutter) */}
+                <div className="absolute top-2.5 left-2.5 z-10">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/75 px-2.5 py-0.5 text-[10px] font-mono font-semibold text-slate-200 backdrop-blur-md">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
                     <span>{project.status}</span>
                   </span>
                 </div>
@@ -222,11 +246,11 @@ export function Projects() {
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center font-mono text-xs text-slate-500 bg-[#080c18]">
-                    Preview Frame
+                    Live Software Preview
                   </div>
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-80" />
               </div>
 
               {/* Information Content */}
@@ -266,7 +290,7 @@ export function Projects() {
 
               {/* Action Prompt */}
               <div className="mt-3.5 flex items-center justify-between text-xs font-semibold text-blue-400 group-hover:text-blue-300">
-                <span>Inspect Architecture & Demo</span>
+                <span>Inspect Project Details</span>
                 <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -277,18 +301,18 @@ export function Projects() {
         ))}
       </div>
 
-      {/* ================= ARCHITECTURE INSPECTION MODAL ================= */}
+      {/* ================= DUAL-TAB PROJECT INSPECTION MODAL ================= */}
       {activeProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', backdropFilter: 'blur(12px)' }}
+          style={{ backgroundColor: 'rgba(3, 5, 10, 0.85)', backdropFilter: 'blur(16px)' }}
           onClick={() => setActiveProject(null)}
         >
           <div
             className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0c101d] text-slate-100 p-6 sm:p-8 shadow-2xl animate-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button with Clean SVG Cross */}
+            {/* Close Button */}
             <button
               onClick={() => setActiveProject(null)}
               className="absolute right-5 top-5 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-colors hover:text-white hover:bg-white/10"
@@ -303,14 +327,15 @@ export function Projects() {
             {/* Modal Image Wallpaper Frame */}
             {activeProject.image && (
               <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10 bg-[#080c18] shadow-2xl">
-                <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between bg-[#06080f] border-b border-white/10 px-3 py-1.5 backdrop-blur-md">
+                {/* Browser Header Bar for authentic single-project inspection */}
+                <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between bg-[#06080f]/90 border-b border-white/10 px-3 py-1.5 backdrop-blur-md">
                   <div className="flex items-center gap-1.5">
                     <div className="h-2 w-2 rounded-full bg-[#ff5f56]" />
                     <div className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
                     <div className="h-2 w-2 rounded-full bg-[#27c93f]" />
                   </div>
-                  <span className="font-mono text-[9px] text-slate-400">Live Architecture Inspection</span>
-                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                  <span className="font-mono text-[9px] text-slate-400">DEVSOLE Production Inspection</span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
                 </div>
 
                 <img
@@ -326,34 +351,81 @@ export function Projects() {
               </div>
             )}
 
-            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-blue-400">
-              {activeProject.category}
-            </span>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-blue-400">
+                {activeProject.category}
+              </span>
 
-            <h3 className="mt-1 font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              {/* Inspector Tab Switcher */}
+              <div className="inline-flex rounded-lg border border-white/10 bg-white/[0.03] p-0.5 text-xs font-mono">
+                <button
+                  type="button"
+                  onClick={() => setModalTab('overview')}
+                  className={`rounded-md px-3 py-1 transition-colors ${
+                    modalTab === 'overview'
+                      ? 'bg-blue-600/20 text-white font-bold border border-blue-500/30'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Features & Scope
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setModalTab('architecture')}
+                  className={`rounded-md px-3 py-1 transition-colors ${
+                    modalTab === 'architecture'
+                      ? 'bg-blue-600/20 text-white font-bold border border-blue-500/30'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  Technologies Used
+                </button>
+              </div>
+            </div>
+
+            <h3 className="mt-2 font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
               {activeProject.title}
             </h3>
 
-            <p className="mt-3 text-sm leading-relaxed text-slate-300 font-normal">
-              {activeProject.description}
-            </p>
+            {modalTab === 'overview' ? (
+              <div className="mt-4 space-y-4 animate-fade">
+                <p className="text-sm leading-relaxed text-slate-300 font-normal">
+                  {activeProject.description}
+                </p>
 
-            {/* Engineered Tech Stack Chips */}
-            <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
-                Engineered Tech Stack
-              </h4>
-              <div className="mt-2.5 flex flex-wrap gap-2">
-                {activeProject.technologies.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-mono font-semibold text-slate-200 shadow-2xs"
-                  >
-                    {t}
-                  </span>
-                ))}
+                <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-xs font-mono space-y-2">
+                  <span className="text-slate-400 uppercase text-[10px] block font-bold">Key Project Deliverables</span>
+                  <div className="grid grid-cols-2 gap-2 text-slate-300">
+                    <div>Page Speed: <strong className="text-emerald-400 font-bold">&lt; 0.7s Load Time</strong></div>
+                    <div>Code Ownership: <strong className="text-white font-bold">100% Client Owned</strong></div>
+                    <div>Mobile Layout: <strong className="text-white font-bold">Fully Responsive</strong></div>
+                    <div>Lead Capture: <strong className="text-white font-bold">Direct WhatsApp & Email</strong></div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="mt-4 space-y-4 animate-fade">
+                <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
+                    Technologies & Tools Integrated
+                  </h4>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {activeProject.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-mono font-semibold text-slate-200 shadow-2xs"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                  Built with clean, fast code and secure database architecture to ensure smooth customer experience without crashes or slow loading.
+                </p>
+              </div>
+            )}
 
             {/* Modal Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
@@ -362,6 +434,7 @@ export function Projects() {
                   href={activeProject.liveUrl}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => soundFX.playClick()}
                   className="inline-flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 text-xs font-semibold shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-colors"
                 >
                   <span>View Live Deployment</span>
@@ -377,28 +450,30 @@ export function Projects() {
                   href={activeProject.githubUrl}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => soundFX.playClick()}
                   className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-xs font-semibold text-slate-200 transition-colors shadow-2xs"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                   </svg>
-                  <span>Repository</span>
+                  <span>Source Code</span>
                 </a>
               )}
 
               <a
-                href={`https://wa.me/${phone}?text=Hi%20DEVSOLE%20Soft!%20I%20want%20to%20discuss%20a%20project%20similar%20to%20${encodeURIComponent(activeProject.title)}.`}
+                href={`https://wa.me/${phone}?text=Hi%20DEVSOLE%20Soft!%20I%20am%20interested%20in%20building%20a%20project%20like%20${encodeURIComponent(activeProject.title)}.`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => soundFX.playClick()}
                 className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 px-4 py-2.5 text-xs font-semibold text-emerald-400 transition-colors shadow-2xs"
               >
-                <span>Discuss on WhatsApp</span>
+                <span>Discuss Similar Project on WhatsApp</span>
               </a>
 
               <button
                 type="button"
                 onClick={() => setActiveProject(null)}
-                className="rounded-xl border border-white/10 px-4 py-2.5 text-xs font-medium text-slate-400 hover:text-white transition-colors"
+                className="rounded-xl border border-white/10 px-4 py-2.5 text-xs font-medium text-slate-400 hover:text-white transition-colors ml-auto"
               >
                 Close
               </button>

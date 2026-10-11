@@ -1,3 +1,4 @@
+/* FILE: src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,7 +34,7 @@
     position: relative;
   }
 
-  /* Architectural Display Typography */
+  /* Architectural Display Typography (Linear / Vercel Tight Kerning) */
   h1,
   h2,
   h3,
@@ -57,9 +58,9 @@
     letter-spacing: -0.025em;
   }
 
-  /* High-End Selection Highlight */
+  /* High-End Obsidian Selection Highlight */
   ::selection {
-    background: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.28);
     color: #ffffff;
   }
 
@@ -81,25 +82,32 @@
 
   /* Ultra-Lightweight Vector Matte Film-Grain Texture (0 KB Network Overhead) */
   .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.032'/%3E%3C/svg%3E");
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Premium Human-Crafted Obsidian Studio Card */
+  /* Premium Human-Crafted Obsidian Studio Card (Zero AI Glowing Tacky Edges) */
   .studio-card {
-    background: #0c101d;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+    background: #0b0f19;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .studio-card:hover {
-    border-color: rgba(59, 130, 246, 0.35);
-    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.8);
     transform: translateY(-2px);
+  }
+
+  /* Linear-Style Typography Mask Container */
+  .mask-line {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
   }
 
   /* Mobile Frame Containment (Guarantees Zero Horizontal Overflow) */
@@ -111,8 +119,8 @@
 
 /* Custom Sleek Scrollbar (Non-intrusive Obsidian Standard) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -146,11 +154,11 @@
   animation-play-state: paused;
 }
 
-/* Smooth Dialog & Modal Transitions */
+/* Smooth Dialog & Modal Transitions (Raycast Spring Physics) */
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: scale(0.98) translateY(6px);
+    transform: scale(0.97) translateY(8px);
   }
   to {
     opacity: 1;
@@ -164,7 +172,7 @@
 }
 
 .animate-modal {
-  animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modalIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade {

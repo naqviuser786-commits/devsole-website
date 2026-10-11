@@ -10,23 +10,18 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-three/drei": "^9.114.0",
-    "@react-three/fiber": "^8.17.8",
-    "@react-three/postprocessing": "^2.16.3",
     "@supabase/supabase-js": "^2.117.2",
     "gsap": "^3.12.5",
     "lenis": "^1.1.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "three": "^0.168.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
-    "@types/three": "^0.168.0",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
     "@vitejs/plugin-react": "^4.3.1",

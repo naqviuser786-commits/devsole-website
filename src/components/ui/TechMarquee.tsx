@@ -1,19 +1,22 @@
+// FILE: src/components/ui/TechMarquee.tsx
+
 const TICKER_ITEMS = [
-  'PropTech & Real Estate Portals',
-  'Sub-Second Full-Stack Web Apps',
-  'Automated SaaS Pricing Engines',
-  'Custom PHP 8.2 & Relational MySQL Architecture',
-  '< 0.8s Global Core Web Vitals Benchmark',
-  'Dynamic E-Commerce Marketplaces',
-  '100% Source Code & IP Ownership',
-  'Responsive Cross-Device Architecture',
-  'Direct Founder Consultations',
+  'Custom Web Development',
+  'SEO & Google Search Ranking',
+  'Real Estate & Business Portals',
+  'E-Commerce Online Stores',
+  'Under 1-Second Page Load Speed',
+  '100% Complete Code Ownership',
+  'Direct WhatsApp Lead Alerts',
+  'Mobile-First Responsive Design',
+  'Direct Developer Consultation',
+  'Fixed 21-Day Delivery Timeline',
 ];
 
 export function TechMarquee() {
   return (
     <div
-      aria-label="Core Engineering Capabilities"
+      aria-label="Core Services and Capabilities"
       className="relative w-full overflow-hidden border-y border-white/10 bg-[#080c18]/80 py-3.5 backdrop-blur-md"
     >
       {/* Side Obsidian Dark Gradient Masks (Zero Hard Edges) */}

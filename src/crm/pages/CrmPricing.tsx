@@ -1,3 +1,4 @@
+// FILE: src/crm/pages/CrmPricing.tsx
 import { useEffect, useState, useCallback, type FormEvent } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useCrmAuth } from '../CrmAuthContext';
@@ -10,6 +11,34 @@ interface PricingItem {
   pricePKR: number;
 }
 
+// 🎯 New Synchronized Client-Friendly Defaults
+const DEFAULT_PROJECT_TYPES: PricingItem[] = [
+  { id: 'fullstack', name: 'Custom Website or Web App', icon: '💻', priceUSD: 450, pricePKR: 125000 },
+  { id: 'proptech', name: 'Real Estate & Business Portal', icon: '🏢', priceUSD: 650, pricePKR: 180000 },
+  { id: 'saas', name: 'Calculators & Custom Business Tool', icon: '⚙️', priceUSD: 750, pricePKR: 210000 },
+  { id: 'ecommerce', name: 'E-Commerce Online Store', icon: '🛒', priceUSD: 550, pricePKR: 150000 },
+];
+
+const DEFAULT_SCOPES: PricingItem[] = [
+  { id: 'mvp', name: 'Starter Website (1-5 Pages)', icon: '📄', priceUSD: 0, pricePKR: 0 },
+  { id: 'growth', name: 'Standard Business (6-12 Pages)', icon: '📑', priceUSD: 150, pricePKR: 40000 },
+  { id: 'enterprise', name: 'Large Platform (13+ Pages)', icon: '📚', priceUSD: 350, pricePKR: 100000 },
+];
+
+const DEFAULT_ADDONS: PricingItem[] = [
+  { id: 'admin', name: 'Custom Admin Panel (Manage Content & Leads)', icon: '🛡️', priceUSD: 100, pricePKR: 30000 },
+  { id: 'auth', name: 'User Accounts & Secure Login System', icon: '🔐', priceUSD: 75, pricePKR: 20000 },
+  { id: 'payment', name: 'Online Card & Bank Payment Gateway', icon: '💳', priceUSD: 75, pricePKR: 20000 },
+  { id: 'pdf', name: 'Automated PDF Quotes & Invoices', icon: '📄', priceUSD: 40, pricePKR: 12000 },
+  { id: 'filters', name: 'Advanced Search & Product/Property Filters', icon: '🔍', priceUSD: 60, pricePKR: 15000 },
+  { id: 'seo', name: 'SEO & Google Search Ranking Setup', icon: '🚀', priceUSD: 70, pricePKR: 20000 },
+];
+
+const DEFAULT_TIMELINES: PricingItem[] = [
+  { id: 'standard', name: 'Standard Delivery (2-3 Weeks)', icon: '⏳', priceUSD: 0, pricePKR: 0 },
+  { id: 'express', name: 'Priority Fast Delivery (1-2 Weeks)', icon: '⚡', priceUSD: 100, pricePKR: 30000 },
+];
+
 export function CrmPricing() {
   const { profile } = useCrmAuth();
   const [exchangeRate, setExchangeRate] = useState<number>(280);
@@ -19,10 +48,10 @@ export function CrmPricing() {
   const [loading, setLoading] = useState(true);
 
   // Pricing Categories
-  const [projectTypes, setProjectTypes] = useState<PricingItem[]>([]);
-  const [scopes, setScopes] = useState<PricingItem[]>([]);
-  const [addons, setAddons] = useState<PricingItem[]>([]);
-  const [timelines, setTimelines] = useState<PricingItem[]>([]);
+  const [projectTypes, setProjectTypes] = useState<PricingItem[]>(DEFAULT_PROJECT_TYPES);
+  const [scopes, setScopes] = useState<PricingItem[]>(DEFAULT_SCOPES);
+  const [addons, setAddons] = useState<PricingItem[]>(DEFAULT_ADDONS);
+  const [timelines, setTimelines] = useState<PricingItem[]>(DEFAULT_TIMELINES);
 
   // Load Pricing from Supabase
   const loadPricing = useCallback(async () => {
@@ -35,10 +64,24 @@ export function CrmPricing() {
 
       if (data) {
         setExchangeRate(Number(data.usd_to_pkr_rate) || 280);
-        setProjectTypes(data.project_types || []);
-        setScopes(data.scopes || []);
-        setAddons(data.addons || []);
-        setTimelines(data.timelines || []);
+        if (data.project_types?.length) setProjectTypes(data.project_types);
+        if (data.scopes?.length) setScopes(data.scopes);
+        if (data.addons?.length) {
+          // Filter out legacy 3D addon if still saved in DB
+          const cleanedAddons = data.addons.filter((a: PricingItem) => a.id !== '3d');
+          // Ensure SEO addon is present
+          if (!cleanedAddons.some((a: PricingItem) => a.id === 'seo')) {
+            cleanedAddons.push({
+              id: 'seo',
+              name: 'SEO & Google Search Ranking Setup',
+              icon: '🚀',
+              priceUSD: 70,
+              pricePKR: 20000,
+            });
+          }
+          setAddons(cleanedAddons);
+        }
+        if (data.timelines?.length) setTimelines(data.timelines);
       }
     } finally {
       setLoading(false);
@@ -68,7 +111,7 @@ export function CrmPricing() {
     }
   }
 
-  // 🔢 Round to nearest 500 or 1,000 for clean figures (e.g. 125,000 instead of 124,783)
+  // 🔢 Round to nearest 500 or 1,000 for clean figures
   function roundToCleanPKR(num: number): number {
     if (num <= 0) return 0;
     if (num < 10000) return Math.round(num / 500) * 500;
@@ -89,6 +132,15 @@ export function CrmPricing() {
     setTimelines((prev) =>
       prev.map((item) => ({ ...item, pricePKR: roundToCleanPKR(item.priceUSD * rate) }))
     );
+  }
+
+  // 1-Click Reset to Recommended Easy Names
+  function loadRecommendedDefaults() {
+    if (!window.confirm('Reset all categories to recommended client-friendly names and prices?')) return;
+    setProjectTypes(DEFAULT_PROJECT_TYPES);
+    setScopes(DEFAULT_SCOPES);
+    setAddons(DEFAULT_ADDONS);
+    setTimelines(DEFAULT_TIMELINES);
   }
 
   // Save Everything to Supabase
@@ -122,7 +174,7 @@ export function CrmPricing() {
   }
 
   if (loading) {
-    return <div className="py-12 text-center text-xs text-chrome-500">Loading pricing data...</div>;
+    return <div className="py-12 text-center text-xs text-chrome-500 font-mono">Loading pricing data...</div>;
   }
 
   return (
@@ -131,15 +183,25 @@ export function CrmPricing() {
         <div>
           <h1 className="font-display text-2xl font-bold text-white">Live Pricing & Currency Manager</h1>
           <p className="text-xs text-chrome-500">
-            Control live prices shown in the website Cost Estimator. Updates apply in real-time.
+            Control live prices and service names shown in the website Cost Estimator. Updates apply in real-time.
           </p>
         </div>
 
-        {savedSuccess && (
-          <span className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400 animate-fade">
-            ✓ Live Prices Updated on Website!
-          </span>
-        )}
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={loadRecommendedDefaults}
+            className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-chrome-300 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            🔄 Load Easy Client-Friendly Defaults
+          </button>
+
+          {savedSuccess && (
+            <span className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400 animate-fade">
+              ✓ Live Prices Updated on Website!
+            </span>
+          )}
+        </div>
       </div>
 
       {/* 💱 Currency Exchange Rate Controller Card */}
@@ -187,32 +249,32 @@ export function CrmPricing() {
       <form onSubmit={handleSave} className="space-y-6">
         {/* Section 1: Project Architecture Types */}
         <PricingSection
-          title="1. Platform Architecture Services"
-          subtitle="Base price for different web application frameworks"
+          title="1. Website & Project Types"
+          subtitle="Base starting price for different categories"
           items={projectTypes}
           onUpdate={setProjectTypes}
         />
 
         {/* Section 2: Scopes */}
         <PricingSection
-          title="2. Project Scale & Views"
-          subtitle="Additional price by number of screens/views"
+          title="2. Project Scale & Page Views"
+          subtitle="Additional price depending on number of pages"
           items={scopes}
           onUpdate={setScopes}
         />
 
         {/* Section 3: Engineering Addons */}
         <PricingSection
-          title="3. Advanced Engineering Add-ons"
-          subtitle="Modular feature add-ons"
+          title="3. Extra Features & Tools"
+          subtitle="Modular add-on features (Admin panel, User login, SEO setup, Payments)"
           items={addons}
           onUpdate={setAddons}
         />
 
         {/* Section 4: Timelines */}
         <PricingSection
-          title="4. Delivery Sprint Timeline"
-          subtitle="Delivery speed pricing"
+          title="4. Delivery Timeline Options"
+          subtitle="Standard delivery vs Priority fast delivery"
           items={timelines}
           onUpdate={setTimelines}
         />
@@ -243,7 +305,7 @@ function PricingSection({
   items: PricingItem[];
   onUpdate: React.Dispatch<React.SetStateAction<PricingItem[]>>;
 }) {
-  const updateItem = (index: number, field: 'priceUSD' | 'pricePKR', value: number) => {
+  const updateItem = (index: number, field: keyof PricingItem, value: string | number) => {
     onUpdate((prev) => {
       const copy = [...prev];
       copy[index] = { ...copy[index], [field]: value };
@@ -262,14 +324,20 @@ function PricingSection({
         {items.map((item, index) => (
           <div
             key={item.id}
-            className="flex items-center justify-between rounded-2xl border border-white/5 bg-navy-950/60 p-4"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-white/5 bg-navy-950/60 p-4"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-lg">{item.icon || '✦'}</span>
-              <span className="text-xs font-semibold text-white">{item.name}</span>
+            <div className="flex items-center gap-2.5 flex-1 w-full sm:w-auto">
+              <span className="text-base shrink-0">{item.icon || '✦'}</span>
+              <input
+                type="text"
+                value={item.name}
+                onChange={(e) => updateItem(index, 'name', e.target.value)}
+                className="w-full bg-transparent text-xs font-semibold text-white focus:outline-none border-b border-transparent focus:border-energy-bright pb-0.5"
+                placeholder="Service Name"
+              />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
               <div className="flex items-center rounded-lg border border-white/10 bg-white/[0.02] px-2 py-1">
                 <span className="text-[10px] text-chrome-500 mr-1">$</span>
                 <input
