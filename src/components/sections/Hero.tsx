@@ -26,7 +26,7 @@ const PROJECTS: ProjectShowcase[] = [
     name: 'Real Space Properties',
     category: 'Real Estate Portal & Lead System',
     previewUrl: 'devsolesoft.com/projects/real-space',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=75&fm=webp',
     latency: '< 0.65s Page Load',
     turnaround: '2-3 Weeks Delivery',
     investment: 'PKR 180,000 / $650 USD',
@@ -38,7 +38,7 @@ const PROJECTS: ProjectShowcase[] = [
     name: 'Universal Quote Estimator',
     category: 'Instant Pricing Tool & PDF Generator',
     previewUrl: 'devsolesoft.com/tools/quote-estimator',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=75&fm=webp',
     latency: '< 0.52s Page Load',
     turnaround: '1-2 Weeks Delivery',
     investment: 'PKR 150,000 / $550 USD',
@@ -50,7 +50,7 @@ const PROJECTS: ProjectShowcase[] = [
     name: 'Nexus Online Shopping Store',
     category: 'E-Commerce Marketplace & Checkout',
     previewUrl: 'devsolesoft.com/stores/nexus-shop',
-    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=75&fm=webp',
     latency: '< 0.70s Page Load',
     turnaround: '2-3 Weeks Delivery',
     investment: 'PKR 150,000 / $550 USD',
@@ -62,7 +62,7 @@ const PROJECTS: ProjectShowcase[] = [
     name: 'Apex Business Admin Portal',
     category: 'Business Dashboard & Management',
     previewUrl: 'devsolesoft.com/apps/apex-admin',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=75&fm=webp',
     latency: '< 0.58s Page Load',
     turnaround: '3-4 Weeks Delivery',
     investment: 'PKR 210,000 / $750 USD',
@@ -354,13 +354,17 @@ export function Hero() {
                     </span>
                   </div>
 
-                  {/* Browser Screen Preview Frame */}
+                  {/* Browser Screen Preview Frame — OPTIMIZED FOR SUB-SECOND LCP */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-b-lg bg-slate-950">
                     <img
                       key={activeProject.id}
                       src={activeProject.image}
                       alt={activeProject.name}
                       loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      width={720}
+                      height={450}
                       className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-102"
                     />
 
@@ -506,7 +510,7 @@ export function Hero() {
                 >
                   <svg className={`h-3.5 w-3.5 ${auditRunning ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="23 4 23 10 17 10" />
-                    <polyline points="1 20 1 14 7 14" />
+                    <polyline points="12 20 1 14 7 14" />
                     <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
                   </svg>
                   <span>{auditRunning ? 'Testing Speed...' : 'Run Live Speed Test'}</span>

@@ -358,13 +358,15 @@ I want to discuss this project and get started.`;
 
             {/* Range Slider */}
             <div className="mt-5 rounded-xl border border-white/5 bg-white/[0.02] p-4">
-              <div className="flex justify-between items-center text-xs font-mono text-slate-300">
+              <label htmlFor="screenCountSlider" className="flex justify-between items-center text-xs font-mono text-slate-300">
                 <span>Page Count Slider:</span>
                 <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded">
                   {screenCount} {screenCount === 1 ? 'Page' : 'Pages'}
                 </span>
-              </div>
+              </label>
               <input
+                id="screenCountSlider"
+                aria-label="Project Page Count Slider"
                 type="range"
                 min="1"
                 max="25"

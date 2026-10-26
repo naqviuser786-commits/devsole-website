@@ -7333,106 +7333,6 @@ export function NotFound() {
 export default NotFound;
 </file>
 
-<file path="public/sitemap.xml">
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- 1. Homepage (Main Studio Showcase) -->
-  <url>
-    <loc>https://devsolesoft.com/</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://devsolesoft.com/images/devsole-logo-reference.png</image:loc>
-      <image:title>DEVSOLE Soft — High-Performance Full-Stack Web Development Studio</image:title>
-    </image:image>
-  </url>
-
-  <!-- 2. Services Page (Core Engineering Capabilities) -->
-  <url>
-    <loc>https://devsolesoft.com/services</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 3. Projects Page (Production Deployments & Case Studies) -->
-  <url>
-    <loc>https://devsolesoft.com/projects</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 4. Client Reviews Page (Verified Testimonials & Social Proof) -->
-  <url>
-    <loc>https://devsolesoft.com/reviews</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 5. Cost Estimator Page (Interactive Real-Time Pricing Calculator) -->
-  <url>
-    <loc>https://devsolesoft.com/estimator</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- 6. Technologies Page (Engineered Tech Stack & Architecture) -->
-  <url>
-    <loc>https://devsolesoft.com/technologies</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 7. Process Page (21-Day Agile Sprint Roadmap & SLAs) -->
-  <url>
-    <loc>https://devsolesoft.com/process</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 8. Technical Blog Page (Engineering Insights & Case Studies) -->
-  <url>
-    <loc>https://devsolesoft.com/blog</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 9. About Page (Company Identity, Origin & Philosophy) -->
-  <url>
-    <loc>https://devsolesoft.com/about</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 10. Team Page (Executive Leadership & Senior Engineers) -->
-  <url>
-    <loc>https://devsolesoft.com/team</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 11. Contact Page (Engineering Consultation & Project Inquiries) -->
-  <url>
-    <loc>https://devsolesoft.com/contact</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-</urlset>
-</file>
-
 <file path="src/components/layout/Footer.tsx">
 // FILE: src/components/layout/Footer.tsx
 import type { ReactNode } from 'react';
@@ -13658,6 +13558,106 @@ export const blogPosts = [
 
 <file path="tsconfig.tsbuildinfo">
 {"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/admin/adminapp.tsx","./src/admin/adminauthcontext.tsx","./src/admin/adminlayout.tsx","./src/admin/requireadminauth.tsx","./src/admin/pages/dashboard.tsx","./src/admin/pages/login.tsx","./src/admin/pages/messages.tsx","./src/admin/pages/projectform.tsx","./src/admin/pages/projectslist.tsx","./src/admin/pages/sitesettingspage.tsx","./src/admin/pages/sociallinkspage.tsx","./src/components/layout/footer.tsx","./src/components/layout/header.tsx","./src/components/layout/headerlogo.tsx","./src/components/layout/navigation.tsx","./src/components/sections/about.tsx","./src/components/sections/blog.tsx","./src/components/sections/contact.tsx","./src/components/sections/costestimator.tsx","./src/components/sections/faq.tsx","./src/components/sections/hero.tsx","./src/components/sections/process.tsx","./src/components/sections/projects.tsx","./src/components/sections/services.tsx","./src/components/sections/statsbar.tsx","./src/components/sections/team.tsx","./src/components/sections/technologies.tsx","./src/components/sections/testimonials.tsx","./src/components/sections/whydevsole.tsx","./src/components/ui/button.tsx","./src/components/ui/discoverymodal.tsx","./src/components/ui/errorboundary.tsx","./src/components/ui/sectionheading.tsx","./src/components/ui/soundtoggle.tsx","./src/components/ui/techmarquee.tsx","./src/components/ui/whatsappfloat.tsx","./src/crm/crmapp.tsx","./src/crm/crmauthcontext.tsx","./src/crm/crmlayout.tsx","./src/crm/requirecrmauth.tsx","./src/crm/pages/crmcustomers.tsx","./src/crm/pages/crmdashboard.tsx","./src/crm/pages/crmfollowups.tsx","./src/crm/pages/crmleads.tsx","./src/crm/pages/crmlogin.tsx","./src/crm/pages/crmportfolio.tsx","./src/crm/pages/crmpricing.tsx","./src/crm/pages/crmprojects.tsx","./src/crm/pages/crmreviews.tsx","./src/crm/pages/crmtasks.tsx","./src/crm/pages/crmteam.tsx","./src/data/sitedata.ts","./src/hooks/useapidata.ts","./src/hooks/usedevsolescrolltimeline.ts","./src/hooks/useperformancetier.ts","./src/hooks/usereducedmotion.ts","./src/lib/api.ts","./src/lib/gsapreveal.ts","./src/lib/lenis.ts","./src/lib/scrollprogress.ts","./src/lib/soundfx.ts","./src/lib/supabase.ts","./src/lib/webgl.ts","./src/pages/aboutpage.tsx","./src/pages/blogpage.tsx","./src/pages/contactpage.tsx","./src/pages/estimatorpage.tsx","./src/pages/home.tsx","./src/pages/notfound.tsx","./src/pages/processpage.tsx","./src/pages/projectspage.tsx","./src/pages/reviewspage.tsx","./src/pages/servicespage.tsx","./src/pages/teampage.tsx","./src/pages/technologiespage.tsx","./src/types/content.ts","./src/types/crm.ts"],"version":"5.9.3"}
+</file>
+
+<file path="public/sitemap.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- 1. Homepage (Main Studio Showcase) -->
+  <url>
+    <loc>https://devsolesoft.com/</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://devsolesoft.com/images/devsole-logo-reference.png</image:loc>
+      <image:title>DEVSOLE Soft — High-Performance Full-Stack Web Development Studio</image:title>
+    </image:image>
+  </url>
+
+  <!-- 2. Services Page (Core Engineering Capabilities) -->
+  <url>
+    <loc>https://devsolesoft.com/services</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 3. Projects Page (Production Deployments & Case Studies) -->
+  <url>
+    <loc>https://devsolesoft.com/projects</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. Client Reviews Page (Verified Testimonials & Social Proof) -->
+  <url>
+    <loc>https://devsolesoft.com/reviews</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 5. Cost Estimator Page (Interactive Real-Time Pricing Calculator) -->
+  <url>
+    <loc>https://devsolesoft.com/estimator</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 6. Technologies Page (Engineered Tech Stack & Architecture) -->
+  <url>
+    <loc>https://devsolesoft.com/technologies</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 7. Process Page (21-Day Agile Sprint Roadmap & SLAs) -->
+  <url>
+    <loc>https://devsolesoft.com/process</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 8. Technical Blog Page (Engineering Insights & Case Studies) -->
+  <url>
+    <loc>https://devsolesoft.com/blog</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 9. About Page (Company Identity, Origin & Philosophy) -->
+  <url>
+    <loc>https://devsolesoft.com/about</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 10. Team Page (Executive Leadership & Senior Engineers) -->
+  <url>
+    <loc>https://devsolesoft.com/team</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 11. Contact Page (Engineering Consultation & Project Inquiries) -->
+  <url>
+    <loc>https://devsolesoft.com/contact</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
 </file>
 
 <file path="src/components/sections/CostEstimator.tsx">

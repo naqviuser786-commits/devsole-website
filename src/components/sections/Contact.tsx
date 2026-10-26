@@ -32,7 +32,7 @@ export function Contact() {
     if (budget.includes('750') || budget.includes('210,000')) estValue = 950;
     if (budget.includes('1,250') || budget.includes('350,000')) estValue = 1500;
 
-    // 1. Dispatch Lead Directly into Supabase Cloud CRM (100% Preserved)
+    // 1. Dispatch Lead Directly into Supabase Cloud CRM
     try {
       const { data: newLead } = await supabase
         .from('leads')
@@ -63,7 +63,7 @@ export function Contact() {
       // CRM sync fallback
     }
 
-    // 2. Email Dispatch via FormSubmit Webhook (100% Preserved)
+    // 2. Email Dispatch via FormSubmit Webhook
     const payload = {
       _subject: `New Project Inquiry: ${name} (${service}) - DEVSOLE Soft`,
       _template: 'table',
@@ -230,23 +230,60 @@ Looking forward to discussing the project.`;
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-xs font-semibold text-slate-300">Your Full Name *</label>
-              <input name="clientName" required placeholder="e.g. Ali Khan / John Doe" className={inputClass} />
+              <label htmlFor="clientName" className="mb-1.5 block text-xs font-semibold text-slate-300">
+                Your Full Name *
+              </label>
+              <input
+                id="clientName"
+                name="clientName"
+                aria-label="Your Full Name"
+                required
+                placeholder="e.g. Ali Khan / John Doe"
+                className={inputClass}
+              />
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-semibold text-slate-300">Email Address *</label>
-              <input name="email" required type="email" placeholder="you@company.com" className={inputClass} />
+              <label htmlFor="email" className="mb-1.5 block text-xs font-semibold text-slate-300">
+                Email Address *
+              </label>
+              <input
+                id="email"
+                name="email"
+                aria-label="Email Address"
+                required
+                type="email"
+                placeholder="you@company.com"
+                className={inputClass}
+              />
             </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-xs font-semibold text-slate-300">WhatsApp / Phone Number *</label>
-              <input name="phone" required placeholder="+92 300 0000000 / +1..." className={inputClass} />
+              <label htmlFor="phone" className="mb-1.5 block text-xs font-semibold text-slate-300">
+                WhatsApp / Phone Number *
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                aria-label="WhatsApp or Phone Number"
+                required
+                placeholder="+92 300 0000000 / +1..."
+                className={inputClass}
+              />
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-semibold text-slate-300">Service Required *</label>
-              <select name="service" required className={inputClass} defaultValue="Web Development">
+              <label htmlFor="service" className="mb-1.5 block text-xs font-semibold text-slate-300">
+                Service Required *
+              </label>
+              <select
+                id="service"
+                name="service"
+                aria-label="Service Required"
+                required
+                className={inputClass}
+                defaultValue="Web Development"
+              >
                 <option value="Web Development" className="bg-[#0c101d] text-white">
                   Custom Website or Web App
                 </option>
@@ -270,8 +307,16 @@ Looking forward to discussing the project.`;
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs font-semibold text-slate-300">Estimated Budget Bracket</label>
-            <select name="budget" className={inputClass} defaultValue="PKR 125,000 - 210,000 ($450 - $750)">
+            <label htmlFor="budget" className="mb-1.5 block text-xs font-semibold text-slate-300">
+              Estimated Budget Bracket
+            </label>
+            <select
+              id="budget"
+              name="budget"
+              aria-label="Estimated Budget Bracket"
+              className={inputClass}
+              defaultValue="PKR 125,000 - 210,000 ($450 - $750)"
+            >
               <option value="PKR 125,000 - 210,000 ($450 - $750) - Starter Website" className="bg-[#0c101d] text-white">
                 PKR 125,000 - 210,000 ($450 - $750) — Starter Website
               </option>
@@ -285,9 +330,13 @@ Looking forward to discussing the project.`;
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs font-semibold text-slate-300">Tell Us About Your Project *</label>
+            <label htmlFor="message" className="mb-1.5 block text-xs font-semibold text-slate-300">
+              Tell Us About Your Project *
+            </label>
             <textarea
+              id="message"
               name="message"
+              aria-label="Project Details Description"
               required
               rows={4}
               placeholder="What does your business do, which pages or features do you need, and when do you want to launch..."

@@ -1,27 +1,29 @@
 // FILE: src/App.tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/ui/WhatsAppFloat';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import { Home } from '@/pages/Home';
-import { NotFound } from '@/pages/NotFound';
-import { AdminApp } from '@/admin/AdminApp';
-import { CrmApp } from '@/crm/CrmApp';
 import { initSmoothScroll } from '@/lib/lenis';
 
-// 🌐 All 10 Dedicated Google SEO Pages
-import { ServicesPage } from '@/pages/ServicesPage';
-import { AboutPage } from '@/pages/AboutPage';
-import { ProjectsPage } from '@/pages/ProjectsPage';
-import { ReviewsPage } from '@/pages/ReviewsPage';
-import { TechnologiesPage } from '@/pages/TechnologiesPage';
-import { ProcessPage } from '@/pages/ProcessPage';
-import { TeamPage } from '@/pages/TeamPage';
-import { EstimatorPage } from '@/pages/EstimatorPage';
-import { BlogPage } from '@/pages/BlogPage';
-import { ContactPage } from '@/pages/ContactPage';
+// ⚡ Lazy Loaded Admin & Cloud CRM (Heavy modules only downloaded when needed)
+const AdminApp = lazy(() => import('@/admin/AdminApp').then((m) => ({ default: m.AdminApp })));
+const CrmApp = lazy(() => import('@/crm/CrmApp').then((m) => ({ default: m.CrmApp })));
+
+// 🌐 10 Dedicated Google SEO Pages (Lazy Loaded on Demand)
+const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
+const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'));
+const ReviewsPage = lazy(() => import('@/pages/ReviewsPage'));
+const TechnologiesPage = lazy(() => import('@/pages/TechnologiesPage'));
+const ProcessPage = lazy(() => import('@/pages/ProcessPage'));
+const TeamPage = lazy(() => import('@/pages/TeamPage'));
+const EstimatorPage = lazy(() => import('@/pages/EstimatorPage'));
+const BlogPage = lazy(() => import('@/pages/BlogPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -108,18 +110,11 @@ function PublicSite() {
         className="pointer-events-none fixed inset-0 z-0 opacity-0 transition-opacity duration-300 will-change-transform"
       />
 
-      {/* 3. Architectural Dual-Tone Ambient Atmosphere (Top Cobalt + Middle Indigo + Bottom Emerald) */}
+      {/* 3. Architectural Dual-Tone Ambient Atmosphere */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-        {/* Soft Ambient Cobalt Wash (Top) */}
         <div className="absolute -top-40 left-1/2 h-[650px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-b from-blue-600/15 via-indigo-600/5 to-transparent blur-[160px]" />
-
-        {/* Ambient Indigo/Violet Glow (Mid-Right) */}
         <div className="absolute top-[40%] -right-48 h-[600px] w-[600px] rounded-full bg-indigo-600/[0.06] blur-[150px]" />
-
-        {/* Subtle Emerald Telemetry Ambient Wash (Bottom-Left) */}
         <div className="absolute bottom-20 -left-48 h-[550px] w-[550px] rounded-full bg-emerald-600/[0.04] blur-[140px]" />
-
-        {/* 1px Subtle Architectural Blueprint Grid Layer */}
         <div className="bg-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
@@ -127,25 +122,27 @@ function PublicSite() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <Header />
         <main className="flex-1 w-full">
-          <Routes>
-            {/* 1. Homepage */}
-            <Route path="/" element={<Home />} />
+          <Suspense fallback={<div className="min-h-screen bg-[#06080f]" />}>
+            <Routes>
+              {/* 1. Homepage (Statically imported for instant paint) */}
+              <Route path="/" element={<Home />} />
 
-            {/* 2. All 10 Dedicated Google SEO Pages */}
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/technologies" element={<TechnologiesPage />} />
-            <Route path="/process" element={<ProcessPage />} />
-            <Route path="/team" element={<TeamPage />} />
-            <Route path="/estimator" element={<EstimatorPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+              {/* 2. All 10 Dedicated Google SEO Pages */}
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/reviews" element={<ReviewsPage />} />
+              <Route path="/technologies" element={<TechnologiesPage />} />
+              <Route path="/process" element={<ProcessPage />} />
+              <Route path="/team" element={<TeamPage />} />
+              <Route path="/estimator" element={<EstimatorPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<ContactPage />} />
 
-            {/* 3. 404 Fallback */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              {/* 3. 404 Fallback */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>
@@ -161,16 +158,18 @@ export default function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          {/* ⚡ DEVSOLE Cloud CRM Route (Internal Use - 100% Untouched) */}
-          <Route path="/crm/*" element={<CrmApp />} />
+        <Suspense fallback={<div className="min-h-screen bg-[#06080f]" />}>
+          <Routes>
+            {/* ⚡ DEVSOLE Cloud CRM Route (Internal Use - 100% Untouched) */}
+            <Route path="/crm/*" element={<CrmApp />} />
 
-          {/* 🛡️ Website Admin Route (100% Untouched) */}
-          <Route path="/admin/*" element={<AdminApp />} />
+            {/* 🛡️ Website Admin Route (100% Untouched) */}
+            <Route path="/admin/*" element={<AdminApp />} />
 
-          {/* 🌐 Public Multi-Page SEO Client Website */}
-          <Route path="/*" element={<PublicSite />} />
-        </Routes>
+            {/* 🌐 Public Multi-Page SEO Client Website */}
+            <Route path="/*" element={<PublicSite />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ErrorBoundary>
   );
