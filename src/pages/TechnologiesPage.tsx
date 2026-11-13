@@ -1,28 +1,11 @@
 // FILE: src/pages/TechnologiesPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Technologies } from '@/components/sections/Technologies';
 import { WhyDevsole } from '@/components/sections/WhyDevsole';
 import { Contact } from '@/components/sections/Contact';
 
 export function TechnologiesPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Engineered Tech Stack & System Architecture — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Explore the battle-tested engineering stack behind DEVSOLE Soft: React, TypeScript, PHP 8.2, relational MySQL indexing, and global edge CDNs built for sub-second speeds.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/technologies');
-    }
-  }, []);
+  useSeo('/technologies');
 
   return (
     <div className="pt-24 sm:pt-28 min-h-screen">

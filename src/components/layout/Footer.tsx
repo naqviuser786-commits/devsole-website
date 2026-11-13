@@ -1,6 +1,7 @@
 // FILE: src/components/layout/Footer.tsx
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import seoData from '@/seo/seo-data.json';
 import { HeaderLogo } from './HeaderLogo';
 import { NAV_LINKS } from './Navigation';
 import { useApiData } from '@/hooks/useApiData';
@@ -149,6 +150,22 @@ export function Footer() {
                   className="text-xs sm:text-sm text-slate-400 transition-colors hover:text-blue-400 font-medium"
                 >
                   {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="mt-6 font-mono text-xs font-semibold uppercase tracking-wider text-white">
+            Services
+          </h3>
+          <ul className="mt-3.5 space-y-2">
+            {seoData.services.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  to={`/services/${s.slug}`}
+                  className="text-xs sm:text-sm text-slate-400 transition-colors hover:text-blue-400 font-medium"
+                >
+                  {s.name}
                 </Link>
               </li>
             ))}

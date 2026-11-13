@@ -1,28 +1,11 @@
 // FILE: src/pages/ProjectsPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Projects } from '@/components/sections/Projects';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Contact } from '@/components/sections/Contact';
 
 export function ProjectsPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Production Portfolio & Shipped Web Systems — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Explore live production web applications, specialized PropTech real estate platforms, and custom SaaS tools built by DEVSOLE Soft with verified sub-second latency.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/projects');
-    }
-  }, []);
+  useSeo('/projects');
 
   return (
     <div className="relative pt-24 sm:pt-28 min-h-screen overflow-hidden">

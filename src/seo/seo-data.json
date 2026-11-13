@@ -1,0 +1,419 @@
+{
+  "site": {
+    "name": "DEVSOLE Soft",
+    "url": "https://devsolesoft.com",
+    "city": "Lahore",
+    "country": "Pakistan",
+    "phone": "+92 370 6492398",
+    "whatsapp": "923706492398",
+    "email": "devsole.official@gmail.com",
+    "founder": "Aoun Abbas",
+    "instagram": "https://www.instagram.com/devsole.tech",
+    "linkedin": "https://www.linkedin.com/company/devsoleofficial/",
+    "github": "https://github.com/naqviuser786-commits"
+  },
+  "pages": [
+    {
+      "path": "/",
+      "label": "Home",
+      "title": "Web Development & SEO Company in Lahore | DEVSOLE Soft",
+      "description": "DEVSOLE Soft is a web development company in Lahore, Pakistan. We build fast business websites, online stores and real estate portals, with SEO and full code ownership.",
+      "h1": "Websites, SEO & Custom Software. Built to Turn Visitors into Clients.",
+      "intro": [
+        "DEVSOLE Soft is an independent web development and software company based in Lahore, Pakistan. We build fast business websites, online stores, real estate portals and custom web tools for clients in Pakistan and worldwide.",
+        "Every project is custom-built, mobile-friendly and handed over with complete source code ownership. Inquiries from your website go straight to your WhatsApp and email."
+      ],
+      "blocks": ["services", "why", "contact"]
+    },
+    {
+      "path": "/services",
+      "label": "Services",
+      "title": "Web Development, SEO & E-Commerce Services | DEVSOLE Soft",
+      "description": "Services from DEVSOLE Soft, Lahore: custom web development, SEO, e-commerce stores, real estate portals, price calculators and website redesign. Fixed timelines.",
+      "h1": "Websites, SEO & Custom Software Built for Real Growth",
+      "intro": [
+        "From fast business websites and search engine optimization to online stores and custom business software, DEVSOLE Soft builds clean, reliable digital solutions for growing businesses.",
+        "Choose a service below to see what is included, how long it takes and who it is for."
+      ],
+      "blocks": ["services", "contact"]
+    },
+    {
+      "path": "/projects",
+      "label": "Projects",
+      "title": "Our Work: Websites, Online Stores & Portals | DEVSOLE Soft",
+      "description": "Browse websites, e-commerce stores, restaurant sites and real estate portals built by DEVSOLE Soft in Lahore. See features, technologies and delivery details.",
+      "h1": "Production Work & Live Case Studies",
+      "intro": [
+        "A selection of websites, online stores, restaurant web apps and real estate portals designed and developed by DEVSOLE Soft.",
+        "Each project lists the features we built and the technologies used, including HTML5, Tailwind CSS, JavaScript, PHP and MySQL."
+      ],
+      "blocks": ["services", "contact"]
+    },
+    {
+      "path": "/reviews",
+      "label": "Reviews",
+      "title": "Client Reviews & Testimonials | DEVSOLE Soft",
+      "description": "Read what clients say about working with DEVSOLE Soft on their websites, online stores and web portals: communication, delivery timelines and results.",
+      "h1": "Verified Reviews & Production Track Record",
+      "intro": [
+        "Feedback from business owners who built their websites, online stores and web portals with DEVSOLE Soft.",
+        "Clients talk directly to the lead developer and review a private preview link before each milestone."
+      ],
+      "blocks": ["contact"]
+    },
+    {
+      "path": "/estimator",
+      "label": "Cost Estimator",
+      "title": "Website Cost Calculator in PKR & USD | DEVSOLE Soft",
+      "description": "Estimate the cost of your website, online store or web portal in PKR and USD. Pick the project type, pages and features, then send the estimate on WhatsApp.",
+      "h1": "Interactive Web Development Cost Calculator",
+      "intro": [
+        "Use the calculator to estimate the cost of a website, online store, real estate portal or custom web application in Pakistani Rupees or US Dollars.",
+        "Select the project type, number of pages, extra features and delivery timeline. You can send the result to us on WhatsApp for a confirmed quote."
+      ],
+      "blocks": ["services", "contact"]
+    },
+    {
+      "path": "/technologies",
+      "label": "Technologies",
+      "title": "Our Tech Stack: React, PHP, MySQL & Tailwind | DEVSOLE Soft",
+      "description": "The technologies DEVSOLE Soft uses to build fast websites and web apps: React, TypeScript, Tailwind CSS, PHP 8.2, MySQL and cloud hosting with CDN delivery.",
+      "h1": "Battle-Tested, High-Velocity Tech Stack",
+      "intro": [
+        "We build with a focused set of proven technologies: React and TypeScript on the front end, Tailwind CSS for styling, PHP 8.2 and MySQL on the back end, and CDN-backed cloud hosting.",
+        "Using the same stack on every project keeps our websites fast, secure and easy for any developer to maintain after handover."
+      ],
+      "blocks": ["contact"]
+    },
+    {
+      "path": "/process",
+      "label": "Process",
+      "title": "Our 21-Day Website Development Process | DEVSOLE Soft",
+      "description": "How DEVSOLE Soft delivers a website in about 21 days: planning, design, development with private preview links, then launch and full code handover.",
+      "h1": "Transparent 21-Day Agile Sprint Roadmap",
+      "intro": [
+        "Most DEVSOLE Soft projects are delivered in two to three weeks through four clear stages: planning, design, development and launch.",
+        "You get a private preview link to test on mobile and desktop before each milestone payment, and all files, database and logins are handed over at launch."
+      ],
+      "blocks": ["contact"]
+    },
+    {
+      "path": "/blog",
+      "label": "Blog",
+      "title": "Web Development & SEO Blog | DEVSOLE Soft",
+      "description": "Articles from the DEVSOLE Soft team on web development, website speed, SEO, e-commerce and real estate portals for businesses in Pakistan and abroad.",
+      "h1": "Engineering Insights & System Case Studies",
+      "intro": [
+        "Practical articles on building fast websites, improving search visibility, running online stores and planning web projects, written by the DEVSOLE Soft team."
+      ],
+      "blocks": ["services", "contact"]
+    },
+    {
+      "path": "/about",
+      "label": "About",
+      "title": "About DEVSOLE Soft | Web Development Team in Lahore",
+      "description": "DEVSOLE Soft is an independent web development team in Lahore led by founder Aoun Abbas. Learn what the name means, how we work and what we commit to.",
+      "h1": "What is DEVSOLE Soft?",
+      "intro": [
+        "DEVSOLE Soft stands for complete software solutions from one trusted team: Dev for modern development, and Sole for your single, dedicated tech partner.",
+        "We are an independent web development and software company based in Lahore, helping businesses in Pakistan and worldwide build fast websites, online stores and custom software. You communicate directly with founder and lead developer Aoun Abbas."
+      ],
+      "blocks": ["why", "team", "contact"]
+    },
+    {
+      "path": "/team",
+      "label": "Team",
+      "title": "Meet the Team | DEVSOLE Soft, Lahore",
+      "description": "Meet the people behind DEVSOLE Soft: founder and lead architect Aoun Abbas, frontend lead Amina Mazhar and backend lead Syeda Momna.",
+      "h1": "Executive Leadership & Full-Stack Engineers",
+      "intro": [
+        "DEVSOLE Soft is a small senior team. The people who plan your project are the people who build it."
+      ],
+      "blocks": ["team", "contact"]
+    },
+    {
+      "path": "/contact",
+      "label": "Contact",
+      "title": "Contact DEVSOLE Soft | Start Your Website Project",
+      "description": "Contact DEVSOLE Soft in Lahore to discuss a website, online store or web portal. Message us on WhatsApp at +92 370 6492398 or email devsole.official@gmail.com.",
+      "h1": "Direct Engineering Consultation & Project Inquiries",
+      "intro": [
+        "Tell us about your project and we will reply with a clear plan, timeline and price. The fastest way to reach us is WhatsApp."
+      ],
+      "blocks": ["contact"]
+    }
+  ],
+  "why": [
+    { "title": "Fast loading on mobile", "text": "Sites are custom-built without heavy page-builder plugins so they open quickly on 4G phones." },
+    { "title": "100% code and asset ownership", "text": "All source code, database and account logins are transferred to you at launch. No platform lock-in fees." },
+    { "title": "Direct WhatsApp and email leads", "text": "Customer inquiries from your website reach your WhatsApp and email within seconds." },
+    { "title": "Preview before you pay", "text": "You test a private preview link on mobile and desktop before releasing each milestone payment." }
+  ],
+  "team": [
+    { "name": "Aoun Abbas", "role": "Founder & Lead Software Architect", "text": "Client consultations, system architecture, full-stack development and project delivery." },
+    { "name": "Amina Mazhar", "role": "Lead Frontend Developer & UI/UX Designer", "text": "Mobile-friendly web design, clean interfaces and conversion-focused layouts." },
+    { "name": "Syeda Momna", "role": "Lead Backend Developer & Database Engineer", "text": "Server logic, database design, form data pipelines and automated business systems." }
+  ],
+  "services": [
+    {
+      "slug": "web-development",
+      "name": "Custom Web Development",
+      "short": "Custom-built business websites and web applications that load fast and work on every device.",
+      "title": "Custom Web Development Company in Lahore | DEVSOLE Soft",
+      "description": "Custom website and web application development in Lahore, Pakistan. Mobile-first, fast-loading, built from scratch and delivered in 2-3 weeks with full code ownership.",
+      "h1": "Custom Web Development in Lahore, Pakistan",
+      "intro": [
+        "DEVSOLE Soft builds custom business websites and web applications for companies in Lahore, across Pakistan and abroad. Every site is written from scratch, without a page-builder theme, so it stays light, fast and easy to maintain.",
+        "A typical business website is delivered in two to three weeks, and you receive the complete source code, database and logins at launch."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Custom design that matches your brand, built mobile-first and fully responsive",
+            "Contact and inquiry forms that send leads to your WhatsApp and email",
+            "On-page SEO basics: page titles, descriptions, headings, sitemap and Google Search Console setup",
+            "An admin panel where needed, so you can update content yourself",
+            "Free 30-day support after launch"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "This service suits businesses that have outgrown a slow template site, or are launching online for the first time and want something they fully own: clinics, restaurants, schools, agencies, manufacturers, consultants and local service companies.",
+            "We have built restaurant ordering sites such as Bashi Food Point and Greeno Bite, along with company websites and web apps for clients in several industries."
+          ]
+        },
+        {
+          "heading": "How we build it",
+          "paragraphs": [
+            "We use HTML5, Tailwind CSS, JavaScript and React on the front end, and PHP with MySQL on the back end. You get a private preview link to test on your own phone before each milestone payment, and you talk directly to the lead developer throughout."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "How long does a custom website take?", "a": "Most business websites take two to three weeks from the approved plan to launch. Larger web applications are planned in fixed stages with a timeline agreed up front." },
+        { "q": "Will I own the website?", "a": "Yes. All source code, the database and every account login are handed over to you when the project is complete." },
+        { "q": "How much does a website cost?", "a": "It depends on the number of pages and features. Use the cost estimator on this site for an instant figure in PKR or USD, then message us for a confirmed quote." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I am interested in Web Development for my business."
+    },
+    {
+      "slug": "seo-services",
+      "name": "SEO & Google Search Ranking",
+      "short": "On-page, technical and local SEO so customers can find your business on Google.",
+      "title": "SEO Services in Lahore: On-Page & Local SEO | DEVSOLE Soft",
+      "description": "SEO services from DEVSOLE Soft, Lahore: technical fixes, on-page optimization, page speed, Google Search Console and Google Business Profile setup for local search.",
+      "h1": "SEO Services in Lahore for Google Search & Maps",
+      "intro": [
+        "DEVSOLE Soft helps businesses in Lahore and across Pakistan become easier to find on Google. Because we are developers, we fix SEO problems in the website code itself: speed, structure, page titles and structured data.",
+        "SEO takes time and no one can honestly guarantee a specific position. What we do is remove the technical barriers, target the right search terms and set up the tools so you can measure progress."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Technical SEO audit: crawling, indexing, canonical tags, sitemap and robots.txt",
+            "Keyword research for your services and city",
+            "On-page optimization of titles, descriptions, headings and internal links",
+            "Page speed and Core Web Vitals improvements",
+            "Schema markup for your business, services and articles",
+            "Google Search Console setup and sitemap submission",
+            "Google Business Profile setup for Google Maps and local search"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Local businesses that want to appear when nearby customers search for their service, and companies whose existing website looks fine but gets little traffic from search."
+          ]
+        },
+        {
+          "heading": "How we measure results",
+          "paragraphs": [
+            "We track clicks, impressions and search terms in Google Search Console, and calls and direction requests in Google Business Profile. You see the same reports we do."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "How long does SEO take to show results?", "a": "Technical fixes can be picked up within weeks, but ranking for competitive search terms usually takes several months of consistent work." },
+        { "q": "Can you guarantee the first position on Google?", "a": "No, and no honest provider can. Rankings depend on competition and on Google. We commit to the work, the reporting and steady improvement." },
+        { "q": "Do you do SEO for websites you did not build?", "a": "Yes. We audit the existing site first and tell you what can be fixed in place and what would need rebuilding." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I want to improve my website's ranking on Google with SEO."
+    },
+    {
+      "slug": "ecommerce-development",
+      "name": "E-Commerce Store Development",
+      "short": "Fast online stores with a simple checkout, card payments, Cash on Delivery and WhatsApp order alerts.",
+      "title": "E-Commerce Website Development in Pakistan | DEVSOLE Soft",
+      "description": "Custom online store development in Pakistan: product catalog, slide-out cart, card payments, Cash on Delivery, WhatsApp order alerts and an easy admin panel.",
+      "h1": "E-Commerce Website Development in Pakistan",
+      "intro": [
+        "DEVSOLE Soft builds custom online stores for brands in Pakistan and abroad. Each store has a clean product catalog, a quick slide-out cart and a short checkout that works well on mobile.",
+        "Stores are usually delivered in two to three weeks, and you own the code, the database and all customer and order data."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Product catalog with categories, filters and detailed product pages",
+            "Slide-out shopping cart and discount coupon codes",
+            "Payment options: credit and debit cards, bank transfer and Cash on Delivery",
+            "Instant order alerts on WhatsApp for you and your team",
+            "Admin panel to add products, change prices and manage orders",
+            "Product schema markup and SEO-friendly URLs"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Retailers and brands selling cosmetics, perfume, clothing, food or any physical product who want their own store without paying monthly platform fees.",
+            "Stores we have built include Beauty Store Luxury, a cosmetics and skincare storefront, and FF Perfume, a fragrance store."
+          ]
+        },
+        {
+          "heading": "Why a custom store",
+          "paragraphs": [
+            "A custom-built store carries only the features you use, so pages stay light. There are no plugin conflicts to manage, and no recurring platform subscription."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "Can customers pay with Cash on Delivery?", "a": "Yes. Cash on Delivery, card payments and bank transfer can all be offered at checkout." },
+        { "q": "Can I add products myself?", "a": "Yes. The admin panel lets you add and edit products, prices, stock and images without a developer." },
+        { "q": "Do you charge monthly fees?", "a": "No platform fee. You pay for the build, and your own hosting and domain. Ongoing maintenance is optional." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I want to build an E-Commerce online store."
+    },
+    {
+      "slug": "real-estate-portal-development",
+      "name": "Real Estate & Business Portals",
+      "short": "Property portals and business dashboards with search filters, galleries and direct agent contact.",
+      "title": "Real Estate Website & Portal Development | DEVSOLE Soft",
+      "description": "Real estate website and property portal development in Pakistan: search by city and price, photo galleries, WhatsApp agent buttons and an admin panel for listings.",
+      "h1": "Real Estate Website & Property Portal Development",
+      "intro": [
+        "DEVSOLE Soft builds property portals for real estate agencies and developers in Pakistan. Buyers can search by city, property type and price, view photo galleries and contact the agent on WhatsApp in one tap.",
+        "We also build custom business portals: customer management dashboards, booking platforms and internal admin systems."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Property search with filters for city, type, size and price",
+            "Listing pages with photo galleries and location maps",
+            "Direct WhatsApp and call buttons for each agent",
+            "Inquiry forms that send leads to your WhatsApp and email",
+            "Admin panel to add, edit and remove listings",
+            "Mobile-first design for buyers browsing on their phones"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Real estate agencies, property dealers and housing projects that want their own listing site instead of relying only on third-party marketplaces.",
+            "Mian Real Estate is one example: a property listing and agency web application for buying, selling and leasing, built with HTML5, Tailwind CSS, JavaScript and PHP."
+          ]
+        },
+        {
+          "heading": "Timeline and cost",
+          "paragraphs": [
+            "A standard property portal takes two to three weeks. As a guide, a portal with search filters, galleries and WhatsApp agent buttons is estimated at around PKR 180,000 (about USD 650). Use the cost estimator for your own requirements."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "Can my staff add listings without a developer?", "a": "Yes. The admin panel is built for non-technical staff to add and edit properties, photos and prices." },
+        { "q": "Can you build portals for other industries?", "a": "Yes. We build booking platforms, customer dashboards and internal business portals using the same approach." },
+        { "q": "Where do buyer inquiries go?", "a": "Straight to the WhatsApp number and email address you choose, within seconds of the buyer sending them." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I want to build a Real Estate Portal or Business Dashboard."
+    },
+    {
+      "slug": "custom-calculators-automation",
+      "name": "Custom Calculators & Business Tools",
+      "short": "Price calculators, PDF quote generators and web tools that save hours of manual sales work.",
+      "title": "Price Calculators & Quote Tools for Websites | DEVSOLE Soft",
+      "description": "Custom price calculators, instant quote tools and PDF proposal generators for your website, with PKR and USD support and leads sent to WhatsApp. Built in 1-2 weeks.",
+      "h1": "Custom Price Calculators & Business Automation Tools",
+      "intro": [
+        "DEVSOLE Soft builds interactive calculators and quote tools that let your customers price a job themselves, then send the result to you as a ready lead.",
+        "These tools are usually delivered in one to two weeks and can be added to an existing website or built as a standalone page."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Live price calculator based on your own rates and options",
+            "Branded PDF quote or proposal the customer can download instantly",
+            "Multi-currency support for PKR and USD",
+            "Lead capture: each estimate is sent to your WhatsApp and email",
+            "Optional link to your CRM or admin dashboard"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Service businesses that quote the same kind of job many times: construction and renovation, printing, solar, events, software and agencies. A calculator answers the price question immediately and filters out inquiries that do not fit your budget range."
+          ]
+        },
+        {
+          "heading": "See one working",
+          "paragraphs": [
+            "The cost estimator on this website is a tool of this kind. Choose a project type, pages and features, and it calculates a figure you can send to us on WhatsApp."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "Can it be added to my existing website?", "a": "Usually yes. We can embed the tool in your current site or host it on its own page." },
+        { "q": "Can I change the prices later?", "a": "Yes. Rates and options are editable, so you can update pricing without rebuilding the tool." },
+        { "q": "How long does it take?", "a": "Most calculators and quote tools are delivered in one to two weeks." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I am interested in a Custom Price Calculator or PDF Tool."
+    },
+    {
+      "slug": "ui-ux-design-website-redesign",
+      "name": "UI/UX Design & Website Redesign",
+      "short": "Redesign an outdated website into a clean, modern, mobile-first experience.",
+      "title": "UI/UX Design & Website Redesign Services | DEVSOLE Soft",
+      "description": "Website redesign and UI/UX design from DEVSOLE Soft, Lahore. Turn an outdated, slow site into a clean, modern, mobile-first design in 1-2 weeks.",
+      "h1": "UI/UX Design & Website Redesign Services",
+      "intro": [
+        "DEVSOLE Soft redesigns outdated or slow websites into clean, modern interfaces that are easy to use on a phone and make a strong first impression.",
+        "A redesign is usually delivered in one to two weeks. We keep your existing content and search-friendly URLs wherever possible so you do not lose the traffic you already have."
+      ],
+      "sections": [
+        {
+          "heading": "What is included",
+          "bullets": [
+            "Review of your current site: what confuses visitors and what slows it down",
+            "New visual design in light or dark style, matched to your brand",
+            "Clear navigation for mobile and desktop",
+            "Call-to-action buttons placed where visitors make decisions",
+            "Touch-friendly layout tested on real phones",
+            "Redirects from old URLs to new ones where pages change"
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Businesses whose website no longer reflects the quality of their work, looks broken on mobile, or was built on a template that has become slow and hard to update."
+          ]
+        },
+        {
+          "heading": "How we work",
+          "paragraphs": [
+            "We design directly in code using Tailwind CSS, so what you approve in the preview link is exactly what goes live. You own the finished design and all source files."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "Will a redesign hurt my Google ranking?", "a": "It should not if it is done carefully. We keep URLs and content where we can and set up redirects for anything that moves." },
+        { "q": "Can you redesign without rebuilding everything?", "a": "Sometimes. If the existing code is sound we restyle it. If it is a slow template, rebuilding is usually faster and cleaner." },
+        { "q": "How long does a redesign take?", "a": "Typically one to two weeks, depending on the number of pages." }
+      ],
+      "whatsappText": "Hi DEVSOLE Soft! I want to redesign my website with a modern UI/UX."
+    }
+  ]
+}

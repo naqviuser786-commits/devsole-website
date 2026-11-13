@@ -1,27 +1,10 @@
 // FILE: src/pages/ReviewsPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Contact } from '@/components/sections/Contact';
 
 export function ReviewsPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Client Reviews & Verified Social Proof — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Read verified 5-star client testimonials, production delivery feedback, and project outcomes from founders who built web systems with DEVSOLE Soft.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/reviews');
-    }
-  }, []);
+  useSeo('/reviews');
 
   return (
     <div className="pt-24 sm:pt-28 min-h-screen">

@@ -1,27 +1,10 @@
 // FILE: src/pages/ContactPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Contact } from '@/components/sections/Contact';
 import { FAQ } from '@/components/sections/FAQ';
 
 export function ContactPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Contact Engineering Desk & Start a Project — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Get in touch with the DEVSOLE Soft lead engineering desk. Submit your project requirements, schedule a direct WhatsApp founder consultation, or request a technical quote.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/contact');
-    }
-  }, []);
+  useSeo('/contact');
 
   return (
     <div className="relative pt-24 sm:pt-28 min-h-screen overflow-hidden">

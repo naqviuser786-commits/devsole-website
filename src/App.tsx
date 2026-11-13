@@ -14,6 +14,7 @@ const CrmApp = lazy(() => import('@/crm/CrmApp').then((m) => ({ default: m.CrmAp
 
 // 🌐 10 Dedicated Google SEO Pages (Lazy Loaded on Demand)
 const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
+const ServiceDetailPage = lazy(() => import('@/pages/ServiceDetailPage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'));
 const ReviewsPage = lazy(() => import('@/pages/ReviewsPage'));
@@ -130,6 +131,7 @@ function PublicSite() {
               {/* 2. All 10 Dedicated Google SEO Pages */}
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:slug" element={<ServiceDetailPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/reviews" element={<ReviewsPage />} />
               <Route path="/technologies" element={<TechnologiesPage />} />

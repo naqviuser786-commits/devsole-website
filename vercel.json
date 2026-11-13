@@ -1,8 +1,21 @@
 {
+  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/admin",
+      "destination": "/_shell.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/_shell.html"
+    },
+    {
+      "source": "/crm",
+      "destination": "/_shell.html"
+    },
+    {
+      "source": "/crm/:path*",
+      "destination": "/_shell.html"
     }
   ],
   "headers": [

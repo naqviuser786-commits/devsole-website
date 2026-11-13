@@ -1,27 +1,10 @@
 // FILE: src/pages/TeamPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Team } from '@/components/sections/Team';
 import { Contact } from '@/components/sections/Contact';
 
 export function TeamPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Leadership & Senior Engineering Team — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Meet the engineering leadership and senior full-stack architects behind DEVSOLE Soft, led by founder Aoun Abbas. Direct technical leadership on every client sprint.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/team');
-    }
-  }, []);
+  useSeo('/team');
 
   return (
     <div className="pt-24 sm:pt-28 min-h-screen">

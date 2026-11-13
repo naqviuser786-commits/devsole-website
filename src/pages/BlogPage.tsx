@@ -1,27 +1,10 @@
 // FILE: src/pages/BlogPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Blog } from '@/components/sections/Blog';
 import { Contact } from '@/components/sections/Contact';
 
 export function BlogPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Engineering Insights & Technical Case Studies — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Deep dives into full-stack web engineering, PropTech innovations, database query indexing, and automated SaaS calculators written by the DEVSOLE Soft core team.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/blog');
-    }
-  }, []);
+  useSeo('/blog');
 
   return (
     <div className="relative pt-24 sm:pt-28 min-h-screen overflow-hidden">

@@ -1,3 +1,4 @@
+import { useSeo } from '@/seo/useSeo';
 import { Hero } from '@/components/sections/Hero';
 import { StatsBar } from '@/components/sections/StatsBar';
 import { TechMarquee } from '@/components/ui/TechMarquee';
@@ -15,6 +16,8 @@ import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
 
 export function Home() {
+  useSeo('/');
+
   return (
     <>
       <Hero />

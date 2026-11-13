@@ -1,28 +1,11 @@
 // FILE: src/pages/EstimatorPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { CostEstimator } from '@/components/sections/CostEstimator';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
 
 export function EstimatorPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Interactive Web Development Cost Estimator — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Calculate your custom web application, PropTech portal, or SaaS development cost in real time with our live multi-currency (USD & PKR) estimator engine.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/estimator');
-    }
-  }, []);
+  useSeo('/estimator');
 
   return (
     <div className="pt-24 sm:pt-28 min-h-screen">

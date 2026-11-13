@@ -1,28 +1,11 @@
 // FILE: src/pages/ProcessPage.tsx
-import { useEffect } from 'react';
+import { useSeo } from '@/seo/useSeo';
 import { Process } from '@/components/sections/Process';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
 
 export function ProcessPage() {
-  useEffect(() => {
-    // 1. Google Search Title & Meta Tags Optimization
-    document.title = 'Agile 21-Day Sprint Process & Delivery Roadmap — DEVSOLE Soft';
-    
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute(
-        'content',
-        'Discover our transparent 4-stage, 21-day agile web engineering process. From technical architecture blueprints to private staging reviews and live cloud handovers.'
-      );
-    }
-
-    // 2. Canonical URL update
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', 'https://devsolesoft.com/process');
-    }
-  }, []);
+  useSeo('/process');
 
   return (
     <div className="pt-24 sm:pt-28 min-h-screen">
