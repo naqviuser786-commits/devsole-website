@@ -98,7 +98,7 @@ const blocks = {
     `${h2('Contact')}\n<p>${esc(site.name)}, ${esc(site.city)}, ${esc(site.country)}. WhatsApp and phone: ${link(
       `https://wa.me/${site.whatsapp}`,
       site.phone,
-    )}. Email: ${link(`mailto:${site.email}`, site.email)}.</p>`,
+    )}. Email: ${link(`mailto:${site.email}`, site.email)}. ${link(site.googleProfile, 'Read our reviews on Google')}.</p>`,
 };
 
 function siteNav() {

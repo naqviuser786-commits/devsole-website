@@ -210,6 +210,17 @@ export function Footer() {
               </svg>
               <span>{address}</span>
             </li>
+            <li>
+              <a
+                href={seoData.site.googleProfile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition-colors hover:text-blue-400 font-medium text-slate-300"
+              >
+                <span aria-hidden="true" className="w-4 text-center text-amber-400">★</span>
+                <span>Reviews on Google</span>
+              </a>
+            </li>
           </ul>
         </div>
 
