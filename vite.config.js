@@ -11,6 +11,9 @@ export default defineConfig({
     },
     build: {
         target: 'es2020',
+        // Not 'assets': that path was once served with a one-year immutable cache
+        // even for 404 responses, so some browsers hold broken copies of its URLs.
+        assetsDir: 'static',
         cssCodeSplit: true,
         chunkSizeWarningLimit: 600,
         rollupOptions: {
