@@ -13,3 +13,10 @@ createRoot(rootEl).render(
     <App />
   </StrictMode>,
 );
+
+// The app started, so the one-time start-up reload (see index.html) may be used again later.
+try {
+  sessionStorage.removeItem('devsole_boot_retry');
+} catch {
+  // Storage blocked: nothing to clear.
+}

@@ -177,6 +177,59 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       />
     </noscript>
+
+    <!--
+      Start-up guard. Every page ships plain readable text inside #root for search
+      engines. Visitors with JavaScript must not see that text page while the app
+      loads, so it is hidden and a small loader is shown instead. If the app cannot
+      start (blocked or failed script), the page reloads once; if it still cannot
+      start, the readable text is shown so the visitor is never left with nothing.
+    -->
+    <style>
+      html.js [data-seo-fallback] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      [data-boot-loader] { display: none; }
+      html.js [data-boot-loader] { display: flex; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; gap: 14px; background: #06080f; color: #94a3b8; font: 500 13px system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      [data-boot-loader] i { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.12); border-top-color: #3b82f6; animation: boot-spin 0.8s linear infinite; }
+      @keyframes boot-spin { to { transform: rotate(360deg); } }
+    </style>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var KEY = 'devsole_boot_retry';
+        function started() { return !document.querySelector('[data-seo-fallback]'); }
+        function showText() { if (!started()) root.classList.remove('js'); }
+        function recover() {
+          if (started()) return;
+          try {
+            if (!sessionStorage.getItem(KEY)) {
+              sessionStorage.setItem(KEY, '1');
+              location.reload();
+              return;
+            }
+          } catch (e) {}
+          showText();
+        }
+        // A script file failed to download, or the app crashed before it could start.
+        // (Failed images and other media are ignored.)
+        window.addEventListener('error', function (e) {
+          var el = e.target;
+          if (el && el.tagName && el.tagName !== 'SCRIPT' && el.tagName !== 'LINK') return;
+          recover();
+        }, true);
+        // A page chunk from an older deployment is gone: reload to get the new version.
+        window.addEventListener('vite:preloadError', function (e) {
+          try {
+            if (sessionStorage.getItem(KEY)) return;
+            sessionStorage.setItem(KEY, '1');
+          } catch (err) { return; }
+          e.preventDefault();
+          location.reload();
+        });
+        // Very slow connection: show the readable text rather than an endless loader.
+        setTimeout(showText, 15000);
+      })();
+    </script>
   </head>
   <body class="bg-[#06080f] text-slate-100 antialiased selection:bg-blue-600/30 selection:text-white">
     <div id="root"></div>

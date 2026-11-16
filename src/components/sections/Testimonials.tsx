@@ -1,7 +1,7 @@
 // FILE: src/components/sections/Testimonials.tsx
 import { useState, useEffect, useMemo, type FormEvent } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabaseLazy';
 import { soundFX } from '@/lib/soundFx';
 
 export interface ReviewItem {
@@ -61,7 +61,7 @@ export function Testimonials() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (await getSupabase())
           .from('reviews')
           .select('*')
           .order('created_at', { ascending: false });
@@ -142,7 +142,7 @@ export function Testimonials() {
     };
 
     try {
-      await supabase.from('reviews').insert({
+      await (await getSupabase()).from('reviews').insert({
         client_name: newReviewItem.clientName,
         role: newReviewItem.role,
         company: newReviewItem.company,
@@ -152,7 +152,7 @@ export function Testimonials() {
         avatar: newReviewItem.avatar,
       });
 
-      await supabase.from('crm_activities').insert({
+      await (await getSupabase()).from('crm_activities').insert({
         entity_type: 'review',
         action: `New Client Review from ${newReviewItem.clientName} (${newReviewItem.rating} Stars)`,
       });

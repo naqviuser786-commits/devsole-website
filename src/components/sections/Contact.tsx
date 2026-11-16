@@ -2,7 +2,7 @@
 import { useState, type FormEvent } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { siteSettings } from '@/data/siteData';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabaseLazy';
 import { soundFX } from '@/lib/soundFx';
 
 const inputClass =
@@ -34,7 +34,7 @@ export function Contact() {
 
     // 1. Dispatch Lead Directly into Supabase Cloud CRM
     try {
-      const { data: newLead } = await supabase
+      const { data: newLead } = await (await getSupabase())
         .from('leads')
         .insert({
           name,
@@ -53,7 +53,7 @@ export function Contact() {
         .single();
 
       if (newLead) {
-        await supabase.from('crm_activities').insert({
+        await (await getSupabase()).from('crm_activities').insert({
           entity_type: 'lead',
           entity_id: newLead.id,
           action: `New Project Inquiry: ${name} (${service})`,

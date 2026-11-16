@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { projects as staticProjects, siteSettings } from '@/data/siteData';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabaseLazy';
 import { soundFX } from '@/lib/soundFx';
 
 interface ProjectType {
@@ -37,7 +37,7 @@ export function Projects() {
   useEffect(() => {
     async function loadLiveProjects() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (await getSupabase())
           .from('portfolio_projects')
           .select('*')
           .order('created_at', { ascending: false });

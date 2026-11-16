@@ -6,8 +6,13 @@ class SoundFXManager {
 
   constructor() {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('devsole_sound_muted');
-      this.isMuted = saved === 'true';
+      // Storage can be blocked (private mode, in-app browsers, strict cookie
+      // settings). It must never stop the website from starting.
+      try {
+        this.isMuted = localStorage.getItem('devsole_sound_muted') === 'true';
+      } catch {
+        this.isMuted = false;
+      }
     }
   }
 
@@ -27,7 +32,11 @@ class SoundFXManager {
   public toggleMute(): boolean {
     this.isMuted = !this.isMuted;
     if (typeof window !== 'undefined') {
-      localStorage.setItem('devsole_sound_muted', String(this.isMuted));
+      try {
+        localStorage.setItem('devsole_sound_muted', String(this.isMuted));
+      } catch {
+        // Storage blocked: the choice simply lasts for this visit only.
+      }
     }
     if (!this.isMuted) {
       this.playClick();

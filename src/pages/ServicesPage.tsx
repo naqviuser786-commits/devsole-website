@@ -1,7 +1,5 @@
 // FILE: src/pages/ServicesPage.tsx
-import { Link } from 'react-router-dom';
 import { useSeo } from '@/seo/useSeo';
-import seoData from '@/seo/seo-data.json';
 import { Services } from '@/components/sections/Services';
 import { CostEstimator } from '@/components/sections/CostEstimator';
 import { Contact } from '@/components/sections/Contact';
@@ -30,24 +28,6 @@ export function ServicesPage() {
           From fast business websites and Google SEO ranking to online stores and custom business software — we build clean, reliable digital solutions that bring you real paying clients.
         </p>
       </div>
-
-      {/* Dedicated page for each service (internal links for visitors and search engines) */}
-      <nav aria-label="Service pages" className="mx-auto max-w-7xl px-4 sm:px-6 pt-4 pb-2">
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {seoData.services.map((s) => (
-            <li key={s.slug}>
-              <Link
-                to={`/services/${s.slug}`}
-                className="block h-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left hover:border-blue-500/40 transition-colors"
-              >
-                <span className="block text-sm font-semibold text-white">{s.name}</span>
-                <span className="mt-1 block text-xs text-slate-400 leading-relaxed">{s.short}</span>
-                <span className="mt-2 block text-xs font-semibold text-blue-400">Read more →</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
 
       {/* Main Services Section */}
       <Services />

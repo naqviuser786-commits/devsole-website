@@ -2,7 +2,7 @@
 import { useState, useMemo, useEffect, type ReactNode } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { siteSettings } from '@/data/siteData';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabaseLazy';
 import { soundFX } from '@/lib/soundFx';
 
 interface Option {
@@ -101,7 +101,7 @@ export function CostEstimator() {
   useEffect(() => {
     async function fetchPricing() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (await getSupabase())
           .from('pricing_catalog')
           .select('*')
           .eq('id', 'default_pricing')

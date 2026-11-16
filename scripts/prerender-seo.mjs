@@ -107,7 +107,9 @@ function siteNav() {
 }
 
 function wrap(inner) {
-  return `<div id="root"><div data-seo-fallback style="max-width:760px;margin:0 auto;padding:96px 20px 48px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.65;color:#cbd5e1">
+  // The loader is what visitors see while the app loads; the text block is
+  // hidden for them by the start-up guard in index.html.
+  return `<div id="root"><div data-boot-loader aria-hidden="true"><i></i><span>Loading ${esc(site.name)}…</span></div><div data-seo-fallback style="max-width:760px;margin:0 auto;padding:96px 20px 48px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.65;color:#cbd5e1">
 ${inner}
 ${siteNav()}
 </div></div>`;
